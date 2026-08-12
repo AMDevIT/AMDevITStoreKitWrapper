@@ -15,4 +15,12 @@ import Foundation
 
     case productsRequestInProgress = 100
     case productsRequestFailed = 101
+
+    case productNotFound = 200
+    case purchaseInProgress = 201
+    case purchaseFailed = 202
+    case transactionVerificationFailed = 203
+
+    case transactionNotFound = 300
+    case transactionFinishInProgress = 301
 }

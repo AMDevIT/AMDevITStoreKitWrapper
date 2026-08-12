@@ -11,4 +11,13 @@ public protocol StoreKitManagerDelegate {
     func availableProductsCompleted(withResult: [StoreKitProduct],
                                     errorCode: StoreKitWrapperErrorCode,
                                     errorMessage: String?)
+
+    func purchaseCompleted(withResult: StoreKitTransaction?,
+                           purchaseResult: StoreKitPurchaseResult,
+                           errorCode: StoreKitWrapperErrorCode,
+                           errorMessage: String?)
+
+    func finishTransactionCompleted(transactionIdentifier: UInt64,
+                                    errorCode: StoreKitWrapperErrorCode,
+                                    errorMessage: String?)
 }

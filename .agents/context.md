@@ -2,8 +2,8 @@
 
 ## Objective and status
 
-- Objective: establish callback-based, binding-friendly StoreKit product and transaction contracts for future cross-platform bindings.
-- Status: product catalog and transaction DTO/mapper implemented; purchase and listener operations remain to be designed. Build and tests are pending explicit approval.
+- Objective: establish callback-based, binding-friendly StoreKit product, transaction, and purchase contracts for future cross-platform bindings.
+- Status: product catalog, transaction DTO/mapper, purchase, and explicit transaction finishing implemented. Transaction updates and entitlement operations remain to be designed. Build and tests are pending explicit approval.
 
 ## Decisions
 
@@ -22,6 +22,11 @@
 - Transaction JSON and JWS are exposed as strings; device verification is exposed as Base64 and its nonce as a UUID string.
 - Unverified transactions remain representable but carry an explicit verification status, error code, and message.
 - Modern transaction metadata uses availability-guarded iOS 15.6 fallbacks where StoreKit provides them.
+- One purchase operation at a time is enforced atomically by `StoreState` before StoreKit is called.
+- Purchase callbacks distinguish success, pending approval, user cancellation, failure, and unknown future results.
+- Verified native transactions are retained internally until the application explicitly finishes them by identifier.
+- Unverified transactions are returned for diagnostics but cannot be finished through the wrapper.
+- App account tokens use nullable UUID strings at the public boundary; purchase quantities are limited to StoreKit's range of 1 through 10.
 
 ## Affected files
 
@@ -43,18 +48,21 @@
 - `src/apple/StoreKitWrapper/StoreKitWrapper/StoreKitTransactionMapper.swift`
 - `src/apple/StoreKitWrapper/StoreKitWrapper/StoreKitTransactionOffer.swift`
 - `src/apple/StoreKitWrapper/StoreKitWrapper/StoreKitTransactionTypes.swift`
+- `src/apple/StoreKitWrapper/StoreKitWrapper/StoreKitPurchaseResult.swift`
 - `.agents/transaction-model.md`
+- `.agents/purchase-flow.md`
 
 ## Checks
 
 - Inspected the source diff and searched for references to the replaced logger methods and `isFaulted` callback parameter.
 - Inspected the expanded product API and searched for the replaced `getProductsAsync` method and misspelled parameter.
 - Ran `git diff --check` and static searches over the transaction DTO and mapper.
+- Ran static whitespace, callback-reference, actor-state, and diff checks over the purchase and finish implementation.
 - Build and automated tests were not run because repository instructions require separate approval.
 
 ## Open issues and recommended next step
 
 - Verify compilation and the generated Objective-C interface on macOS with Xcode.
 - Verify availability guards for subscription metadata using the configured Xcode SDK.
-- Add StoreKit product and transaction-mapper tests after the native API contract is confirmed.
-- Design purchase results, transaction updates, entitlement callbacks, and transaction finishing next.
+- Add StoreKit product, transaction-mapper, purchase-state, and finish-state tests after the native API contract is confirmed.
+- Design the `Transaction.updates` listener next so pending and out-of-app purchases can reach the delegate and repopulate unfinished transaction state.
