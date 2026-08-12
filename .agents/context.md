@@ -2,8 +2,8 @@
 
 ## Objective and status
 
-- Objective: establish a complete callback-based StoreKit product catalog contract for future cross-platform bindings.
-- Status: product catalog implemented; build and tests are pending explicit approval.
+- Objective: establish callback-based, binding-friendly StoreKit product and transaction contracts for future cross-platform bindings.
+- Status: product catalog and transaction DTO/mapper implemented; purchase and listener operations remain to be designed. Build and tests are pending explicit approval.
 
 ## Decisions
 
@@ -18,6 +18,10 @@
 - Numeric prices use `NSDecimalNumber`, and raw product JSON uses a UTF-8 `String`.
 - Valid product requests are deduplicated and invalidate the previous catalog immediately.
 - Missing products produce a warning while preserving successful partial results.
+- Native `Transaction` and `VerificationResult` values remain internal and are converted together by one mapper.
+- Transaction JSON and JWS are exposed as strings; device verification is exposed as Base64 and its nonce as a UUID string.
+- Unverified transactions remain representable but carry an explicit verification status, error code, and message.
+- Modern transaction metadata uses availability-guarded iOS 15.6 fallbacks where StoreKit provides them.
 
 ## Affected files
 
@@ -35,16 +39,22 @@
 - `src/apple/StoreKitWrapper/StoreKitWrapper/StoreKitSubscriptionOfferType.swift`
 - `src/apple/StoreKitWrapper/StoreKitWrapper/StoreKitSubscriptionPeriod.swift`
 - `src/apple/StoreKitWrapper/StoreKitWrapper/StoreKitSubscriptionPeriodUnit.swift`
+- `src/apple/StoreKitWrapper/StoreKitWrapper/StoreKitTransaction.swift`
+- `src/apple/StoreKitWrapper/StoreKitWrapper/StoreKitTransactionMapper.swift`
+- `src/apple/StoreKitWrapper/StoreKitWrapper/StoreKitTransactionOffer.swift`
+- `src/apple/StoreKitWrapper/StoreKitWrapper/StoreKitTransactionTypes.swift`
+- `.agents/transaction-model.md`
 
 ## Checks
 
 - Inspected the source diff and searched for references to the replaced logger methods and `isFaulted` callback parameter.
 - Inspected the expanded product API and searched for the replaced `getProductsAsync` method and misspelled parameter.
+- Ran `git diff --check` and static searches over the transaction DTO and mapper.
 - Build and automated tests were not run because repository instructions require separate approval.
 
 ## Open issues and recommended next step
 
 - Verify compilation and the generated Objective-C interface on macOS with Xcode.
 - Verify availability guards for subscription metadata using the configured Xcode SDK.
-- Add StoreKit product tests after the native API contract is confirmed.
-- Design purchase results, transaction updates, and entitlement callbacks next.
+- Add StoreKit product and transaction-mapper tests after the native API contract is confirmed.
+- Design purchase results, transaction updates, entitlement callbacks, and transaction finishing next.
