@@ -33,7 +33,7 @@ Apply these conventions to all code added to or modified in this repository.
 
 - Write all code comments in English.
 
-## Class Member Organization
+## Class Member Organization for C#
 
 Order class members as follows:
 
@@ -59,13 +59,64 @@ Group each applicable category in a `#region`/`#endregion` block, using exactly 
 
 Do not create empty regions when a class does not contain members belonging to the corresponding category.
 
-## Variable Declarations
+## Variable Declarations for C#
 
 Whenever possible, and especially when this does not interfere with `using` and `await using` directives, try to declare local variables at the beginning of their enclosing scope. This applies to C#, while for Swift and Kotlin doesn't apply becausae of peculiar languages syntax like, for example, guard blocks or let blocks. For these two languages, follow the best practice allocation syntax.
 Avoid using the `var` keyword as much as possible, unless it is necessary or provides a clear improvement in readability, such as when dealing with multiple nested generic types or very long class names.
 Always use `this` before class fields and properties whenever possible, even when it is redundant and optional. Do not use underscores (`_`) when declaring class fields.
 The rule is simple: inside methods, when a field or property belongs to the class definition, access it through `this`. When a variable is local to the method, reference it directly because `this` does not apply.
 This makes it immediately clear whether a variable should be looked for in the current local scope or in the class declaration.
+
+## Type Member Organization for Swift
+
+Order type members as follows:
+
+1. Constants
+2. Stored properties
+3. Computed properties
+4. Initializers
+5. Public methods
+6. Internal methods
+7. File-private methods
+8. Private methods
+
+Group each applicable category using Swift `// MARK: -` sections, using exactly the following section names:
+
+- `Constants`
+- `Properties`
+- `Initialization`
+- `Methods`
+
+Do not create empty sections.
+When protocol conformances or extensions improve readability, prefer grouping them into separate extensions.
+
+## Variable Declarations for Swift
+
+Follow standard Swift scoping and declaration practices.
+Declare local variables as close as reasonably possible to the point where they are first needed.
+Prefer `let` whenever a value does not need to change after initialization.
+Use `var` only when mutation is required.
+Prefer Swift's concise collection syntax:
+
+```swift
+var products = [StoreKitProduct]()
+var productsByIdentifier = [String: StoreKitProduct]()
+```
+
+Avoid unnecessarily verbose forms such as:
+
+```swift
+var products = Array<StoreKitProduct>()
+var productsByIdentifier = Dictionary<String, StoreKitProduct>()
+```
+
+## Instance Member Access for Swift
+
+Use `self` when accessing instance properties from within instance methods whenever possible, even when Swift does not require it.
+If a property belongs to the type instance, access it through `self`.
+If a variable or constant belongs to the current local scope, access it directly.
+Do not prefix stored properties with underscores solely to distinguish them from local variables or parameters.
+Use a leading underscore only when it has a specific Swift or API-design purpose.
 
 ## Indentation
 

@@ -9,33 +9,48 @@ import Foundation
 import StoreKit
 
 actor StoreState {
-    private var knownProducts: [String:Product] = [:]
+    // MARK: - Properties
+
+    private var knownProducts = [String: Product]()
     private var initialized: Bool = false
-    
-    // Initialization
-    
+    private var isProductsRequestInProgress: Bool = false
+
+    // MARK: - Methods
+
     func isInitialized() -> Bool {
         return self.initialized
     }
-    
+
     func setInitialized(isInitialized: Bool) {
         self.initialized = isInitialized
     }
-    
-    // Products
-    
-    func addProduct(product: Product) {
-        self.knownProducts.updateValue(product, forKey: product.id)
-    }
-    
-    func removeProduct(product: Product) {
-        self.knownProducts.removeValue(forKey: product.id)
-    }
-    
-    func clearProducts() {
+
+    func beginProductsRequest() -> Bool {
+        guard !self.isProductsRequestInProgress else {
+            return false
+        }
+
+        self.isProductsRequestInProgress = true
         self.knownProducts.removeAll()
+
+        return true
     }
-    
+
+    func completeProductsRequest(products: [Product]) {
+        var productsByIdentifier = [String: Product]()
+
+        for product in products {
+            productsByIdentifier[product.id] = product
+        }
+
+        self.knownProducts = productsByIdentifier
+        self.isProductsRequestInProgress = false
+    }
+
+    func failProductsRequest() {
+        self.isProductsRequestInProgress = false
+    }
+
     func getProducts() -> [Product] {
         return Array(self.knownProducts.values)
     }
