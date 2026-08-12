@@ -15,7 +15,7 @@ public protocol IStoreKitWrapperLogger {
     func logTrace(_ message: String)
     func logDebug(_ message: String)
     func logInfo(_ message: String)
-    func logWarning(_ message: String, error: Error?)
-    func logError(_ message: String, error: Error?)
-    func logFatal(_ message: String, error: Error?)
+    func logWarning(_ message: String, errorMessage: String?)
+    func logError(_ message: String, errorMessage: String?)
+    func logFatal(_ message: String, errorMessage: String?)
 }

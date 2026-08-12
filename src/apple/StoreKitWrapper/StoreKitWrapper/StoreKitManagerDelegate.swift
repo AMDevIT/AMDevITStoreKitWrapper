@@ -8,5 +8,7 @@
 import Foundation
 
 public protocol StoreKitManagerDelegate {
-    func availableProducts()
+    func availableProductsCompleted(withResult: [StoreKitProduct],
+                                    isFaulted: Bool,
+                                    errorMessage: String?)
 }
