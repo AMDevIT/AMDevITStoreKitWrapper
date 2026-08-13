@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class StoreKitTransaction: NSObject {
+@objcMembers public final class StoreKitTransaction: NSObject {
     // MARK: - Properties
 
     public let identifier: UInt64

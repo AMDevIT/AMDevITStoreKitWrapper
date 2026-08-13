@@ -8,7 +8,7 @@
 import Foundation
 import StoreKit
 
-public final class StoreKitProduct: NSObject {
+@objcMembers public final class StoreKitProduct: NSObject {
     // MARK: - Properties
 
     public let identifier: String

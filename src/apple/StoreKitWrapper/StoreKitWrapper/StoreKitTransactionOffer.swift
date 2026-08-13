@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class StoreKitTransactionOffer: NSObject {
+@objcMembers public final class StoreKitTransactionOffer: NSObject {
     // MARK: - Properties
 
     public let identifier: String?

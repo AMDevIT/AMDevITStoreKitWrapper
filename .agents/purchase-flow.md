@@ -26,12 +26,11 @@ Expose a callback-based StoreKit purchase workflow while keeping `Product.purcha
 - Quantities must be between 1 and 10. Quantities greater than one are accepted only for consumable products.
 - App account tokens cross the public boundary as nullable UUID strings and are converted internally to `UUID`.
 - User cancellation and pending approval are normal purchase outcomes with no wrapper error.
-- Task cancellation, thrown StoreKit errors, missing products, concurrent purchases, and failed transaction verification carry explicit wrapper error codes.
+- Task cancellation, thrown StoreKit and purchase errors, missing products, concurrent purchases, and failed transaction verification carry explicit wrapper error codes.
+- Purchase failures distinguish unavailable products, disallowed purchases, invalid quantities, invalid offers, and offer ineligibility.
 
 ## Deferred work
 
-- `Transaction.updates` listening and recovery of transactions across process restarts.
-- Current-entitlement enumeration and restoration callbacks.
 - Promotional and win-back purchase options.
 
 ## Verification status

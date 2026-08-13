@@ -8,7 +8,7 @@
 import Foundation
 import StoreKit
 
-public final class StoreKitSubscriptionOffer: NSObject {
+@objcMembers public final class StoreKitSubscriptionOffer: NSObject {
     // MARK: - Properties
 
     public let identifier: String?

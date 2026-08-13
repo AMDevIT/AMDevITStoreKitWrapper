@@ -8,7 +8,7 @@
 import Foundation
 import StoreKit
 
-public final class StoreKitSubscriptionPeriod: NSObject {
+@objcMembers public final class StoreKitSubscriptionPeriod: NSObject {
     // MARK: - Properties
 
     public let value: Int

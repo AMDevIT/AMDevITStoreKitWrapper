@@ -8,7 +8,7 @@
 import Foundation
 import StoreKit
 
-public final class StoreKitSubscriptionInfo: NSObject {
+@objcMembers public final class StoreKitSubscriptionInfo: NSObject {
     // MARK: - Properties
 
     public let subscriptionGroupIdentifier: String
