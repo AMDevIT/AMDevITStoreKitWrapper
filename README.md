@@ -1,15 +1,16 @@
 # AMDevITStoreKitWrapper
-A Storekit 2 native wrapper for dotnet
 
-## Native contract verification
+A StoreKit 2 native wrapper for .NET.
 
-On macOS with Xcode installed, build the framework and verify its generated Objective-C interface with:
+## Native StoreKit views
 
-```bash
-bash scripts/verify-native-contract.sh
-```
+On iOS 17 and later, the framework exposes ordinary UIKit controllers that internally host StoreKit SwiftUI views:
 
-The script builds the Release framework for the iOS Simulator and validates `StoreKitWrapper-Swift.h` before the framework is consumed by a .NET for iOS binding project.
+- `StoreKitProductViewController`
+- `StoreKitProductsViewController`
+- `StoreKitSubscriptionsViewController`
+
+Applications own presentation, parent containment, and external Auto Layout constraints. Initialize `StoreKitManager` before presenting these controllers to receive completed purchases through `StoreKitManagerDelegate.transactionUpdated`.
 
 ## Native contract verification
 

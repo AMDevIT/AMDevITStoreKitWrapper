@@ -1,16 +1,16 @@
-# StoreKit SwiftUI View Controllers — Next Implementation Step
+# StoreKit SwiftUI View Controllers
 
 ## Objective
 
 Expose selected StoreKit SwiftUI merchandising views to .NET for iOS through ordinary, Objective-C-compatible `UIViewController` subclasses while keeping SwiftUI and all generic types internal.
 
-## Planned public controllers
+## Implemented public controllers
 
 - `StoreKitProductViewController` for one product identifier using `ProductView`.
 - `StoreKitProductsViewController` for multiple product identifiers using `StoreView`.
 - `StoreKitSubscriptionsViewController` for a subscription group identifier using `SubscriptionStoreView`.
 
-The first implementation should target these three established StoreKit views. Evaluate `SubscriptionOfferView` separately because it is newer and may not fit the framework's iOS 15.6 deployment target.
+The first implementation targets these three established StoreKit views. `SubscriptionOfferView` remains separate because it is newer and may not fit the framework's iOS 15.6 deployment target.
 
 ## Interoperability boundary
 
@@ -31,6 +31,7 @@ The first implementation should target these three established StoreKit views. E
 
 - Purchases initiated through StoreKit SwiftUI views are owned by those views and don't call the wrapper's programmatic `purchase()` method.
 - Their resulting transactions continue through the existing `Transaction.updates` listener and `transactionUpdated` delegate callback.
+- The application must initialize `StoreKitManager` before presenting a StoreKit view controller if it expects these transaction callbacks.
 - `purchaseCompleted` remains reserved for purchases initiated through `StoreKitManager.purchase(...)`.
 - This distinction must be documented in the public API and verified with StoreKit Configuration tests.
 
@@ -38,17 +39,21 @@ The first implementation should target these three established StoreKit views. E
 
 - Preserve the framework's current minimum deployment target where practical.
 - Guard StoreKit SwiftUI views by their actual OS availability instead of silently raising the whole framework deployment target.
-- Define a predictable unavailable-feature path before implementation, either a failable construction contract or a placeholder controller plus delegate/error result. Prefer a contract that is straightforward to bind from C#.
+- The public controllers use `@available(iOS 17.0, *)`; the framework retains its iOS 15.6 deployment target and callers use the normal platform-availability contract.
 - Do not add promotional-offer signing or server-side JWS validation to this step.
 
-## Recommended implementation order
+## Implementation details
 
-1. Confirm exact OS availability with the target Xcode SDK.
-2. Define minimal Objective-C-visible initializers and availability behavior.
-3. Implement the shared internal hosting/containment base or helper.
-4. Implement the three concrete public controllers.
-5. Extend `verify-native-contract.sh` with their generated Objective-C declarations.
-6. Add deterministic construction/configuration tests and StoreKit Configuration integration tests on macOS.
+- `StoreKitViewHostingContainer` owns `UIHostingController<AnyView>` internally and performs idempotent child containment.
+- Public controllers preserve their product or subscription-group identifiers as immutable Objective-C-visible properties.
+- Storyboard and coder construction is unavailable; callers construct the controllers using their identifier initializers.
+- `verify-native-contract.sh` checks the three controllers and rejects hosting implementation types in the generated header.
+- Native tests verify identifier preservation, child containment, hosted-view installation, and idempotent installation.
+
+## Verification status
+
+- Static surface, containment, availability, header-script, test-discovery, and diff checks were performed.
+- Compilation, generated-header inspection, and test execution remain pending macOS/Xcode.
 
 ## Deferred advanced features
 

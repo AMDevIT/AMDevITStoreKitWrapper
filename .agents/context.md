@@ -3,7 +3,7 @@
 ## Objective and status
 
 - Objective: establish callback-based, binding-friendly StoreKit lifecycle, product, transaction, purchase, entitlement, synchronization, unfinished-transaction, and update-listener contracts for future cross-platform bindings.
-- Status: the native StoreKit implementation, Objective-C-visible contract, repeatable Xcode contract verification, and deterministic native unit-test suite are implemented. Compilation and execution remain pending a macOS/Xcode environment.
+- Status: the native StoreKit implementation, Objective-C-visible contract, deterministic tests, Xcode verification script, and UIViewController wrappers for StoreKit SwiftUI merchandising are implemented. Compilation and execution remain pending a macOS/Xcode environment.
 
 ## Decisions
 
@@ -58,9 +58,12 @@
 - Native tests cover actor lifecycle and exclusion rules, centralized error mapping, logger filtering and forwarding, stable enum raw values, and representative DTO construction.
 - Internal state-result enums without payloads conform to `Equatable` solely to support direct deterministic assertions.
 - StoreKit service injection and StoreKit Test integration remain deferred to avoid an invasive production refactor before the native framework compiles on macOS.
-- The next UI step will expose StoreKit SwiftUI merchandising only through concrete `UIViewController` subclasses; SwiftUI and `UIHostingController` remain internal.
+- StoreKit SwiftUI merchandising is exposed only through concrete `UIViewController` subclasses; SwiftUI and `UIHostingController` remain internal.
 - The .NET application will own presentation, containment, and external Auto Layout constraints for these controllers.
 - StoreKit-view purchases will be reported through `transactionUpdated`; `purchaseCompleted` remains specific to programmatic manager purchases.
+- Applications must initialize `StoreKitManager` before presenting these controllers to receive their completed transactions through the listener.
+- Product, products, and subscription-group controllers are available on iOS 17 and later while the framework retains its iOS 15.6 deployment target.
+- An internal hosting container installs one `UIHostingController` child using full-edge Auto Layout constraints and prevents duplicate installation.
 
 ## Affected files
 
@@ -103,6 +106,11 @@
 - `src/apple/StoreKitWrapper/StoreKitWrapperTests/StoreKitWrapperPublicContractTests.swift`
 - `.agents/native-tests.md`
 - `.agents/storekit-view-controllers.md`
+- `src/apple/StoreKitWrapper/StoreKitWrapper/Views/StoreKitViewHostingContainer.swift`
+- `src/apple/StoreKitWrapper/StoreKitWrapper/Views/StoreKitProductViewController.swift`
+- `src/apple/StoreKitWrapper/StoreKitWrapper/Views/StoreKitProductsViewController.swift`
+- `src/apple/StoreKitWrapper/StoreKitWrapper/Views/StoreKitSubscriptionsViewController.swift`
+- `src/apple/StoreKitWrapper/StoreKitWrapperTests/StoreKitViewControllerTests.swift`
 
 ## Checks
 
@@ -122,6 +130,7 @@
 - Confirmed that this Windows environment doesn't provide `xcodebuild`, `swiftc`, or `swift`; the new native verification script was therefore not executed.
 - Added deterministic Swift Testing coverage for actor state, error mapping, logging, ABI-stable enum values, and binding DTOs.
 - Performed static test discovery, raw-value consistency, source-reference, formatting, and diff checks; native tests weren't compiled or executed because the Apple toolchain is unavailable.
+- Added the three public StoreKit view controllers, their internal hosting container, generated-header assertions, and deterministic containment tests.
 - Build and automated tests were not run because repository instructions require separate approval.
 
 ## Open issues and recommended next step
@@ -132,4 +141,4 @@
 - Run `bash scripts/verify-native-contract.sh` on macOS and resolve any compiler or generated-header differences it reports.
 - Compile and run the `StoreKitWrapperTests` target on macOS.
 - Add StoreKit Configuration integration tests and any necessary internal service injection only after the deterministic suite and generated contract pass.
-- Next implementation step: add `StoreKitProductViewController`, `StoreKitProductsViewController`, and `StoreKitSubscriptionsViewController` according to `.agents/storekit-view-controllers.md`.
+- Verify the three view controllers against the intended Xcode SDK and StoreKit Configuration on macOS.
