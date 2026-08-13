@@ -3,7 +3,7 @@
 ## Objective and status
 
 - Objective: establish callback-based, binding-friendly StoreKit lifecycle, product, transaction, purchase, entitlement, synchronization, unfinished-transaction, and update-listener contracts for future cross-platform bindings.
-- Status: the native StoreKit implementation and Objective-C-visible contract are implemented, and a repeatable Xcode contract-verification script is available. Its execution and automated StoreKit tests remain pending a macOS/Xcode environment.
+- Status: the native StoreKit implementation, Objective-C-visible contract, repeatable Xcode contract verification, and deterministic native unit-test suite are implemented. Compilation and execution remain pending a macOS/Xcode environment.
 
 ## Decisions
 
@@ -55,6 +55,9 @@
 - The framework installs a generated Objective-C header named `StoreKitWrapper-Swift.h`.
 - Native contract verification builds the Release iOS Simulator framework and validates the installed generated header, not only the Swift source.
 - The StoreKit framework reference is relative to the active Apple SDK rather than a hardcoded local Xcode SDK path.
+- Native tests cover actor lifecycle and exclusion rules, centralized error mapping, logger filtering and forwarding, stable enum raw values, and representative DTO construction.
+- Internal state-result enums without payloads conform to `Equatable` solely to support direct deterministic assertions.
+- StoreKit service injection and StoreKit Test integration remain deferred to avoid an invasive production refactor before the native framework compiles on macOS.
 
 ## Affected files
 
@@ -91,6 +94,11 @@
 - `scripts/verify-native-contract.sh`
 - `README.md`
 - `.agents/native-verification.md`
+- `src/apple/StoreKitWrapper/StoreKitWrapperTests/StoreStateTests.swift`
+- `src/apple/StoreKitWrapper/StoreKitWrapperTests/StoreKitWrapperErrorMapperTests.swift`
+- `src/apple/StoreKitWrapper/StoreKitWrapperTests/StoreKitWrapperLoggerTests.swift`
+- `src/apple/StoreKitWrapper/StoreKitWrapperTests/StoreKitWrapperPublicContractTests.swift`
+- `.agents/native-tests.md`
 
 ## Checks
 
@@ -108,6 +116,8 @@
 - Added a macOS verification script that builds the framework and asserts the expected generated Objective-C declarations and absence of internal Swift implementation types.
 - Replaced the machine-specific StoreKit framework reference with an `SDKROOT`-relative framework reference.
 - Confirmed that this Windows environment doesn't provide `xcodebuild`, `swiftc`, or `swift`; the new native verification script was therefore not executed.
+- Added deterministic Swift Testing coverage for actor state, error mapping, logging, ABI-stable enum values, and binding DTOs.
+- Performed static test discovery, raw-value consistency, source-reference, formatting, and diff checks; native tests weren't compiled or executed because the Apple toolchain is unavailable.
 - Build and automated tests were not run because repository instructions require separate approval.
 
 ## Open issues and recommended next step
@@ -116,4 +126,5 @@
 - Verify availability guards for subscription metadata using the configured Xcode SDK.
 - Add StoreKit product, transaction-mapper, purchase-state, entitlement-state, unfinished-state, and finish-state tests after the native API contract is confirmed.
 - Run `bash scripts/verify-native-contract.sh` on macOS and resolve any compiler or generated-header differences it reports.
-- Add StoreKit product, transaction-mapper, purchase-state, entitlement-state, unfinished-state, and finish-state tests after the generated native contract passes.
+- Compile and run the `StoreKitWrapperTests` target on macOS.
+- Add StoreKit Configuration integration tests and any necessary internal service injection only after the deterministic suite and generated contract pass.

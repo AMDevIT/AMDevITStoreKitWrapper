@@ -8,35 +8,35 @@
 import Foundation
 import StoreKit
 
-enum StoreStateInitializationResult {
+enum StoreStateInitializationResult: Equatable {
     case started
     case inProgress
     case alreadyInitialized
     case managerShutdown
 }
 
-enum StoreStateProductsRequestStartResult {
+enum StoreStateProductsRequestStartResult: Equatable {
     case ready
     case inProgress
     case managerNotInitialized
     case managerShutdown
 }
 
-enum StoreStateCurrentEntitlementsRequestStartResult {
+enum StoreStateCurrentEntitlementsRequestStartResult: Equatable {
     case ready
     case inProgress
     case managerNotInitialized
     case managerShutdown
 }
 
-enum StoreStateAppStoreSyncStartResult {
+enum StoreStateAppStoreSyncStartResult: Equatable {
     case ready
     case inProgress
     case managerNotInitialized
     case managerShutdown
 }
 
-enum StoreStateUnfinishedTransactionsRequestStartResult {
+enum StoreStateUnfinishedTransactionsRequestStartResult: Equatable {
     case ready
     case inProgress
     case transactionFinishInProgress
@@ -44,7 +44,7 @@ enum StoreStateUnfinishedTransactionsRequestStartResult {
     case managerShutdown
 }
 
-enum StoreStateShutdownResult {
+enum StoreStateShutdownResult: Equatable {
     case started
     case inProgress
     case alreadyShutdown
