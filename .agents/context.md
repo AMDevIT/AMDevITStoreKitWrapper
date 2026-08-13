@@ -58,6 +58,9 @@
 - Native tests cover actor lifecycle and exclusion rules, centralized error mapping, logger filtering and forwarding, stable enum raw values, and representative DTO construction.
 - Internal state-result enums without payloads conform to `Equatable` solely to support direct deterministic assertions.
 - StoreKit service injection and StoreKit Test integration remain deferred to avoid an invasive production refactor before the native framework compiles on macOS.
+- The next UI step will expose StoreKit SwiftUI merchandising only through concrete `UIViewController` subclasses; SwiftUI and `UIHostingController` remain internal.
+- The .NET application will own presentation, containment, and external Auto Layout constraints for these controllers.
+- StoreKit-view purchases will be reported through `transactionUpdated`; `purchaseCompleted` remains specific to programmatic manager purchases.
 
 ## Affected files
 
@@ -99,6 +102,7 @@
 - `src/apple/StoreKitWrapper/StoreKitWrapperTests/StoreKitWrapperLoggerTests.swift`
 - `src/apple/StoreKitWrapper/StoreKitWrapperTests/StoreKitWrapperPublicContractTests.swift`
 - `.agents/native-tests.md`
+- `.agents/storekit-view-controllers.md`
 
 ## Checks
 
@@ -128,3 +132,4 @@
 - Run `bash scripts/verify-native-contract.sh` on macOS and resolve any compiler or generated-header differences it reports.
 - Compile and run the `StoreKitWrapperTests` target on macOS.
 - Add StoreKit Configuration integration tests and any necessary internal service injection only after the deterministic suite and generated contract pass.
+- Next implementation step: add `StoreKitProductViewController`, `StoreKitProductsViewController`, and `StoreKitSubscriptionsViewController` according to `.agents/storekit-view-controllers.md`.
