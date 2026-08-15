@@ -8,6 +8,7 @@
 import Foundation
 import StoreKit
 
+/// Carries a stable wrapper error code and its diagnostic message.
 internal struct StoreKitWrapperMappedError {
     // MARK: - Properties
 
@@ -15,6 +16,7 @@ internal struct StoreKitWrapperMappedError {
     internal let message: String
 }
 
+/// Maps StoreKit, purchase, network, and cancellation errors to stable wrapper error codes.
 internal enum StoreKitWrapperErrorMapper {
     // MARK: - Constants
 

@@ -8,15 +8,20 @@
 import Foundation
 import StoreKit
 
+/// Represents a subscription duration using a numeric value and calendar unit.
 @objcMembers public final class StoreKitSubscriptionPeriod: NSObject {
     // MARK: - Properties
 
+    /// The number of calendar units in the period.
     public let value: Int
+    /// The normalized calendar unit.
     public let unit: StoreKitSubscriptionPeriodUnit
+    /// StoreKit's localized description of the calendar unit.
     public let unitDisplayName: String
 
     // MARK: - Initialization
 
+    /// Creates a subscription period.
     public init(value: Int,
                 unit: StoreKitSubscriptionPeriodUnit,
                 unitDisplayName: String) {

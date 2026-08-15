@@ -8,6 +8,11 @@
 import Foundation
 import StoreKit
 
+/// Coordinates StoreKit operations through an Objective-C-compatible callback API.
+///
+/// Swift concurrency remains internal. Set `delegate`, call `initialize()`, and process
+/// terminal operation callbacks before issuing dependent requests. Callbacks aren't
+/// automatically dispatched to the main thread.
 @objcMembers public final class StoreKitManager: NSObject {
     // MARK: - Constants
 
@@ -18,6 +23,8 @@ import StoreKit
     private static let shutdownStartedEventId: Int = 5
     private static let shutdownCompletedEventId: Int = 6
     private static let alreadyShutdownEventId: Int = 7
+    private static let initializationCancelledEventId: Int = 8
+    private static let shutdownCancelledEventId: Int = 9
     private static let transactionListenerStartedEventId: Int = 10
     private static let verifiedTransactionUpdatedEventId: Int = 11
     private static let unverifiedTransactionUpdatedEventId: Int = 12
@@ -46,6 +53,7 @@ import StoreKit
     private static let transactionFinishInProgressEventId: Int = 3001
     private static let transactionFinishStartedEventId: Int = 3002
     private static let transactionFinishCompletedEventId: Int = 3003
+    private static let transactionFinishCancelledEventId: Int = 3004
     private static let currentEntitlementsRequestInProgressEventId: Int = 4000
     private static let currentEntitlementsRequestStartedEventId: Int = 4001
     private static let currentEntitlementFoundEventId: Int = 4002
@@ -68,17 +76,24 @@ import StoreKit
     // MARK: - Properties
 
     private let state = StoreState()
+    private let operationTaskStore = StoreKitOperationTaskStore()
     private let logger: IStoreKitWrapperLogger?
     private var transactionUpdatesTask: Task<Void, Never>?
+    /// Receives operation completions and persistent transaction updates.
     public var delegate: StoreKitManagerDelegate? = nil
 
     // MARK: - Initialization
 
+    /// Creates a manager without a logger or delegate.
     public override convenience init() {
         self.init(logger: nil,
                   delegate: nil)
     }
 
+    /// Creates a manager with optional logging and callback receivers.
+    /// - Parameters:
+    ///   - logger: The structured logger, or `nil` to disable logging.
+    ///   - delegate: The operation callback receiver, or `nil`.
     public init(logger: IStoreKitWrapperLogger?,
                 delegate: StoreKitManagerDelegate?) {
         self.logger = logger
@@ -87,53 +102,70 @@ import StoreKit
     }
 
     deinit {
+        self.operationTaskStore.cancelAll()
         self.transactionUpdatesTask?.cancel()
     }
 
     // MARK: - Methods
 
+    /// Initializes the manager and starts listening for transaction updates.
+    ///
+    /// Completion is reported through `StoreKitManagerDelegate.initializationCompleted`.
     public func initialize() {
-        Task {
-            await self.initializeInternal()
+        self.operationTaskStore.start(operationKind: .initialization) { [weak self] in
+            await self?.initializeInternal()
         }
     }
 
+    /// Stops the transaction listener and shuts down the manager.
+    ///
+    /// Completion is reported through `StoreKitManagerDelegate.shutdownCompleted`.
     public func shutdown() {
-        Task {
-            await self.shutdownInternal()
+        self.operationTaskStore.start(operationKind: .shutdown) { [weak self] in
+            await self?.shutdownInternal()
         }
     }
 
+    /// Invalidates the current product catalog and requests fresh product metadata.
+    /// - Parameter productIdentifiers: The App Store Connect identifiers to request.
     public func getProducts(productIdentifiers: [String]) {
-        Task {
-            await self.getProductsInternal(productIdentifiers: productIdentifiers)
+        self.operationTaskStore.start(operationKind: .productsRequest) { [weak self] in
+            await self?.getProductsInternal(productIdentifiers: productIdentifiers)
         }
     }
 
+    /// Invalidates and reloads the customer's current entitlement snapshot.
     public func getCurrentEntitlements() {
-        Task {
-            await self.getCurrentEntitlementsInternal()
+        self.operationTaskStore.start(operationKind: .currentEntitlementsRequest) { [weak self] in
+            await self?.getCurrentEntitlementsInternal()
         }
     }
 
+    /// Explicitly synchronizes transaction information with the App Store.
+    ///
+    /// Call only in response to a user-initiated restore action because StoreKit may present authentication UI.
     public func sync() {
-        Task {
-            await self.syncInternal()
+        self.operationTaskStore.start(operationKind: .appStoreSync) { [weak self] in
+            await self?.syncInternal()
         }
     }
 
+    /// Invalidates and reloads the currently unfinished verified transactions.
     public func getUnfinishedTransactions() {
-        Task {
-            await self.getUnfinishedTransactionsInternal()
+        self.operationTaskStore.start(operationKind: .unfinishedTransactionsRequest) { [weak self] in
+            await self?.getUnfinishedTransactionsInternal()
         }
     }
 
+    /// Purchases one unit of a product without an application account token.
+    /// - Parameter productIdentifier: The identifier of a product loaded by `getProducts(productIdentifiers:)`.
     public func purchase(productIdentifier: String) {
         self.purchase(productIdentifier: productIdentifier,
                       appAccountToken: nil,
                       quantity: 1)
     }
 
+    /// Purchases one unit of a product with an optional application account token.
     public func purchase(productIdentifier: String,
                          appAccountToken: String?) {
         self.purchase(productIdentifier: productIdentifier,
@@ -141,27 +173,86 @@ import StoreKit
                       quantity: 1)
     }
 
+    /// Purchases a product using the supplied account token and quantity.
+    /// - Parameters:
+    ///   - productIdentifier: The identifier of a product loaded by `getProducts(productIdentifiers:)`.
+    ///   - appAccountToken: A UUID string associated with the application account, or `nil`.
+    ///   - quantity: The quantity to purchase. Values greater than one are valid only for consumables.
     public func purchase(productIdentifier: String,
                          appAccountToken: String?,
                          quantity: Int) {
-        Task {
-            await self.purchaseInternal(productIdentifier: productIdentifier,
-                                        appAccountToken: appAccountToken,
-                                        quantity: quantity)
+        self.operationTaskStore.start(operationKind: .purchase) { [weak self] in
+            await self?.purchaseInternal(productIdentifier: productIdentifier,
+                                         appAccountToken: appAccountToken,
+                                         quantity: quantity)
         }
     }
 
+    /// Finishes a verified transaction after the application has durably delivered its content.
+    /// - Parameter transactionIdentifier: The identifier of a retained unfinished transaction.
     public func finishTransaction(transactionIdentifier: UInt64) {
-        Task {
-            await self.finishTransactionInternal(transactionIdentifier: transactionIdentifier)
+        self.operationTaskStore.start(operationKind: .transactionFinish) { [weak self] in
+            await self?.finishTransactionInternal(transactionIdentifier: transactionIdentifier)
         }
+    }
+
+    /// Cooperatively cancels active initialization work.
+    public func cancelInitialization() {
+        self.operationTaskStore.cancel(operationKind: .initialization)
+    }
+
+    /// Cooperatively cancels an active shutdown wait.
+    public func cancelShutdown() {
+        self.operationTaskStore.cancel(operationKind: .shutdown)
+    }
+
+    /// Cooperatively cancels the active product request.
+    public func cancelProductsRequest() {
+        self.operationTaskStore.cancel(operationKind: .productsRequest)
+    }
+
+    /// Cooperatively cancels the active current-entitlements request.
+    public func cancelCurrentEntitlementsRequest() {
+        self.operationTaskStore.cancel(operationKind: .currentEntitlementsRequest)
+    }
+
+    /// Cooperatively cancels active App Store synchronization.
+    public func cancelAppStoreSync() {
+        self.operationTaskStore.cancel(operationKind: .appStoreSync)
+    }
+
+    /// Cooperatively cancels the active unfinished-transactions request.
+    public func cancelUnfinishedTransactionsRequest() {
+        self.operationTaskStore.cancel(operationKind: .unfinishedTransactionsRequest)
+    }
+
+    /// Cooperatively cancels the active purchase task.
+    ///
+    /// Cancellation doesn't guarantee dismissal or rollback of App Store UI or a transaction already created by StoreKit.
+    public func cancelPurchase() {
+        self.operationTaskStore.cancel(operationKind: .purchase)
+    }
+
+    /// Cooperatively cancels transaction finishing before StoreKit accepts the finish operation.
+    public func cancelTransactionFinish() {
+        self.operationTaskStore.cancel(operationKind: .transactionFinish)
     }
 
     private func initializeInternal() async {
+        if Task.isCancelled {
+            await self.completeCancelledInitialization(resetState: false)
+            return
+        }
+
         let initializationResult = await self.state.beginInitialization()
 
         switch initializationResult {
         case .started:
+            if Task.isCancelled {
+                await self.completeCancelledInitialization(resetState: true)
+                return
+            }
+
             self.logger?.logInformation(eventId: Self.initializationStartedEventId,
                                         eventName: "InitializationStarted",
                                         message: "Initializing StoreKit manager...")
@@ -176,7 +267,9 @@ import StoreKit
         case .inProgress:
             let initialized = await self.state.waitForInitializationCompletion()
 
-            if initialized {
+            if Task.isCancelled {
+                await self.completeCancelledInitialization(resetState: false)
+            } else if initialized {
                 self.delegate?.initializationCompleted(errorCode: .none,
                                                        errorMessage: nil)
             } else {
@@ -205,7 +298,26 @@ import StoreKit
         }
     }
 
+    private func completeCancelledInitialization(resetState: Bool) async {
+        let errorMessage = "StoreKit manager initialization was cancelled."
+
+        if resetState {
+            await self.state.cancelInitialization()
+        }
+
+        self.logger?.logInformation(eventId: Self.initializationCancelledEventId,
+                                    eventName: "InitializationCancelled",
+                                    message: errorMessage)
+        self.delegate?.initializationCompleted(errorCode: .operationCancelled,
+                                               errorMessage: errorMessage)
+    }
+
     private func shutdownInternal() async {
+        if Task.isCancelled {
+            self.completeCancelledShutdown()
+            return
+        }
+
         let shutdownResult = await self.state.beginShutdown()
 
         switch shutdownResult {
@@ -227,8 +339,13 @@ import StoreKit
                                              errorMessage: nil)
         case .inProgress:
             await self.state.waitForShutdownCompletion()
-            self.delegate?.shutdownCompleted(errorCode: .none,
-                                             errorMessage: nil)
+
+            if Task.isCancelled {
+                self.completeCancelledShutdown()
+            } else {
+                self.delegate?.shutdownCompleted(errorCode: .none,
+                                                 errorMessage: nil)
+            }
         case .alreadyShutdown:
             self.logger?.logDebug(eventId: Self.alreadyShutdownEventId,
                                   eventName: "AlreadyShutdown",
@@ -236,6 +353,16 @@ import StoreKit
             self.delegate?.shutdownCompleted(errorCode: .none,
                                              errorMessage: nil)
         }
+    }
+
+    private func completeCancelledShutdown() {
+        let errorMessage = "Waiting for StoreKit manager shutdown was cancelled."
+
+        self.logger?.logInformation(eventId: Self.shutdownCancelledEventId,
+                                    eventName: "ShutdownCancelled",
+                                    message: errorMessage)
+        self.delegate?.shutdownCompleted(errorCode: .operationCancelled,
+                                         errorMessage: errorMessage)
     }
 
     private func createTransactionUpdatesTask() -> Task<Void, Never> {
@@ -365,10 +492,14 @@ import StoreKit
         do {
             var wrappedStoreProducts = [StoreKitProduct]()
 
+            try Task.checkCancellation()
+
             self.logger?.logTrace(eventId: Self.productsRequestStartedEventId,
                                   eventName: "ProductsRequestStarted",
                                   message: "Fetching products from Apple servers...")
             let fetchedProducts = try await Product.products(for: uniqueProductIdentifiers)
+            try Task.checkCancellation()
+
             for currentProduct in fetchedProducts {
                 let currencyCode = currentProduct.priceFormatStyle.currencyCode
                 let localeIdentifier = currentProduct.priceFormatStyle.locale.identifier
@@ -378,6 +509,7 @@ import StoreKit
                     subscriptionInfo = await StoreKitSubscriptionInfo.create(subscriptionInfo: currentSubscriptionInfo,
                                                                               currencyCode: currencyCode,
                                                                               localeIdentifier: localeIdentifier)
+                    try Task.checkCancellation()
                 } else {
                     subscriptionInfo = nil
                 }
@@ -401,6 +533,7 @@ import StoreKit
                                         message: "Apple did not return products for identifiers: \(missingProductIdentifiers.joined(separator: ", "))")
             }
 
+            try Task.checkCancellation()
             await self.state.completeProductsRequest(products: fetchedProducts)
 
             self.logger?.logDebug(eventId: Self.productsRequestCompletedEventId,
@@ -477,6 +610,11 @@ import StoreKit
         self.logger?.logTrace(eventId: Self.currentEntitlementsRequestStartedEventId,
                               eventName: "CurrentEntitlementsRequestStarted",
                               message: "Fetching current StoreKit entitlements...")
+
+        if Task.isCancelled {
+            await self.completeCancelledCurrentEntitlementsRequest()
+            return
+        }
 
         for await verificationResult in Transaction.currentEntitlements {
             if Task.isCancelled {
@@ -581,10 +719,13 @@ import StoreKit
         }
 
         do {
+            try Task.checkCancellation()
+
             self.logger?.logInformation(eventId: Self.appStoreSyncStartedEventId,
                                         eventName: "AppStoreSyncStarted",
                                         message: "Synchronizing transaction information with the App Store...")
             try await AppStore.sync()
+            try Task.checkCancellation()
             await self.state.completeAppStoreSync()
 
             self.logger?.logInformation(eventId: Self.appStoreSyncCompletedEventId,
@@ -669,6 +810,11 @@ import StoreKit
         self.logger?.logTrace(eventId: Self.unfinishedTransactionsRequestStartedEventId,
                               eventName: "UnfinishedTransactionsRequestStarted",
                               message: "Fetching unfinished StoreKit transactions...")
+
+        if Task.isCancelled {
+            await self.completeCancelledUnfinishedTransactionsRequest()
+            return
+        }
 
         for await verificationResult in Transaction.unfinished {
             if Task.isCancelled {
@@ -845,6 +991,8 @@ import StoreKit
         do {
             var purchaseOptions = Set<Product.PurchaseOption>()
 
+            try Task.checkCancellation()
+
             if let accountToken = accountToken {
                 purchaseOptions.insert(.appAccountToken(accountToken))
             }
@@ -1004,6 +1152,21 @@ import StoreKit
         self.logger?.logTrace(eventId: Self.transactionFinishStartedEventId,
                               eventName: "TransactionFinishStarted",
                               message: "Finishing transaction: \(transactionIdentifier)")
+
+        if Task.isCancelled {
+            let errorMessage = "Finishing transaction \(transactionIdentifier) was cancelled before StoreKit started the operation."
+
+            await self.state.failTransactionFinish(transactionIdentifier: transactionIdentifier)
+
+            self.logger?.logInformation(eventId: Self.transactionFinishCancelledEventId,
+                                        eventName: "TransactionFinishCancelled",
+                                        message: errorMessage)
+            self.delegate?.finishTransactionCompleted(transactionIdentifier: transactionIdentifier,
+                                                      errorCode: .operationCancelled,
+                                                      errorMessage: errorMessage)
+            return
+        }
+
         await transaction.finish()
         await self.state.completeTransactionFinish(transactionIdentifier: transactionIdentifier)
 

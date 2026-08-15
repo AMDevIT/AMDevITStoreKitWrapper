@@ -124,7 +124,9 @@ private void OnTransactionUpdated(object? sender,
 
 All task continuations are detached from the native callback through `TaskCreationOptions.RunContinuationsAsynchronously`. The wrapper doesn't dispatch callbacks or events to the main thread.
 
-The current `CancellationToken` contract is intentionally limited: a token whose cancellation was already requested prevents the native operation from starting. Cancellation requested after Swift begins doesn't yet interrupt the native operation or its managed task.
+Every task-based operation honors `CancellationToken` both before and after its native invocation. Cancellation stops the managed wait immediately and forwards a cooperative cancellation request to the corresponding Swift task. The internal completion source remains registered until the native terminal callback arrives, preventing late callbacks from being associated with a later request.
+
+Cancellation is best effort for StoreKit operations that may already have reached system UI or an irreversible system action. In particular, cancelling a purchase wait doesn't guarantee that the App Store confirmation flow or transaction stops, and cancelling a transaction finish doesn't roll back a finish already accepted by StoreKit. Transactions completed after a cancelled purchase wait remain recoverable through `TransactionUpdated`.
 
 Errors reported by native operation callbacks become `StoreKitWrapperException` instances containing the stable `StoreKitWrapperErrorCode`. Pending and customer-cancelled purchases remain successful task completions represented by `StoreKitPurchaseOutcome`.
 
@@ -315,7 +317,7 @@ Create the NuGet package from the repository root:
 dotnet pack src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper.slnx --configuration Release
 ```
 
-The package is written to `artifacts/packages` and includes the binding assembly, native XCFramework, README, license, package icon, and NuGet metadata. Packing does not publish the package; use an authenticated NuGet source explicitly when it is ready for release.
+The package is written to `artifacts/packages` and includes the binding assembly, its XML documentation for IDE IntelliSense, the native XCFramework, README, license, package icon, and NuGet metadata. Packing does not publish the package; use an authenticated NuGet source explicitly when it is ready for release.
 
 On macOS with Xcode installed, build the native framework and verify its generated Objective-C interface:
 

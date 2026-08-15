@@ -8,20 +8,30 @@
 import Foundation
 import StoreKit
 
+/// Provides subscription-specific metadata for an auto-renewable product.
 @objcMembers public final class StoreKitSubscriptionInfo: NSObject {
     // MARK: - Properties
 
+    /// The App Store Connect subscription-group identifier.
     public let subscriptionGroupIdentifier: String
+    /// The localized subscription-group display name when supported by the OS.
     public let groupDisplayName: String?
+    /// The service level within the subscription group when supported by the OS.
     public let groupLevel: Int?
+    /// The standard renewal period of the subscription.
     public let subscriptionPeriod: StoreKitSubscriptionPeriod
+    /// Indicates whether the current customer is eligible for the introductory offer.
     public let isEligibleForIntroductoryOffer: Bool
+    /// The introductory offer configured for the product, if any.
     public let introductoryOffer: StoreKitSubscriptionOffer?
+    /// Promotional offers configured for the product.
     public let promotionalOffers: [StoreKitSubscriptionOffer]
+    /// Win-back offers configured for the product on supported OS versions.
     public let winBackOffers: [StoreKitSubscriptionOffer]
 
     // MARK: - Initialization
 
+    /// Creates a subscription metadata snapshot.
     public init(subscriptionGroupIdentifier: String,
                 groupDisplayName: String?,
                 groupLevel: Int?,
