@@ -596,3 +596,4 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+src/apple/StoreKitWrapper/build
