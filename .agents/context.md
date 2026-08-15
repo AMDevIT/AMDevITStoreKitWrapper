@@ -1,5 +1,14 @@
 # StoreKit Wrapper Context
 
+## Latest step: binding source classification fix
+
+- Objective: stop compiling the managed `StoreKitClient` facade as binding-generator core source.
+- Status: completed and verified by a successful .NET for iOS binding build.
+- Decisions: keep `ApiDefinition.cs` as `ObjcBindingApiDefinition`; keep only `StructsAndEnums.cs` as `ObjcBindingCoreSource`; rely on SDK default `Compile` inclusion for the seven managed facade files to avoid duplicate items.
+- Affected files: the binding `.csproj`, `.agents/binding-source-classification.md`, and `.agents/context.md`.
+- Checks: MSBuild item evaluation reports all seven facade files exactly once as normal `Compile` items, with the API definition and enum source in their correct special item groups; the scoped diff whitespace check passes; solution restore succeeded; the Debug `net10.0-ios` solution build succeeded with zero warnings and zero errors.
+- Open issues and recommended next step: native execution and runtime validation in an iOS application remain separate checks; the source-classification compilation failure is resolved.
+
 ## Latest step: Microsoft.Extensions.Logging client bridge
 
 - Objective: let the managed StoreKit client accept the standard typed Microsoft logger and forward all native structured diagnostics.
