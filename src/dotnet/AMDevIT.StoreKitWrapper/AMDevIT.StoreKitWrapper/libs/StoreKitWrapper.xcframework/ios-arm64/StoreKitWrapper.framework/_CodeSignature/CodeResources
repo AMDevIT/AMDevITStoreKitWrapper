@@ -4,7 +4,7 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Headers/StoreKitWrapper.h</key>
+		<key>Headers/StoreKitWrapper-Swift.h</key>
 		<data>
 		GJ5yeUD7J2nCnMUhZ3FNcvv3jwo=
 		</data>
@@ -34,12 +34,12 @@
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		qQGOwwKWci2qOqazd/YN/fAhxSs=
+		ND61VsQOMgXVBbkalDbIR63pp/4=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Headers/StoreKitWrapper.h</key>
+		<key>Headers/StoreKitWrapper-Swift.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
@@ -85,7 +85,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			GeQpN20xT4Ndu3npyq6WyftWcsKFenjXPZdoOXcBikc=
+			tkDJreqgKy99sYpOWy/7pkZq5BdyM2tiNEZ8jzkGKv8=
 			</data>
 		</dict>
 	</dict>
