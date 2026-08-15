@@ -3,7 +3,7 @@
 set -euo pipefail
 
 FRAMEWORK_PATH="./build/StoreKitWrapper.xcframework/ios-arm64/StoreKitWrapper.framework"
-HEADER_PATH="$FRAMEWORK_PATH/Headers/StoreKitWrapper.h"
+HEADER_PATH="$FRAMEWORK_PATH/Headers/StoreKitWrapper-Swift.h"
 OUTPUT_PATH="./sharpie-output"
 
 if ! command -v sharpie > /dev/null 2>&1; then
@@ -23,7 +23,7 @@ fi
 
 echo "Extracting classes and interfaces from xcframework"
 
-sharpie bind "$HEADER_PATH" -scope="$FRAMEWORK_PATH/Headers" -o "$OUTPUT_PATH" -n "AMDevIT.StoreKitWrapper" -v -c -F "$HOME/Library/Developer/Xcode/DerivedData"
+sharpie bind -f "$FRAMEWORK_PATH" -o "$OUTPUT_PATH" -n "AMDevIT.StoreKitWrapper" -v -c -F "$HOME/Library/Developer/Xcode/DerivedData"
 
 if [[ ! -d "$OUTPUT_PATH" ]] || [[ -z "$(find "$OUTPUT_PATH" -type f -print -quit)" ]]; then
     echo "Objective Sharpie completed without generating files in $OUTPUT_PATH." >&2
