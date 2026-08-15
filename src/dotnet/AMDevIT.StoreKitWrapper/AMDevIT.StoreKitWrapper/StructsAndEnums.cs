@@ -1,0 +1,4 @@
+namespace AMDevIT.StoreKitWrapper
+{
+
+}
