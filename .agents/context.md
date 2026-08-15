@@ -47,8 +47,7 @@
 - Verified purchase and listener transactions received during an unfinished refresh are preserved and merged into the final cache.
 - Recovered verified transactions are finishable before their callback; unverified results remain diagnostic-only.
 - Product, purchase, and synchronization failures use one internal mapper rather than operation-specific StoreKit switches.
-- StoreKit network, system, storefront, entitlement, and unknown failures have stable wrapper codes.
-- Purchase failures distinguish unavailable products, disallowed purchases, invalid quantities, invalid offers, and offer ineligibility.
+- Every currently known StoreKit and purchase failure has a distinct, stable wrapper code; only future unknown cases use generic fallbacks.
 - Native StoreKit errors remain internal; delegate callbacks expose only an Objective-C-compatible integer code and message.
 - Public manager and DTO classes inherit from `NSObject` and explicitly export Objective-C-compatible members.
 - Public delegates and loggers are class-bound Objective-C protocols; all public enums use Objective-C-compatible integer raw values.
@@ -133,6 +132,8 @@
 - Performed static test discovery, raw-value consistency, source-reference, formatting, and diff checks; native tests weren't compiled or executed because the Apple toolchain is unavailable.
 - Added the three public StoreKit view controllers, their internal hosting container, generated-header assertions, and deterministic containment tests.
 - Corrected the nested iOS 18.4 availability check required by `Transaction.Offer.period` and performed static source and diff validation.
+- Made the `StoreKitError` and `Product.PurchaseError` switches exhaustive for the current StoreKit SDK while preserving future `@unknown default` fallbacks.
+- Replaced generic mappings for known StoreKit and purchase failures with one-to-one public error codes and updated their deterministic contract tests.
 - Build and automated tests were not run because repository instructions require separate approval.
 
 ## Open issues and recommended next step

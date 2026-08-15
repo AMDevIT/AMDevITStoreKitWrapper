@@ -73,6 +73,12 @@ internal enum StoreKitWrapperErrorMapper {
         case .unknown:
             return StoreKitWrapperMappedError(code: .storeKitUnknown,
                                               message: storeKitError.localizedDescription)
+        case .unsupported:
+            return StoreKitWrapperMappedError(code: .storeKitUnsupported,
+                                              message: storeKitError.localizedDescription)
+        case .invalidPresentationContext:
+            return StoreKitWrapperMappedError(code: .storeKitInvalidPresentationContext,
+                                              message: storeKitError.localizedDescription)
         @unknown default:
             return StoreKitWrapperMappedError(code: .storeKitUnknown,
                                               message: storeKitError.localizedDescription)
@@ -89,13 +95,18 @@ internal enum StoreKitWrapperErrorMapper {
             code = .purchaseNotAllowed
         case .invalidQuantity:
             code = .purchaseInvalidQuantity
-        case .invalidOfferIdentifier,
-             .invalidOfferPrice,
-             .invalidOfferSignature,
-             .missingOfferParameters:
-            code = .purchaseInvalidOffer
+        case .invalidOfferIdentifier:
+            code = .purchaseInvalidOfferIdentifier
+        case .invalidOfferPrice:
+            code = .purchaseInvalidOfferPrice
+        case .invalidOfferSignature:
+            code = .purchaseInvalidOfferSignature
+        case .missingOfferParameters:
+            code = .purchaseMissingOfferParameters
         case .ineligibleForOffer:
             code = .purchaseIneligibleForOffer
+        case .paymentMethodBindingConfigurationRequired:
+            code = .purchasePaymentMethodBindingConfigurationRequired
         @unknown default:
             code = .purchaseFailed
         }

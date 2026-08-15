@@ -53,15 +53,24 @@ struct StoreKitWrapperErrorMapperTests {
                                                                 fallbackCode: .purchaseFailed)
         let invalidQuantity = StoreKitWrapperErrorMapper.map(error: Product.PurchaseError.invalidQuantity,
                                                              fallbackCode: .purchaseFailed)
-        let invalidOffer = StoreKitWrapperErrorMapper.map(error: Product.PurchaseError.invalidOfferSignature,
-                                                          fallbackCode: .purchaseFailed)
+        let invalidOfferIdentifier = StoreKitWrapperErrorMapper.map(error: Product.PurchaseError.invalidOfferIdentifier,
+                                                                    fallbackCode: .purchaseFailed)
+        let invalidOfferPrice = StoreKitWrapperErrorMapper.map(error: Product.PurchaseError.invalidOfferPrice,
+                                                               fallbackCode: .purchaseFailed)
+        let invalidOfferSignature = StoreKitWrapperErrorMapper.map(error: Product.PurchaseError.invalidOfferSignature,
+                                                                   fallbackCode: .purchaseFailed)
+        let missingOfferParameters = StoreKitWrapperErrorMapper.map(error: Product.PurchaseError.missingOfferParameters,
+                                                                    fallbackCode: .purchaseFailed)
         let ineligibleForOffer = StoreKitWrapperErrorMapper.map(error: Product.PurchaseError.ineligibleForOffer,
                                                                 fallbackCode: .purchaseFailed)
 
         #expect(productUnavailable.code == .purchaseProductUnavailable)
         #expect(purchaseNotAllowed.code == .purchaseNotAllowed)
         #expect(invalidQuantity.code == .purchaseInvalidQuantity)
-        #expect(invalidOffer.code == .purchaseInvalidOffer)
+        #expect(invalidOfferIdentifier.code == .purchaseInvalidOfferIdentifier)
+        #expect(invalidOfferPrice.code == .purchaseInvalidOfferPrice)
+        #expect(invalidOfferSignature.code == .purchaseInvalidOfferSignature)
+        #expect(missingOfferParameters.code == .purchaseMissingOfferParameters)
         #expect(ineligibleForOffer.code == .purchaseIneligibleForOffer)
     }
 

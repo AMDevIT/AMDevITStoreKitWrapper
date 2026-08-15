@@ -8,9 +8,8 @@ Expose stable, Objective-C-compatible wrapper error codes while keeping native S
 
 - `StoreKitWrapperErrorMapper` is an internal translation point shared by product retrieval, purchase, and App Store synchronization.
 - Swift task cancellation, `StoreKitError.userCancelled`, cancelled `URLError` values, and user-cancelled URL authentication map to `operationCancelled`.
-- StoreKit network, system, storefront, entitlement, and unknown errors have dedicated wrapper codes.
-- Purchase errors distinguish unavailable products, disallowed purchases, invalid quantities, invalid offers, and offer ineligibility.
-- Invalid offer identifier, price, signature, and missing parameters intentionally share `purchaseInvalidOffer`; the native localized message retains the detail.
+- Every StoreKit network, system, storefront, entitlement, unknown, unsupported-operation, and invalid-presentation-context error has a dedicated wrapper code.
+- Every known purchase error has a dedicated wrapper code, including each invalid-offer variant, missing offer parameters, offer ineligibility, and payment-method binding requirements.
 - Unknown future StoreKit cases map to `storeKitUnknown`; unknown future purchase cases retain the operation fallback `purchaseFailed`.
 - Errors outside the recognized StoreKit families retain the operation-specific fallback code.
 
@@ -22,9 +21,13 @@ Expose stable, Objective-C-compatible wrapper error codes while keeping native S
 
 ## Compatibility decision
 
-- Newly introduced or beta StoreKit cases aren't referenced directly until their SDK availability is verified. The `@unknown default` paths preserve forward compatibility in the meantime.
+- All cases known to the active StoreKit SDK are handled explicitly, including newly introduced and beta cases.
+- Known StoreKit cases aren't collapsed into generic categories because doing so would discard actionable information at the Objective-C and future C# boundary.
+- The `@unknown default` paths remain present for cases introduced by future SDKs.
 
 ## Verification status
 
 - Static mapping-reference, callback-code, formatting, and diff checks completed without errors.
+- Added the StoreKit cases required for exhaustive switches by current Swift compilers.
+- Updated raw-value and mapper tests for the one-to-one public error contract.
 - Compilation and automated tests were not run because repository instructions require separate approval and a macOS/Xcode environment.
