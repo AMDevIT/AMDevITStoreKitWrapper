@@ -22,6 +22,7 @@ AMDevIT StoreKit Wrapper is a native StoreKit 2 framework with a .NET 10 for iOS
 - Exposes an explicit App Store synchronization operation for Restore Purchases flows.
 - Maps StoreKit failures to stable, Objective-C-compatible error codes.
 - Supports optional structured logging through a native logger protocol.
+- Provides a managed `StoreKitClient` facade with task-based .NET APIs.
 - Provides UIKit controllers backed by StoreKit SwiftUI views on iOS 17 and later.
 - Keeps Swift concurrency, `Product`, `Transaction`, and `VerificationResult` behind the native boundary.
 
@@ -32,7 +33,7 @@ The repository contains two cooperating layers:
 1. `src/apple/StoreKitWrapper` implements the StoreKit 2 framework in Swift and exposes an Objective-C-compatible surface.
 2. `src/dotnet/AMDevIT.StoreKitWrapper` binds the packaged `StoreKitWrapper.xcframework` for .NET 10 for iOS.
 
-All asynchronous native operations complete through `StoreKitManagerDelegate`. This allows .NET consumers to use StoreKit 2 without crossing the binding boundary with Swift actors, tasks, async sequences, or generic StoreKit values.
+All asynchronous native operations complete through `StoreKitManagerDelegate`. The managed `StoreKitClient` converts those callbacks into .NET tasks while preserving `StoreKitManager` as the directly bound low-level API. This allows .NET consumers to use StoreKit 2 without crossing the binding boundary with Swift actors, tasks, async sequences, or generic StoreKit values.
 
 ## Requirements
 
@@ -69,7 +70,65 @@ Alternatively, add a project reference from the consuming .NET for iOS applicati
 
 Adjust the relative path to match the location of the repositories on your machine.
 
-### 2. Implement the StoreKit delegate
+### 2. Use the managed async client
+
+`StoreKitClient` is the recommended application-facing API. It owns a native `StoreKitManager`, translates operation callbacks into tasks, and exposes independent transaction-listener updates as an event:
+
+```csharp
+private readonly StoreKitClient storeKitClient;
+
+public MyStoreService()
+{
+    this.storeKitClient = new StoreKitClient();
+    this.storeKitClient.TransactionUpdated += this.OnTransactionUpdated;
+}
+
+public async Task InitializeAsync(CancellationToken cancellationToken)
+{
+    IReadOnlyList<StoreKitProduct> products;
+
+    await this.storeKitClient.InitializeAsync(cancellationToken);
+    products = await this.storeKitClient.GetProductsAsync(["com.example.premium"],
+                                                          cancellationToken);
+
+    foreach (StoreKitProduct product in products)
+    {
+        Console.WriteLine($"{product.DisplayName}: {product.DisplayPrice}");
+    }
+}
+
+public async Task PurchasePremiumAsync(CancellationToken cancellationToken)
+{
+    StoreKitPurchaseOutcome outcome;
+
+    outcome = await this.storeKitClient.PurchaseAsync("com.example.premium",
+                                                      cancellationToken: cancellationToken);
+
+    if (outcome.Transaction?.VerificationStatus == StoreKitTransactionVerificationStatus.Verified)
+    {
+        DeliverPurchase(outcome.Transaction);
+        await this.storeKitClient.FinishTransactionAsync(outcome.Transaction.Identifier,
+                                                         cancellationToken);
+    }
+}
+
+private void OnTransactionUpdated(object? sender,
+                                  StoreKitTransactionUpdatedEventArgs eventArgs)
+{
+    if (eventArgs.Transaction.VerificationStatus == StoreKitTransactionVerificationStatus.Verified)
+    {
+        DeliverPurchase(eventArgs.Transaction);
+    }
+}
+```
+
+All task continuations are detached from the native callback through `TaskCreationOptions.RunContinuationsAsynchronously`. The wrapper doesn't dispatch callbacks or events to the main thread.
+
+The current `CancellationToken` contract is intentionally limited: a token whose cancellation was already requested prevents the native operation from starting. Cancellation requested after Swift begins doesn't yet interrupt the native operation or its managed task.
+
+Errors reported by native operation callbacks become `StoreKitWrapperException` instances containing the stable `StoreKitWrapperErrorCode`. Pending and customer-cancelled purchases remain successful task completions represented by `StoreKitPurchaseOutcome`.
+
+### 3. Use the low-level delegate API
 
 Derive from the generated `StoreKitManagerDelegate` model and override every callback that the native protocol can invoke. The following delegate initializes a product catalog and shows the essential transaction flow:
 
@@ -174,7 +233,7 @@ public sealed class AppStoreKitDelegate : StoreKitManagerDelegate
 
 Replace `DeliverPurchase` with an idempotent delivery process backed by durable application storage. Never grant content solely because a transaction object exists: first confirm that `VerificationStatus` is `Verified`.
 
-### 3. Create and initialize the manager
+### 4. Create and initialize the low-level manager
 
 Keep strong references to both objects for as long as StoreKit callbacks are required:
 

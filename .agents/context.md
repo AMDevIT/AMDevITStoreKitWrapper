@@ -1,5 +1,14 @@
 # StoreKit Wrapper Context
 
+## Latest step: managed StoreKit client
+
+- Objective: provide an idiomatic task-based .NET facade over the native callback API without changing Objective Sharpie output.
+- Status: `StoreKitClient`, its interface, native delegate bridge, managed result/event/exception types, project registration, and README guidance are implemented; compilation and runtime verification remain pending separate approval.
+- Decisions: retain the generated `StoreKitManager` name; use independent completion sources with asynchronous continuations; expose transaction updates as same-thread events; reject duplicate category operations locally; accept cancellation tokens but only check pre-cancellation before invoking Swift.
+- Affected files: the new managed client sources, the binding `.csproj`, `README.md`, `.agents/managed-storekit-client.md`, and `.agents/context.md`.
+- Checks: verified all eight async methods have cancellation pre-checks, all nine native callbacks have delegate overrides, every new source is registered, project XML parses, no main-thread dispatch or in-flight cancellation registration was introduced, and scoped formatting/diff checks pass.
+- Open issues and recommended next step: with user approval, restore and build the binding; then validate callback correlation, disposal, listener events, and error propagation in an iOS consumer before adding real in-flight cancellation.
+
 ## Latest step: NuGet packaging
 
 - Objective: configure the .NET 10 for iOS binding as a publishable NuGet package with complete metadata, documentation, licensing, and a deterministic output location.
@@ -86,6 +95,9 @@
 - The .NET binding represents implementable native protocols with generated interfaces and subclassable model classes by combining `Model`, `Protocol`, and an `NSObject` base type.
 - The .NET binding omits explicit `ViewDidLoad` declarations for the StoreKit controllers because the member is already inherited from `UIViewController`.
 - The binding project references the StoreKitWrapper XCFramework and its Foundation, StoreKit, SwiftUI, and UIKit dependencies.
+- The .NET binding provides `StoreKitClient` as a task-based managed facade while retaining the Sharpie-generated `StoreKitManager` as its low-level native API.
+- Managed task continuations are asynchronous, while transaction-update events remain on the native callback thread.
+- Managed methods accept cancellation tokens but currently check them only before invoking Swift; in-flight cancellation remains deferred.
 
 ## Affected files
 
@@ -137,6 +149,13 @@
 - `src/apple/StoreKitWrapper/StoreKitWrapper/Views/StoreKitProductsViewController.swift`
 - `src/apple/StoreKitWrapper/StoreKitWrapper/Views/StoreKitSubscriptionsViewController.swift`
 - `src/apple/StoreKitWrapper/StoreKitWrapperTests/StoreKitViewControllerTests.swift`
+- `.agents/managed-storekit-client.md`
+- `src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper/IStoreKitClient.cs`
+- `src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper/StoreKitClient.cs`
+- `src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper/StoreKitClientDelegate.cs`
+- `src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper/StoreKitPurchaseOutcome.cs`
+- `src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper/StoreKitTransactionUpdatedEventArgs.cs`
+- `src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper/StoreKitWrapperException.cs`
 
 ## Checks
 
@@ -166,6 +185,7 @@
 - Restored and built the .NET 10 for iOS binding project successfully with zero warnings and zero errors after correcting protocol model generation and removing duplicate `ViewDidLoad` bindings.
 - Inspected generated binding sources and confirmed that both logger/delegate interfaces and abstract protocol model classes are emitted.
 - A repository-wide `git diff --check` encountered Windows path-length errors inside the XCFramework; the scoped check for the edited binding definition passed.
+- Added the task-based `StoreKitClient`, its native callback bridge, typed purchase and transaction-update results, managed exception, cancellation-token placeholders, project registration, and usage documentation.
 
 ## Open issues and recommended next step
 
@@ -177,3 +197,5 @@
 - Add StoreKit Configuration integration tests and any necessary internal service injection only after the deterministic suite and generated contract pass.
 - Verify the three view controllers against the intended Xcode SDK and StoreKit Configuration on macOS.
 - Link the generated .NET binding into a consumer iOS application and verify manager construction, protocol callbacks, and StoreKit view-controller presentation on macOS/iOS.
+- Build and validate `StoreKitClient` against native callbacks on iOS after receiving verification approval.
+- Add in-flight cancellation forwarding only after the Swift manager exposes deterministic cancellation and terminal callbacks.

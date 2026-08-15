@@ -40,6 +40,12 @@
 
   <ItemGroup>
     <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
+    <ObjcBindingCoreSource Include="IStoreKitClient.cs" />
+    <ObjcBindingCoreSource Include="StoreKitClient.cs" />
+    <ObjcBindingCoreSource Include="StoreKitClientDelegate.cs" />
+    <ObjcBindingCoreSource Include="StoreKitPurchaseOutcome.cs" />
+    <ObjcBindingCoreSource Include="StoreKitTransactionUpdatedEventArgs.cs" />
+    <ObjcBindingCoreSource Include="StoreKitWrapperException.cs" />
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
   </ItemGroup>
 
