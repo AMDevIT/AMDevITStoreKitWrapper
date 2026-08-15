@@ -23,7 +23,7 @@ fi
 
 echo "Extracting classes and interfaces from xcframework"
 
-sharpie bind --header="$HEADER_PATH" --scope="$FRAMEWORK_PATH/Headers" --sdk=iphoneos --output="$OUTPUT_PATH" --namespace="AMDevIT.StoreKitWrapper" --verbose --clang -target arm64-apple-ios15.6
+sharpie bind "$HEADER_PATH" -scope="$FRAMEWORK_PATH/Headers" -o "$OUTPUT_PATH" -n "AMDevIT.StoreKitWrapper" -v -c -F "$HOME/Library/Developer/Xcode/DerivedData"
 
 if [[ ! -d "$OUTPUT_PATH" ]] || [[ -z "$(find "$OUTPUT_PATH" -type f -print -quit)" ]]; then
     echo "Objective Sharpie completed without generating files in $OUTPUT_PATH." >&2
