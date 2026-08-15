@@ -198,10 +198,17 @@ enum StoreKitTransactionMapper {
                 return nil
             }
 
+            let period: StoreKitSubscriptionPeriod?
+            if #available(iOS 18.4, *) {
+                period = offer.period.map { StoreKitSubscriptionPeriod(subscriptionPeriod: $0) }
+            } else {
+                period = nil
+            }
+
             return StoreKitTransactionOffer(identifier: offer.id,
                                             offerType: self.map(offerType: offer.type),
                                             paymentMode: self.map(paymentMode: offer.paymentMode),
-                                            period: offer.period.map { StoreKitSubscriptionPeriod(subscriptionPeriod: $0) })
+                                            period: period)
         }
 
         guard transaction.offerID != nil || transaction.offerType != nil else {

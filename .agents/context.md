@@ -22,6 +22,7 @@
 - Transaction JSON and JWS are exposed as strings; device verification is exposed as Base64 and its nonce as a UUID string.
 - Unverified transactions remain representable but carry an explicit verification status, error code, and message.
 - Modern transaction metadata uses availability-guarded iOS 15.6 fallbacks where StoreKit provides them.
+- Applied-offer periods are populated only on iOS 18.4 and later; earlier supported versions expose the remaining offer metadata with a `nil` period.
 - One purchase operation at a time is enforced atomically by `StoreState` before StoreKit is called.
 - Purchase callbacks distinguish success, pending approval, user cancellation, failure, and unknown future results.
 - Verified native transactions are retained internally until the application explicitly finishes them by identifier.
@@ -131,6 +132,7 @@
 - Added deterministic Swift Testing coverage for actor state, error mapping, logging, ABI-stable enum values, and binding DTOs.
 - Performed static test discovery, raw-value consistency, source-reference, formatting, and diff checks; native tests weren't compiled or executed because the Apple toolchain is unavailable.
 - Added the three public StoreKit view controllers, their internal hosting container, generated-header assertions, and deterministic containment tests.
+- Corrected the nested iOS 18.4 availability check required by `Transaction.Offer.period` and performed static source and diff validation.
 - Build and automated tests were not run because repository instructions require separate approval.
 
 ## Open issues and recommended next step

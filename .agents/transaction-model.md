@@ -16,10 +16,12 @@ Represent StoreKit 2 transactions with binding-friendly DTOs while keeping `Tran
 - `StoreKitTransactionMapper` accepts only `VerificationResult<Transaction>`, preventing callers from accidentally separating a transaction from its StoreKit verification result.
 - Verified and unverified payloads are both mapped, but unverified DTOs carry an explicit status, error code, and message so the consumer can reject them.
 - Modern StoreKit properties are used where available. Deprecated StoreKit representations provide the iOS 15.6 fallback for environment, storefront country, transaction reason, and offer metadata.
+- `Transaction.Offer.period` is read only on iOS 18.4 and later; on iOS 17.2 through 18.3 the applied offer remains available while its period is represented as `nil`.
 - The StoreKit JWS is preserved as received. No second client-side signature verifier or server dependency is introduced.
 - Subscription status, Advanced Commerce data, and native transaction references are intentionally excluded.
 
 ## Verification status
 
 - `git diff --check` and static source searches completed without errors.
+- Corrected the nested availability guard for `Transaction.Offer.period`, which requires iOS 18.4 even though `Transaction.Offer` itself is available earlier.
 - Compilation, generated Objective-C header inspection, and automated tests require a macOS/Xcode verification step and were not run.
