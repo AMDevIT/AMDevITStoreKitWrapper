@@ -134,6 +134,7 @@
 - Corrected the nested iOS 18.4 availability check required by `Transaction.Offer.period` and performed static source and diff validation.
 - Made the `StoreKitError` and `Product.PurchaseError` switches exhaustive for the current StoreKit SDK while preserving future `@unknown default` fallbacks.
 - Replaced generic mappings for known StoreKit and purchase failures with one-to-one public error codes and updated their deterministic contract tests.
+- Removed the documentation-only beta `StoreKitError.invalidPresentationContext` mapping because the installed StoreKit SDK doesn't expose that symbol.
 - Build and automated tests were not run because repository instructions require separate approval.
 
 ## Open issues and recommended next step

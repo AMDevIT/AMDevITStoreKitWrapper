@@ -76,9 +76,6 @@ internal enum StoreKitWrapperErrorMapper {
         case .unsupported:
             return StoreKitWrapperMappedError(code: .storeKitUnsupported,
                                               message: storeKitError.localizedDescription)
-        case .invalidPresentationContext:
-            return StoreKitWrapperMappedError(code: .storeKitInvalidPresentationContext,
-                                              message: storeKitError.localizedDescription)
         @unknown default:
             return StoreKitWrapperMappedError(code: .storeKitUnknown,
                                               message: storeKitError.localizedDescription)

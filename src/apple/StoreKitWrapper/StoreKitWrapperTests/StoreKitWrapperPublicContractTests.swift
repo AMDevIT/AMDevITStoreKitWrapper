@@ -26,7 +26,6 @@ struct StoreKitWrapperPublicContractTests {
             (.storeKitNotEntitled, 23),
             (.storeKitUnknown, 24),
             (.storeKitUnsupported, 25),
-            (.storeKitInvalidPresentationContext, 26),
             (.productsRequestInProgress, 100),
             (.productsRequestFailed, 101),
             (.productNotFound, 200),

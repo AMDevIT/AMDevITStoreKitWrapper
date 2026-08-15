@@ -22,7 +22,6 @@ import Foundation
     case storeKitNotEntitled = 23
     case storeKitUnknown = 24
     case storeKitUnsupported = 25
-    case storeKitInvalidPresentationContext = 26
 
     case productsRequestInProgress = 100
     case productsRequestFailed = 101
