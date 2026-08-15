@@ -1,7 +1,6 @@
 using System;
 using Foundation;
 using ObjCRuntime;
-using StoreKitWrapper;
 using UIKit;
 
 namespace AMDevIT.StoreKitWrapper {
