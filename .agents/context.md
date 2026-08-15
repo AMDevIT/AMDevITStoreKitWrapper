@@ -1,5 +1,14 @@
 # StoreKit Wrapper Context
 
+## Latest step: NuGet publication documentation
+
+- Objective: make the published NuGet package the primary README installation path and reflect its public availability accurately.
+- Status: completed for user-confirmed package `AMDevIT.StoreKitWrapper` version `0.130.0` at `https://www.nuget.org/packages/AMDevIT.StoreKitWrapper/0.130.0`.
+- Decisions: replace the static version shield with dynamic NuGet version and download shields; link installation and project status directly to NuGet.org; retain local package and project-reference instructions for repository development.
+- Affected files: `README.md`, `.agents/nuget-publication.md`, and `.agents/context.md`.
+- Checks: package ID, version, URL, install command, badge URLs, Markdown structure, and scoped diffs were checked statically. Publication was performed and confirmed externally by the user; no package mutation was performed here.
+- Open issues and recommended next step: validate installation and runtime behavior from NuGet.org in a clean .NET for iOS consumer application and update all version references together for the next release.
+
 ## Latest step: binding source classification fix
 
 - Objective: stop compiling the managed `StoreKitClient` facade as binding-generator core source.

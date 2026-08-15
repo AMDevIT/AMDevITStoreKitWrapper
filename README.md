@@ -1,6 +1,7 @@
 # AMDevIT StoreKit Wrapper
 
-[![Version](https://img.shields.io/badge/version-0.130.0-0A7EA4)](https://github.com/AMDevIT/AMDevITStoreKitWrapper)
+[![NuGet version](https://img.shields.io/nuget/v/AMDevIT.StoreKitWrapper?logo=nuget)](https://www.nuget.org/packages/AMDevIT.StoreKitWrapper/0.130.0)
+[![NuGet downloads](https://img.shields.io/nuget/dt/AMDevIT.StoreKitWrapper?logo=nuget)](https://www.nuget.org/packages/AMDevIT.StoreKitWrapper/0.130.0)
 [![iOS](https://img.shields.io/badge/iOS-15.6%2B-000000?logo=apple)](https://developer.apple.com/ios/)
 [![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![Swift](https://img.shields.io/badge/Swift-5-F05138?logo=swift&logoColor=white)](https://www.swift.org/)
@@ -45,15 +46,15 @@ All asynchronous native operations complete through `StoreKitManagerDelegate`. T
 
 ## Quick start
 
-### 1. Install or reference the binding
+### 1. Install the binding
 
-The binding is configured as the `AMDevIT.StoreKitWrapper` NuGet package. After it is published, install version `0.130.0` from the configured NuGet source:
+Install the published [`AMDevIT.StoreKitWrapper` version `0.130.0`](https://www.nuget.org/packages/AMDevIT.StoreKitWrapper/0.130.0) package from NuGet.org:
 
 ```bash
 dotnet add package AMDevIT.StoreKitWrapper --version 0.130.0
 ```
 
-Until the first public release, clone this repository and either create a local package or add a direct project reference. To produce and consume the local package from the repository root:
+For repository development, clone the project and either create a local package or add a direct project reference. To produce and consume the local package from the repository root:
 
 ```bash
 dotnet pack src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper.slnx --configuration Release
@@ -319,7 +320,7 @@ Create the NuGet package from the repository root:
 dotnet pack src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper.slnx --configuration Release
 ```
 
-The package is written to `artifacts/packages` and includes the binding assembly, its XML documentation for IDE IntelliSense, the native XCFramework, README, license, package icon, and NuGet metadata. Packing does not publish the package; use an authenticated NuGet source explicitly when it is ready for release.
+The package is written to `artifacts/packages` and includes the binding assembly, its XML documentation for IDE IntelliSense, the native XCFramework, README, license, package icon, and NuGet metadata. Creating a local package does not publish a new version; publishing still requires an explicit push to an authenticated NuGet source.
 
 On macOS with Xcode installed, build the native framework and verify its generated Objective-C interface:
 
@@ -335,7 +336,7 @@ The script builds the Release framework for the iOS Simulator and validates the 
 - Objective-C-compatible contract: implemented; generated-header verification script available.
 - Native deterministic tests: implemented; execution on macOS pending.
 - .NET 10 for iOS binding: restored and built successfully with zero warnings and errors in the recorded project verification.
-- NuGet packaging: configured for package ID `AMDevIT.StoreKitWrapper`; package creation and content inspection pending.
+- NuGet package: [`AMDevIT.StoreKitWrapper` version `0.130.0`](https://www.nuget.org/packages/AMDevIT.StoreKitWrapper/0.130.0) is published on NuGet.org.
 - Consumer application and real StoreKit runtime validation: pending on macOS/iOS.
 
 See the files in `.agents` for the progressive implementation notes and verification history.
