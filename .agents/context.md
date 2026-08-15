@@ -64,6 +64,7 @@
 - Applications must initialize `StoreKitManager` before presenting these controllers to receive their completed transactions through the listener.
 - Product, products, and subscription-group controllers are available on iOS 17 and later while the framework retains its iOS 15.6 deployment target.
 - An internal hosting container installs one `UIHostingController` child using full-edge Auto Layout constraints and prevents duplicate installation.
+- The StoreKitWrapper framework marketing version is `0.130.0` for both Debug and Release; its build and Mach-O compatibility versions remain independent.
 
 ## Affected files
 
@@ -135,6 +136,7 @@
 - Made the `StoreKitError` and `Product.PurchaseError` switches exhaustive for the current StoreKit SDK while preserving future `@unknown default` fallbacks.
 - Replaced generic mappings for known StoreKit and purchase failures with one-to-one public error codes and updated their deterministic contract tests.
 - Removed the documentation-only beta `StoreKitError.invalidPresentationContext` mapping because the installed StoreKit SDK doesn't expose that symbol.
+- Updated the StoreKitWrapper framework `MARKETING_VERSION` to `0.130.0` in Debug and Release.
 - Build and automated tests were not run because repository instructions require separate approval.
 
 ## Open issues and recommended next step
