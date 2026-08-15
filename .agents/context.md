@@ -1,5 +1,14 @@
 # StoreKit Wrapper Context
 
+## Latest step: README refresh
+
+- Objective: document the project definition, important and truthful shields, requirements, quick-start usage, common operations, native StoreKit views, verification workflow, and project status.
+- Status: completed. The README now reflects the current Swift framework and .NET 10 for iOS binding surface.
+- Decisions: keep the README in English; omit unsupported CI, NuGet, and release shields; require verified and durably delivered transactions before finishing; use the generated C# API names in examples.
+- Affected files: `README.md`, `.agents/readme-refresh.md`, and `.agents/context.md`.
+- Checks: API names, enum names, versions, targets, paths, Markdown structure, links, and repository diff were checked statically. Restore and build were not run because they require separate approval.
+- Open issues and recommended next step: run the existing native checks on macOS/Xcode and restore/build the .NET binding when separately authorized; update installation guidance if a NuGet package is published.
+
 ## Objective and status
 
 - Objective: establish callback-based, binding-friendly StoreKit lifecycle, product, transaction, purchase, entitlement, synchronization, unfinished-transaction, update-listener, and .NET for iOS binding contracts.
