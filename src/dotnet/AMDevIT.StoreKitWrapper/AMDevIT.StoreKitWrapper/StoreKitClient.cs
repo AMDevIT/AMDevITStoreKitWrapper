@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace AMDevIT.StoreKitWrapper;
 
@@ -31,6 +32,7 @@ public sealed class StoreKitClient : IStoreKitClient
 
     private readonly object synchronizationLock = new();
     private readonly StoreKitClientDelegate clientDelegate;
+    private readonly StoreKitLoggerBridge? loggerBridge;
     private readonly StoreKitManager manager;
     private TaskCompletionSource<bool>? initializationCompletionSource;
     private TaskCompletionSource<bool>? shutdownCompletionSource;
@@ -47,12 +49,13 @@ public sealed class StoreKitClient : IStoreKitClient
 
     #region .ctor
 
-    /// <summary>Creates a StoreKit client with optional native structured logging.</summary>
-    /// <param name="logger">A native logger implementation, or <see langword="null"/> to disable logging.</param>
-    public StoreKitClient(StoreKitWrapperLogger? logger = null)
+    /// <summary>Creates a StoreKit client with optional Microsoft.Extensions.Logging integration.</summary>
+    /// <param name="logger">The typed Microsoft logger that receives native StoreKit diagnostics, or <see langword="null"/> to disable logging.</param>
+    public StoreKitClient(ILogger<StoreKitClient>? logger = null)
     {
         this.clientDelegate = new StoreKitClientDelegate(this);
-        this.manager = new StoreKitManager(logger, this.clientDelegate);
+        this.loggerBridge = logger is null ? null : new StoreKitLoggerBridge(logger);
+        this.manager = new StoreKitManager(this.loggerBridge, this.clientDelegate);
     }
 
     #endregion

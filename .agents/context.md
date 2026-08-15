@@ -1,5 +1,14 @@
 # StoreKit Wrapper Context
 
+## Latest step: Microsoft.Extensions.Logging client bridge
+
+- Objective: let the managed StoreKit client accept the standard typed Microsoft logger and forward all native structured diagnostics.
+- Status: the abstractions dependency, private native logger bridge, typed client constructor, level/event/error mapping, lifecycle handling, README guidance, and progressive documentation are implemented; restore and build remain pending separate approval.
+- Decisions: depend on `Microsoft.Extensions.Logging.Abstractions` 10.0.0 rather than provider packages; expose `ILogger<StoreKitClient>` only on the managed facade; retain low-level native logger support on `StoreKitManager`; map `NSError` to `NSErrorException`; don't force-dispose the bridge while retained native Swift work may still log.
+- Affected files: the binding `.csproj`, `StoreKitClient.cs`, new `StoreKitLoggerBridge.cs`, `README.md`, `.agents/managed-storekit-client.md`, `.agents/microsoft-logging-bridge.md`, and `.agents/context.md`.
+- Checks: project XML parses, the new source is registered, every known native log level is mapped, event identity and native error forwarding are preserved, and scoped documentation/whitespace checks pass. No restore or build command was run.
+- Open issues and recommended next step: with user approval, restore/build the binding and validate log delivery, filtering, event IDs, exceptions, package dependency metadata, and trimming behavior in an iOS consumer.
+
 ## Latest step: public API documentation and NuGet IntelliSense
 
 - Objective: document the complete public Swift and .NET API and ship .NET XML documentation for NuGet IntelliSense.

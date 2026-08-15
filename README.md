@@ -21,7 +21,7 @@ AMDevIT StoreKit Wrapper is a native StoreKit 2 framework with a .NET 10 for iOS
 - Finishes verified transactions explicitly after the application delivers the purchase.
 - Exposes an explicit App Store synchronization operation for Restore Purchases flows.
 - Maps StoreKit failures to stable, Objective-C-compatible error codes.
-- Supports optional structured logging through a native logger protocol.
+- Bridges optional native structured logging to `Microsoft.Extensions.Logging` in the managed client.
 - Provides a managed `StoreKitClient` facade with task-based .NET APIs.
 - Provides UIKit controllers backed by StoreKit SwiftUI views on iOS 17 and later.
 - Keeps Swift concurrency, `Product`, `Transaction`, and `VerificationResult` behind the native boundary.
@@ -77,9 +77,9 @@ Adjust the relative path to match the location of the repositories on your machi
 ```csharp
 private readonly StoreKitClient storeKitClient;
 
-public MyStoreService()
+public MyStoreService(ILogger<StoreKitClient> logger)
 {
-    this.storeKitClient = new StoreKitClient();
+    this.storeKitClient = new StoreKitClient(logger);
     this.storeKitClient.TransactionUpdated += this.OnTransactionUpdated;
 }
 
@@ -123,6 +123,8 @@ private void OnTransactionUpdated(object? sender,
 ```
 
 All task continuations are detached from the native callback through `TaskCreationOptions.RunContinuationsAsynchronously`. The wrapper doesn't dispatch callbacks or events to the main thread.
+
+The optional `ILogger<StoreKitClient>` receives native StoreKit diagnostics with their mapped Microsoft log level, numeric and named `EventId`, message, and an `NSErrorException` when the native event carries an error. The package depends only on `Microsoft.Extensions.Logging.Abstractions`; the application remains responsible for selecting and configuring logging providers.
 
 Every task-based operation honors `CancellationToken` both before and after its native invocation. Cancellation stops the managed wait immediately and forwards a cooperative cancellation request to the corresponding Swift task. The internal completion source remains registered until the native terminal callback arrives, preventing late callbacks from being associated with a later request.
 

@@ -11,6 +11,7 @@ Provide an idiomatic task-based .NET API over the callback-based native StoreKit
 - `StoreKitPurchaseOutcome` preserves pending, customer-cancelled, successful, and failed purchase outcomes together with the nullable transaction.
 - `StoreKitTransactionUpdatedEventArgs` carries persistent listener updates independently of operation tasks.
 - `StoreKitWrapperException` exposes the stable `StoreKitWrapperErrorCode` reported by native callbacks.
+- The client accepts an optional `ILogger<StoreKitClient>` and privately bridges native structured diagnostics to Microsoft logging.
 
 ## Concurrency and threading decisions
 
@@ -34,6 +35,13 @@ Provide an idiomatic task-based .NET API over the callback-based native StoreKit
 
 - The generated manager contract gains only ordinary `void` cancellation selectors; no Swift `Task`, actor, or async method crosses the Objective-C boundary.
 - Managed facade files are registered as `ObjcBindingCoreSource` items and therefore don't collide with future Sharpie extraction.
+
+## Logging integration
+
+- The binding references `Microsoft.Extensions.Logging.Abstractions` because only the logging contract is required; provider selection remains with the consuming application.
+- `StoreKitLoggerBridge` maps every native log level to its Microsoft equivalent and preserves numeric and named event identifiers.
+- Native `NSError` values become `NSErrorException` instances passed to `ILogger.Log`.
+- The bridge remains private and is retained by the client while the native manager is active; the low-level manager still accepts direct native logger implementations.
 
 ## Verification status
 
