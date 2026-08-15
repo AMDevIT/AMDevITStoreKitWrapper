@@ -12,8 +12,8 @@ import StoreKit
     // MARK: - Properties
 
     public let subscriptionGroupIdentifier: String
-    public let groupDisplayName: String
-    public let groupLevel: Int
+    public let groupDisplayName: String?
+    public let groupLevel: Int?
     public let subscriptionPeriod: StoreKitSubscriptionPeriod
     public let isEligibleForIntroductoryOffer: Bool
     public let introductoryOffer: StoreKitSubscriptionOffer?
@@ -23,8 +23,8 @@ import StoreKit
     // MARK: - Initialization
 
     public init(subscriptionGroupIdentifier: String,
-                groupDisplayName: String,
-                groupLevel: Int,
+                groupDisplayName: String?,
+                groupLevel: Int?,
                 subscriptionPeriod: StoreKitSubscriptionPeriod,
                 isEligibleForIntroductoryOffer: Bool,
                 introductoryOffer: StoreKitSubscriptionOffer?,
@@ -66,10 +66,22 @@ import StoreKit
                                           localeIdentifier: localeIdentifier)
             }
         }
+        
+        var groupDisplayName: String?
+        var groupLevel: Int?
+        
+        if #available(iOS 16.4, *) {
+            groupDisplayName = subscriptionInfo.groupDisplayName
+            groupLevel = subscriptionInfo.groupLevel
+        } else {
+            // The Group Display Name and Level are not available
+            groupDisplayName = nil
+            groupLevel = nil
+        }
 
         return StoreKitSubscriptionInfo(subscriptionGroupIdentifier: subscriptionInfo.subscriptionGroupID,
-                                        groupDisplayName: subscriptionInfo.groupDisplayName,
-                                        groupLevel: subscriptionInfo.groupLevel,
+                                        groupDisplayName: groupDisplayName,
+                                        groupLevel: groupLevel,
                                         subscriptionPeriod: StoreKitSubscriptionPeriod(subscriptionPeriod: subscriptionInfo.subscriptionPeriod),
                                         isEligibleForIntroductoryOffer: isEligibleForIntroductoryOffer,
                                         introductoryOffer: introductoryOffer,
