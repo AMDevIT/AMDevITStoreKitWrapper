@@ -8,6 +8,7 @@
 import Foundation
 import StoreKit
 
+/// Maps native StoreKit transaction values to the wrapper's Objective-C-compatible transaction model.
 enum StoreKitTransactionMapper {
     // MARK: - Methods
 

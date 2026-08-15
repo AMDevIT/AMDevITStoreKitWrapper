@@ -36,6 +36,19 @@ struct StoreStateTests {
         #expect(rejectedInitialization == .managerShutdown)
     }
 
+    @Test func cancelledInitializationCanBeRetried() async {
+        let state = StoreState()
+        let firstInitialization = await state.beginInitialization()
+
+        #expect(firstInitialization == .started)
+
+        await state.cancelInitialization()
+
+        let retry = await state.beginInitialization()
+
+        #expect(retry == .started)
+    }
+
     @Test func operationsRequireInitialization() async {
         let state = StoreState()
         let productsResult = await state.beginProductsRequest()

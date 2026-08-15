@@ -1,11 +1,11 @@
 # AMDevIT StoreKit Wrapper
 
-[![Version](https://img.shields.io/badge/version-0.130.0-0A7EA4)](https://github.com/AMDevIT/AMDevITStoreKitWrapper)
+[![NuGet version](https://img.shields.io/nuget/v/AMDevIT.StoreKitWrapper?logo=nuget)](https://img.shields.io/nuget/v/AMDevIT.StoreKitWrapper)
 [![iOS](https://img.shields.io/badge/iOS-15.6%2B-000000?logo=apple)](https://developer.apple.com/ios/)
 [![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![Swift](https://img.shields.io/badge/Swift-5-F05138?logo=swift&logoColor=white)](https://www.swift.org/)
 [![Project status](https://img.shields.io/badge/status-preview-F59E0B)](#project-status)
-[![License](https://img.shields.io/github/license/AMDevIT/AMDevITStoreKitWrapper)](LICENSE)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](LICENSE)
 
 AMDevIT StoreKit Wrapper is a native StoreKit 2 framework with a .NET 10 for iOS binding. It provides a callback-based API for products, purchases, entitlements, transaction recovery, and StoreKit merchandising views without exposing Swift concurrency or native StoreKit types to .NET applications.
 
@@ -21,7 +21,7 @@ AMDevIT StoreKit Wrapper is a native StoreKit 2 framework with a .NET 10 for iOS
 - Finishes verified transactions explicitly after the application delivers the purchase.
 - Exposes an explicit App Store synchronization operation for Restore Purchases flows.
 - Maps StoreKit failures to stable, Objective-C-compatible error codes.
-- Supports optional structured logging through a native logger protocol.
+- Bridges optional native structured logging to `Microsoft.Extensions.Logging` in the managed client.
 - Provides a managed `StoreKitClient` facade with task-based .NET APIs.
 - Provides UIKit controllers backed by StoreKit SwiftUI views on iOS 17 and later.
 - Keeps Swift concurrency, `Product`, `Transaction`, and `VerificationResult` behind the native boundary.
@@ -45,21 +45,22 @@ All asynchronous native operations complete through `StoreKitManagerDelegate`. T
 
 ## Quick start
 
-### 1. Install or reference the binding
+### 1. Install the binding
 
-The binding is configured as the `AMDevIT.StoreKitWrapper` NuGet package. After it is published, install version `0.130.0` from the configured NuGet source:
+Install the published [`AMDevIT.StoreKitWrapper`] (https://www.nuget.org/packages/AMDevIT.StoreKitWrapper) package from NuGet.org:
 
 ```bash
-dotnet add package AMDevIT.StoreKitWrapper --version 0.130.0
+dotnet add package AMDevIT.StoreKitWrapper 
 ```
 
-Until the first public release, clone this repository and either create a local package or add a direct project reference. To produce and consume the local package from the repository root:
+For repository development, clone the project and either create a local package or add a direct project reference. To produce and consume the local package from the repository root:
 
 ```bash
 dotnet pack src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper.slnx --configuration Release
-dotnet add package AMDevIT.StoreKitWrapper --version 0.130.0 --source ./artifacts/packages
+dotnet add package AMDevIT.StoreKitWrapper --version <version> --source ./artifacts/packages
 ```
 
+where version is the current package version built from sources.
 Alternatively, add a project reference from the consuming .NET for iOS application:
 
 ```xml
@@ -77,9 +78,9 @@ Adjust the relative path to match the location of the repositories on your machi
 ```csharp
 private readonly StoreKitClient storeKitClient;
 
-public MyStoreService()
+public MyStoreService(ILogger<StoreKitClient> logger)
 {
-    this.storeKitClient = new StoreKitClient();
+    this.storeKitClient = new StoreKitClient(logger);
     this.storeKitClient.TransactionUpdated += this.OnTransactionUpdated;
 }
 
@@ -124,7 +125,11 @@ private void OnTransactionUpdated(object? sender,
 
 All task continuations are detached from the native callback through `TaskCreationOptions.RunContinuationsAsynchronously`. The wrapper doesn't dispatch callbacks or events to the main thread.
 
-The current `CancellationToken` contract is intentionally limited: a token whose cancellation was already requested prevents the native operation from starting. Cancellation requested after Swift begins doesn't yet interrupt the native operation or its managed task.
+The optional `ILogger<StoreKitClient>` receives native StoreKit diagnostics with their mapped Microsoft log level, numeric and named `EventId`, message, and an `NSErrorException` when the native event carries an error. The package depends only on `Microsoft.Extensions.Logging.Abstractions`; the application remains responsible for selecting and configuring logging providers.
+
+Every task-based operation honors `CancellationToken` both before and after its native invocation. Cancellation stops the managed wait immediately and forwards a cooperative cancellation request to the corresponding Swift task. The internal completion source remains registered until the native terminal callback arrives, preventing late callbacks from being associated with a later request.
+
+Cancellation is best effort for StoreKit operations that may already have reached system UI or an irreversible system action. In particular, cancelling a purchase wait doesn't guarantee that the App Store confirmation flow or transaction stops, and cancelling a transaction finish doesn't roll back a finish already accepted by StoreKit. Transactions completed after a cancelled purchase wait remain recoverable through `TransactionUpdated`.
 
 Errors reported by native operation callbacks become `StoreKitWrapperException` instances containing the stable `StoreKitWrapperErrorCode`. Pending and customer-cancelled purchases remain successful task completions represented by `StoreKitPurchaseOutcome`.
 
@@ -315,7 +320,7 @@ Create the NuGet package from the repository root:
 dotnet pack src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper.slnx --configuration Release
 ```
 
-The package is written to `artifacts/packages` and includes the binding assembly, native XCFramework, README, license, package icon, and NuGet metadata. Packing does not publish the package; use an authenticated NuGet source explicitly when it is ready for release.
+The package is written to `artifacts/packages` and includes the binding assembly, its XML documentation for IDE IntelliSense, the native XCFramework, README, license, package icon, and NuGet metadata. Creating a local package does not publish a new version; publishing still requires an explicit push to an authenticated NuGet source.
 
 On macOS with Xcode installed, build the native framework and verify its generated Objective-C interface:
 
@@ -331,7 +336,7 @@ The script builds the Release framework for the iOS Simulator and validates the 
 - Objective-C-compatible contract: implemented; generated-header verification script available.
 - Native deterministic tests: implemented; execution on macOS pending.
 - .NET 10 for iOS binding: restored and built successfully with zero warnings and errors in the recorded project verification.
-- NuGet packaging: configured for package ID `AMDevIT.StoreKitWrapper`; package creation and content inspection pending.
+- NuGet package: [`AMDevIT.StoreKitWrapper` version `0.130.0`](https://www.nuget.org/packages/AMDevIT.StoreKitWrapper/0.130.0) is published on NuGet.org.
 - Consumer application and real StoreKit runtime validation: pending on macOS/iOS.
 
 See the files in `.agents` for the progressive implementation notes and verification history.

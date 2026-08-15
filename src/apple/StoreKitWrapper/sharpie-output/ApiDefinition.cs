@@ -83,6 +83,38 @@ namespace AMDevIT.StoreKitWrapper {
 		// -(void)finishTransactionWithTransactionIdentifier:(uint64_t)transactionIdentifier;
 		[Export ("finishTransactionWithTransactionIdentifier:")]
 		void FinishTransactionWithTransactionIdentifier (ulong transactionIdentifier);
+
+		// -(void)cancelInitialization;
+		[Export ("cancelInitialization")]
+		void CancelInitialization ();
+
+		// -(void)cancelShutdown;
+		[Export ("cancelShutdown")]
+		void CancelShutdown ();
+
+		// -(void)cancelProductsRequest;
+		[Export ("cancelProductsRequest")]
+		void CancelProductsRequest ();
+
+		// -(void)cancelCurrentEntitlementsRequest;
+		[Export ("cancelCurrentEntitlementsRequest")]
+		void CancelCurrentEntitlementsRequest ();
+
+		// -(void)cancelAppStoreSync;
+		[Export ("cancelAppStoreSync")]
+		void CancelAppStoreSync ();
+
+		// -(void)cancelUnfinishedTransactionsRequest;
+		[Export ("cancelUnfinishedTransactionsRequest")]
+		void CancelUnfinishedTransactionsRequest ();
+
+		// -(void)cancelPurchase;
+		[Export ("cancelPurchase")]
+		void CancelPurchase ();
+
+		// -(void)cancelTransactionFinish;
+		[Export ("cancelTransactionFinish")]
+		void CancelTransactionFinish ();
 	}
 
 	// @protocol StoreKitManagerDelegate

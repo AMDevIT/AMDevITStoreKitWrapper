@@ -2,6 +2,7 @@ using System;
 
 namespace AMDevIT.StoreKitWrapper;
 
+/// <summary>Bridges native manager callbacks into the owning managed StoreKit client.</summary>
 internal sealed class StoreKitClientDelegate : StoreKitManagerDelegate
 {
     #region Fields
@@ -21,6 +22,7 @@ internal sealed class StoreKitClientDelegate : StoreKitManagerDelegate
 
     #region Methods
 
+    /// <inheritdoc/>
     public override void InitializationCompletedWithErrorCode(StoreKitWrapperErrorCode errorCode,
                                                               string? errorMessage)
     {
@@ -30,6 +32,7 @@ internal sealed class StoreKitClientDelegate : StoreKitManagerDelegate
         }
     }
 
+    /// <inheritdoc/>
     public override void ShutdownCompletedWithErrorCode(StoreKitWrapperErrorCode errorCode,
                                                         string? errorMessage)
     {
@@ -39,6 +42,7 @@ internal sealed class StoreKitClientDelegate : StoreKitManagerDelegate
         }
     }
 
+    /// <inheritdoc/>
     public override void AvailableProductsCompletedWithResult(StoreKitProduct[] withResult,
                                                               StoreKitWrapperErrorCode errorCode,
                                                               string? errorMessage)
@@ -49,6 +53,7 @@ internal sealed class StoreKitClientDelegate : StoreKitManagerDelegate
         }
     }
 
+    /// <inheritdoc/>
     public override void CurrentEntitlementsCompletedWithResult(StoreKitTransaction[] withResult,
                                                                 StoreKitWrapperErrorCode errorCode,
                                                                 string? errorMessage)
@@ -59,6 +64,7 @@ internal sealed class StoreKitClientDelegate : StoreKitManagerDelegate
         }
     }
 
+    /// <inheritdoc/>
     public override void AppStoreSyncCompletedWithErrorCode(StoreKitWrapperErrorCode errorCode,
                                                             string? errorMessage)
     {
@@ -68,6 +74,7 @@ internal sealed class StoreKitClientDelegate : StoreKitManagerDelegate
         }
     }
 
+    /// <inheritdoc/>
     public override void UnfinishedTransactionsCompletedWithResult(StoreKitTransaction[] withResult,
                                                                    StoreKitWrapperErrorCode errorCode,
                                                                    string? errorMessage)
@@ -78,6 +85,7 @@ internal sealed class StoreKitClientDelegate : StoreKitManagerDelegate
         }
     }
 
+    /// <inheritdoc/>
     public override void PurchaseCompletedWithResult(StoreKitTransaction? withResult,
                                                      StoreKitPurchaseResult purchaseResult,
                                                      StoreKitWrapperErrorCode errorCode,
@@ -89,6 +97,7 @@ internal sealed class StoreKitClientDelegate : StoreKitManagerDelegate
         }
     }
 
+    /// <inheritdoc/>
     public override void FinishTransactionCompletedWithTransactionIdentifier(ulong transactionIdentifier,
                                                                              StoreKitWrapperErrorCode errorCode,
                                                                              string? errorMessage)
@@ -99,6 +108,7 @@ internal sealed class StoreKitClientDelegate : StoreKitManagerDelegate
         }
     }
 
+    /// <inheritdoc/>
     public override void TransactionUpdatedWithResult(StoreKitTransaction withResult,
                                                       StoreKitWrapperErrorCode errorCode,
                                                       string? errorMessage)

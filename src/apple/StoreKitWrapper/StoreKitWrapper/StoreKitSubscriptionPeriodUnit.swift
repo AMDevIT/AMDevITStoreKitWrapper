@@ -8,11 +8,17 @@
 import Foundation
 import StoreKit
 
+/// Identifies the calendar unit used by a subscription period.
 @objc public enum StoreKitSubscriptionPeriodUnit: Int {
+    /// A period unit that isn't recognized by this version of the wrapper.
     case unknown = -1
+    /// A period measured in days.
     case day = 0
+    /// A period measured in weeks.
     case week = 1
+    /// A period measured in months.
     case month = 2
+    /// A period measured in years.
     case year = 3
 
     // MARK: - Initialization

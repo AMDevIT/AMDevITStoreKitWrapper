@@ -11,6 +11,7 @@ Provide an idiomatic task-based .NET API over the callback-based native StoreKit
 - `StoreKitPurchaseOutcome` preserves pending, customer-cancelled, successful, and failed purchase outcomes together with the nullable transaction.
 - `StoreKitTransactionUpdatedEventArgs` carries persistent listener updates independently of operation tasks.
 - `StoreKitWrapperException` exposes the stable `StoreKitWrapperErrorCode` reported by native callbacks.
+- The client accepts an optional `ILogger<StoreKitClient>` and privately bridges native structured diagnostics to Microsoft logging.
 
 ## Concurrency and threading decisions
 
@@ -23,17 +24,26 @@ Provide an idiomatic task-based .NET API over the callback-based native StoreKit
 
 ## Cancellation decision
 
-- Every asynchronous public method accepts an optional `CancellationToken` for forward compatibility.
-- The token is currently checked only with `ThrowIfCancellationRequested` before reserving state or invoking Swift.
-- Cancellation requested after the native operation begins doesn't cancel the native operation or the returned task yet.
-- No completion source is removed early, preventing a late native callback from being associated with a later request.
+- Every asynchronous public method accepts an optional `CancellationToken`, rejects pre-cancelled calls, and uses `Task.WaitAsync` so cancellation stops the managed wait immediately.
+- A token cancellation also invokes the matching Objective-C-compatible cancellation selector on the native manager.
+- Native cancellation is cooperative. A StoreKit result or irreversible action that already completed may win the race against cancellation.
+- The managed completion source remains registered until the native terminal callback arrives. This prevents a late callback from being associated with a later request in the same operation category.
+- A native `operationCancelled` error is translated to `OperationCanceledException` when it was caused by the caller's token; direct low-level native cancellation remains a `StoreKitWrapperException`.
+- Native faults arriving after the managed wait was cancelled are observed to avoid unobserved task exceptions.
 
 ## Objective Sharpie compatibility
 
-- `ApiDefinition.cs`, its generated `StoreKitManager`, and `StoreKitManagerDelegate` remain unchanged.
+- The generated manager contract gains only ordinary `void` cancellation selectors; no Swift `Task`, actor, or async method crosses the Objective-C boundary.
 - Managed facade files are registered as `ObjcBindingCoreSource` items and therefore don't collide with future Sharpie extraction.
+
+## Logging integration
+
+- The binding references `Microsoft.Extensions.Logging.Abstractions` because only the logging contract is required; provider selection remains with the consuming application.
+- `StoreKitLoggerBridge` maps every native log level to its Microsoft equivalent and preserves numeric and named event identifiers.
+- Native `NSError` values become `NSErrorException` instances passed to `ILogger.Log`.
+- The bridge remains private and is retained by the client while the native manager is active; the low-level manager still accepts direct native logger implementations.
 
 ## Verification status
 
-- Static source, callback-name, cancellation-entry, completion-source, project-item, formatting, and diff checks completed.
+- Static source, callback-name, cancellation-selector, completion-source retention, project-item, formatting, and diff checks completed.
 - Restore and build were not run because repository instructions require separate user approval.

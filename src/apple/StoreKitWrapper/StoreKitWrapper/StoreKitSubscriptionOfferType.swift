@@ -8,10 +8,15 @@
 import Foundation
 import StoreKit
 
+/// Identifies the kind of subscription offer represented by product metadata.
 @objc public enum StoreKitSubscriptionOfferType: Int {
+    /// An offer type that isn't recognized by this version of the wrapper.
     case unknown = -1
+    /// An offer available to eligible new subscribers.
     case introductory = 0
+    /// A promotional offer configured for selected customers.
     case promotional = 1
+    /// An offer intended to recover a previous subscriber.
     case winBack = 2
 
     // MARK: - Initialization

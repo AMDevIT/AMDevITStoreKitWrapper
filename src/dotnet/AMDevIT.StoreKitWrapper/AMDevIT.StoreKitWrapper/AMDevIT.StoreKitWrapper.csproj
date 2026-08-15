@@ -3,26 +3,9 @@
     <TargetFramework>net10.0-ios</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsBindingProject>true</IsBindingProject>
-    <IsPackable>true</IsPackable>
-
-    <PackageId>AMDevIT.StoreKitWrapper</PackageId>
-    <Version>0.130.0</Version>
-    <Title>AMDevIT StoreKit Wrapper</Title>
-    <Authors>Alessandro Morvillo</Authors>
-    <Company>AMDev.IT di Alessandro Morvillo</Company>
-    <Copyright>AMDev.IT di Alessandro Morvillo</Copyright>
-    <Description>StoreKit 2 native framework binding for .NET for iOS, with callback-based APIs for products, purchases, subscriptions, entitlements, and transaction management.</Description>
-    <PackageTags>storekit storekit2 ios dotnet binding in-app-purchases subscriptions</PackageTags>
-    <PackageProjectUrl>https://github.com/AMDevIT/AMDevITStoreKitWrapper</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/AMDevIT/AMDevITStoreKitWrapper.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageIcon>nuget_icon_128.png</PackageIcon>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageOutputPath>$(MSBuildThisFileDirectory)../../../../artifacts/packages</PackageOutputPath>
+    <PackageReleaseNotes>First release. Native low level wrapper and high level async wrapper.</PackageReleaseNotes>
 
     <!--
       Enable trim analyzers for class libraries.
@@ -30,6 +13,10 @@
     -->
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <NativeReference Include="libs\StoreKitWrapper.xcframework">
@@ -40,12 +27,6 @@
 
   <ItemGroup>
     <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
-    <ObjcBindingCoreSource Include="IStoreKitClient.cs" />
-    <ObjcBindingCoreSource Include="StoreKitClient.cs" />
-    <ObjcBindingCoreSource Include="StoreKitClientDelegate.cs" />
-    <ObjcBindingCoreSource Include="StoreKitPurchaseOutcome.cs" />
-    <ObjcBindingCoreSource Include="StoreKitTransactionUpdatedEventArgs.cs" />
-    <ObjcBindingCoreSource Include="StoreKitWrapperException.cs" />
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
   </ItemGroup>
 

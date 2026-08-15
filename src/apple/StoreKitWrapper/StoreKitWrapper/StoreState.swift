@@ -75,6 +75,7 @@ private enum StoreStateLifecycle: Equatable {
     case shutdown
 }
 
+/// Serializes manager lifecycle, catalogs, transactions, and operation-exclusion state.
 actor StoreState {
     // MARK: - Properties
 
@@ -115,6 +116,15 @@ actor StoreState {
 
         self.lifecycle = .initialized
         self.resumeInitializationWaiters(initialized: true)
+    }
+
+    func cancelInitialization() {
+        guard self.lifecycle == .initializing else {
+            return
+        }
+
+        self.lifecycle = .uninitialized
+        self.resumeInitializationWaiters(initialized: false)
     }
 
     func waitForInitializationCompletion() async -> Bool {
@@ -377,6 +387,10 @@ actor StoreState {
 
     func completeTransactionFinish(transactionIdentifier: UInt64) {
         self.unfinishedTransactions.removeValue(forKey: transactionIdentifier)
+        self.transactionsBeingFinished.remove(transactionIdentifier)
+    }
+
+    func failTransactionFinish(transactionIdentifier: UInt64) {
         self.transactionsBeingFinished.remove(transactionIdentifier)
     }
 

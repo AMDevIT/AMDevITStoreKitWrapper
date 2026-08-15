@@ -1,13 +1,49 @@
 # StoreKit Wrapper Context
 
-## Latest step: managed StoreKit client
+## Latest step: NuGet publication documentation
 
-- Objective: provide an idiomatic task-based .NET facade over the native callback API without changing Objective Sharpie output.
-- Status: `StoreKitClient`, its interface, native delegate bridge, managed result/event/exception types, project registration, and README guidance are implemented; compilation and runtime verification remain pending separate approval.
-- Decisions: retain the generated `StoreKitManager` name; use independent completion sources with asynchronous continuations; expose transaction updates as same-thread events; reject duplicate category operations locally; accept cancellation tokens but only check pre-cancellation before invoking Swift.
-- Affected files: the new managed client sources, the binding `.csproj`, `README.md`, `.agents/managed-storekit-client.md`, and `.agents/context.md`.
-- Checks: verified all eight async methods have cancellation pre-checks, all nine native callbacks have delegate overrides, every new source is registered, project XML parses, no main-thread dispatch or in-flight cancellation registration was introduced, and scoped formatting/diff checks pass.
-- Open issues and recommended next step: with user approval, restore and build the binding; then validate callback correlation, disposal, listener events, and error propagation in an iOS consumer before adding real in-flight cancellation.
+- Objective: make the published NuGet package the primary README installation path and reflect its public availability accurately.
+- Status: completed for user-confirmed package `AMDevIT.StoreKitWrapper` version `0.130.0` at `https://www.nuget.org/packages/AMDevIT.StoreKitWrapper/0.130.0`.
+- Decisions: replace the static version shield with dynamic NuGet version and download shields; link installation and project status directly to NuGet.org; retain local package and project-reference instructions for repository development.
+- Affected files: `README.md`, `.agents/nuget-publication.md`, and `.agents/context.md`.
+- Checks: package ID, version, URL, install command, badge URLs, Markdown structure, and scoped diffs were checked statically. Publication was performed and confirmed externally by the user; no package mutation was performed here.
+- Open issues and recommended next step: validate installation and runtime behavior from NuGet.org in a clean .NET for iOS consumer application and update all version references together for the next release.
+
+## Latest step: binding source classification fix
+
+- Objective: stop compiling the managed `StoreKitClient` facade as binding-generator core source.
+- Status: completed and verified by a successful .NET for iOS binding build.
+- Decisions: keep `ApiDefinition.cs` as `ObjcBindingApiDefinition`; keep only `StructsAndEnums.cs` as `ObjcBindingCoreSource`; rely on SDK default `Compile` inclusion for the seven managed facade files to avoid duplicate items.
+- Affected files: the binding `.csproj`, `.agents/binding-source-classification.md`, and `.agents/context.md`.
+- Checks: MSBuild item evaluation reports all seven facade files exactly once as normal `Compile` items, with the API definition and enum source in their correct special item groups; the scoped diff whitespace check passes; solution restore succeeded; the Debug `net10.0-ios` solution build succeeded with zero warnings and zero errors.
+- Open issues and recommended next step: native execution and runtime validation in an iOS application remain separate checks; the source-classification compilation failure is resolved.
+
+## Latest step: Microsoft.Extensions.Logging client bridge
+
+- Objective: let the managed StoreKit client accept the standard typed Microsoft logger and forward all native structured diagnostics.
+- Status: the abstractions dependency, private native logger bridge, typed client constructor, level/event/error mapping, lifecycle handling, README guidance, and progressive documentation are implemented; restore and build remain pending separate approval.
+- Decisions: depend on `Microsoft.Extensions.Logging.Abstractions` 10.0.0 rather than provider packages; expose `ILogger<StoreKitClient>` only on the managed facade; retain low-level native logger support on `StoreKitManager`; map `NSError` to `NSErrorException`; don't force-dispose the bridge while retained native Swift work may still log.
+- Affected files: the binding `.csproj`, `StoreKitClient.cs`, new `StoreKitLoggerBridge.cs`, `README.md`, `.agents/managed-storekit-client.md`, `.agents/microsoft-logging-bridge.md`, and `.agents/context.md`.
+- Checks: project XML parses, the new source is registered, every known native log level is mapped, event identity and native error forwarding are preserved, and scoped documentation/whitespace checks pass. No restore or build command was run.
+- Open issues and recommended next step: with user approval, restore/build the binding and validate log delivery, filtering, event IDs, exceptions, package dependency metadata, and trimming behavior in an iOS consumer.
+
+## Latest step: public API documentation and NuGet IntelliSense
+
+- Objective: document the complete public Swift and .NET API and ship .NET XML documentation for NuGet IntelliSense.
+- Status: DocC-style Swift comments, C# XML comments, enum-value documentation, managed facade contract details, project XML generation, README guidance, and static coverage checks are complete; build and package inspection remain pending separate approval.
+- Decisions: document all public types and members rather than class summaries alone; keep Swift and binding descriptions semantically aligned; document cancellation as cooperative and StoreKit side effects as potentially irreversible; rely on SDK-style NuGet packing to place the generated XML beside the binding assembly.
+- Affected files: the public Swift framework sources, internal coordination type summaries, all binding and managed facade C# sources, the binding `.csproj`, `README.md`, `.agents/api-documentation.md`, and `.agents/context.md`.
+- Checks: found no undocumented public Swift or C# declarations, found no documentation comments incorrectly placed after attributes, parsed the project file as XML, and ran scoped whitespace checks. No build or pack command was run.
+- Open issues and recommended next step: with user approval, restore/build/pack the binding, inspect the `.nupkg` for the framework XML file beside the DLL, and validate IntelliSense from a clean consumer project.
+
+## Latest step: end-to-end operation cancellation
+
+- Objective: make all task-based .NET operations cancel immediately and cooperatively cancel their internal Swift work without exposing Swift concurrency to Objective-C.
+- Status: the native task registry, eight cancellation selectors, actor state recovery, binding declarations, managed forwarding and cancelled waits, tests, contract verification, and documentation are implemented; compilation and runtime verification remain pending separate approval.
+- Decisions: retain callback-based terminal completion; keep Swift `Task` handles private; expose only ordinary Objective-C `void` selectors; preserve completion-source reservations until late callbacks drain; let an already-completed StoreKit result or irreversible action win a cancellation race.
+- Affected files: `StoreKitManager.swift`, `StoreState.swift`, the new `StoreKitOperationTaskStore.swift`, native state/task-store tests, `ApiDefinition.cs`, `StoreKitClient.cs`, the native contract script, `README.md`, `.agents/managed-storekit-client.md`, `.agents/native-operation-cancellation.md`, and `.agents/context.md`.
+- Checks: statically verified all eight async facade methods pre-check and observe tokens, all eight native categories have matching selectors and binding declarations, cancellation callbacks retain their original operation slot until terminal completion, initialization and transaction-finishing state can be released safely, and the generated-header verification script checks every new selector.
+- Open issues and recommended next step: with user approval, run the native Xcode tests and contract verification on macOS, regenerate the XCFramework and Objective Sharpie output, then restore/build the .NET binding and validate cancellation races in an iOS consumer.
 
 ## Latest step: NuGet packaging
 
@@ -97,7 +133,7 @@
 - The binding project references the StoreKitWrapper XCFramework and its Foundation, StoreKit, SwiftUI, and UIKit dependencies.
 - The .NET binding provides `StoreKitClient` as a task-based managed facade while retaining the Sharpie-generated `StoreKitManager` as its low-level native API.
 - Managed task continuations are asynchronous, while transaction-update events remain on the native callback thread.
-- Managed methods accept cancellation tokens but currently check them only before invoking Swift; in-flight cancellation remains deferred.
+- Managed methods cancel their wait immediately and forward cooperative cancellation to the corresponding native Swift task while retaining callback correlation until terminal completion.
 
 ## Affected files
 
