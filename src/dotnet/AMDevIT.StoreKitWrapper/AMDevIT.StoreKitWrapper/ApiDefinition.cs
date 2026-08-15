@@ -5,17 +5,9 @@ using UIKit;
 
 namespace AMDevIT.StoreKitWrapper {
 	// @protocol IStoreKitWrapperLogger
-	/*
-  Check whether adding [Model] to this declaration is appropriate.
-  [Model] is used to generate a C# class that implements this protocol,
-  and might be useful for protocols that consumers are supposed to implement,
-  since consumers can subclass the generated class instead of implementing
-  the generated interface. If consumers are not supposed to implement this
-  protocol, then [Model] is redundant and will generate code that will never
-  be used.
-*/
-	[Protocol (Name = "_TtP15StoreKitWrapper22IStoreKitWrapperLogger_")]
-	interface IStoreKitWrapperLogger {
+	[BaseType (typeof (NSObject))]
+	[Model, Protocol (Name = "_TtP15StoreKitWrapper22IStoreKitWrapperLogger_")]
+	interface StoreKitWrapperLogger {
 		// @required -(BOOL)isEnabledWithLogLevel:(enum StoreKitWrapperLogLevel)logLevel __attribute__((warn_unused_result("")));
 		[Abstract]
 		[Export ("isEnabledWithLogLevel:")]
@@ -41,7 +33,8 @@ namespace AMDevIT.StoreKitWrapper {
 		// -(instancetype _Nonnull)initWithLogger:(id<IStoreKitWrapperLogger> _Nullable)logger delegate:(id<StoreKitManagerDelegate> _Nullable)delegate __attribute__((objc_designated_initializer));
 		[Export ("initWithLogger:delegate:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor ([NullAllowed] IStoreKitWrapperLogger logger, [NullAllowed] StoreKitManagerDelegate @delegate);
+		NativeHandle Constructor ([NullAllowed] StoreKitWrapperLogger logger,
+		                          [NullAllowed] StoreKitManagerDelegate @delegate);
 
 		// -(void)initialize;
 		[Export ("initialize")]
@@ -85,7 +78,8 @@ namespace AMDevIT.StoreKitWrapper {
 	}
 
 	// @protocol StoreKitManagerDelegate
-	[Protocol (Name = "_TtP15StoreKitWrapper23StoreKitManagerDelegate_"), Model]
+	[BaseType (typeof (NSObject))]
+	[Model, Protocol (Name = "_TtP15StoreKitWrapper23StoreKitManagerDelegate_")]
 	interface StoreKitManagerDelegate {
 		// @required -(void)initializationCompletedWithErrorCode:(enum StoreKitWrapperErrorCode)errorCode errorMessage:(NSString * _Nullable)errorMessage;
 		[Abstract]
@@ -203,10 +197,6 @@ namespace AMDevIT.StoreKitWrapper {
 		[Export ("initWithProductIdentifier:")]
 		[DesignatedInitializer]
 		NativeHandle Constructor (string productIdentifier);
-
-		// -(void)viewDidLoad;
-		[Export ("viewDidLoad")]
-		void ViewDidLoad ();
 	}
 
 	// @interface StoreKitProductsViewController : UIViewController
@@ -221,10 +211,6 @@ namespace AMDevIT.StoreKitWrapper {
 		[Export ("initWithProductIdentifiers:")]
 		[DesignatedInitializer]
 		NativeHandle Constructor (string [] productIdentifiers);
-
-		// -(void)viewDidLoad;
-		[Export ("viewDidLoad")]
-		void ViewDidLoad ();
 	}
 
 	// @interface StoreKitSubscriptionInfo : NSObject
@@ -348,10 +334,6 @@ namespace AMDevIT.StoreKitWrapper {
 		[Export ("initWithSubscriptionGroupIdentifier:")]
 		[DesignatedInitializer]
 		NativeHandle Constructor (string subscriptionGroupIdentifier);
-
-		// -(void)viewDidLoad;
-		[Export ("viewDidLoad")]
-		void ViewDidLoad ();
 	}
 
 	// @interface StoreKitTransaction : NSObject

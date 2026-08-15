@@ -2,8 +2,8 @@
 
 ## Objective and status
 
-- Objective: establish callback-based, binding-friendly StoreKit lifecycle, product, transaction, purchase, entitlement, synchronization, unfinished-transaction, and update-listener contracts for future cross-platform bindings.
-- Status: the native StoreKit implementation, Objective-C-visible contract, deterministic tests, Xcode verification script, and UIViewController wrappers for StoreKit SwiftUI merchandising are implemented. Compilation and execution remain pending a macOS/Xcode environment.
+- Objective: establish callback-based, binding-friendly StoreKit lifecycle, product, transaction, purchase, entitlement, synchronization, unfinished-transaction, update-listener, and .NET for iOS binding contracts.
+- Status: the native StoreKit implementation, Objective-C-visible contract, deterministic tests, Xcode verification script, UIViewController wrappers, and .NET 10 for iOS binding definitions are implemented. The .NET binding builds successfully; native execution remains pending a macOS/iOS environment.
 
 ## Decisions
 
@@ -65,6 +65,9 @@
 - Product, products, and subscription-group controllers are available on iOS 17 and later while the framework retains its iOS 15.6 deployment target.
 - An internal hosting container installs one `UIHostingController` child using full-edge Auto Layout constraints and prevents duplicate installation.
 - The StoreKitWrapper framework marketing version is `0.130.0` for both Debug and Release; its build and Mach-O compatibility versions remain independent.
+- The .NET binding represents implementable native protocols with generated interfaces and subclassable model classes by combining `Model`, `Protocol`, and an `NSObject` base type.
+- The .NET binding omits explicit `ViewDidLoad` declarations for the StoreKit controllers because the member is already inherited from `UIViewController`.
+- The binding project references the StoreKitWrapper XCFramework and its Foundation, StoreKit, SwiftUI, and UIKit dependencies.
 
 ## Affected files
 
@@ -107,6 +110,10 @@
 - `src/apple/StoreKitWrapper/StoreKitWrapperTests/StoreKitWrapperPublicContractTests.swift`
 - `.agents/native-tests.md`
 - `.agents/storekit-view-controllers.md`
+- `.agents/dotnet-binding.md`
+- `src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper/ApiDefinition.cs`
+- `src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper/StructsAndEnums.cs`
+- `src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper.csproj`
 - `src/apple/StoreKitWrapper/StoreKitWrapper/Views/StoreKitViewHostingContainer.swift`
 - `src/apple/StoreKitWrapper/StoreKitWrapper/Views/StoreKitProductViewController.swift`
 - `src/apple/StoreKitWrapper/StoreKitWrapper/Views/StoreKitProductsViewController.swift`
@@ -137,7 +144,10 @@
 - Replaced generic mappings for known StoreKit and purchase failures with one-to-one public error codes and updated their deterministic contract tests.
 - Removed the documentation-only beta `StoreKitError.invalidPresentationContext` mapping because the installed StoreKit SDK doesn't expose that symbol.
 - Updated the StoreKitWrapper framework `MARKETING_VERSION` to `0.130.0` in Debug and Release.
-- Build and automated tests were not run because repository instructions require separate approval.
+- Native Swift compilation and automated tests were not run as part of this Windows-side .NET binding verification.
+- Restored and built the .NET 10 for iOS binding project successfully with zero warnings and zero errors after correcting protocol model generation and removing duplicate `ViewDidLoad` bindings.
+- Inspected generated binding sources and confirmed that both logger/delegate interfaces and abstract protocol model classes are emitted.
+- A repository-wide `git diff --check` encountered Windows path-length errors inside the XCFramework; the scoped check for the edited binding definition passed.
 
 ## Open issues and recommended next step
 
@@ -148,3 +158,4 @@
 - Compile and run the `StoreKitWrapperTests` target on macOS.
 - Add StoreKit Configuration integration tests and any necessary internal service injection only after the deterministic suite and generated contract pass.
 - Verify the three view controllers against the intended Xcode SDK and StoreKit Configuration on macOS.
+- Link the generated .NET binding into a consumer iOS application and verify manager construction, protocol callbacks, and StoreKit view-controller presentation on macOS/iOS.
