@@ -21,6 +21,8 @@ import Foundation
     case storeKitNotAvailableInStorefront = 22
     case storeKitNotEntitled = 23
     case storeKitUnknown = 24
+    case storeKitUnsupported = 25
+    case storeKitInvalidPresentationContext = 26
 
     case productsRequestInProgress = 100
     case productsRequestFailed = 101
@@ -32,8 +34,12 @@ import Foundation
     case purchaseProductUnavailable = 204
     case purchaseNotAllowed = 205
     case purchaseInvalidQuantity = 206
-    case purchaseInvalidOffer = 207
-    case purchaseIneligibleForOffer = 208
+    case purchaseInvalidOfferIdentifier = 207
+    case purchaseInvalidOfferPrice = 208
+    case purchaseInvalidOfferSignature = 209
+    case purchaseMissingOfferParameters = 210
+    case purchaseIneligibleForOffer = 211
+    case purchasePaymentMethodBindingConfigurationRequired = 212
 
     case transactionNotFound = 300
     case transactionFinishInProgress = 301
