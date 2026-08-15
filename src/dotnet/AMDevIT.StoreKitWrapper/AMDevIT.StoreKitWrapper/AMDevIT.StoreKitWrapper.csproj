@@ -4,6 +4,25 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
     <IsBindingProject>true</IsBindingProject>
+    <IsPackable>true</IsPackable>
+
+    <PackageId>AMDevIT.StoreKitWrapper</PackageId>
+    <Version>0.130.0</Version>
+    <Title>AMDevIT StoreKit Wrapper</Title>
+    <Authors>Alessandro Morvillo</Authors>
+    <Company>AMDev.IT di Alessandro Morvillo</Company>
+    <Copyright>AMDev.IT di Alessandro Morvillo</Copyright>
+    <Description>StoreKit 2 native framework binding for .NET for iOS, with callback-based APIs for products, purchases, subscriptions, entitlements, and transaction management.</Description>
+    <PackageTags>storekit storekit2 ios dotnet binding in-app-purchases subscriptions</PackageTags>
+    <PackageProjectUrl>https://github.com/AMDevIT/AMDevITStoreKitWrapper</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AMDevIT/AMDevITStoreKitWrapper.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>nuget_icon_128.png</PackageIcon>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)../../../../artifacts/packages</PackageOutputPath>
 
     <!--
       Enable trim analyzers for class libraries.
@@ -12,15 +31,21 @@
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
 
- <ItemGroup>
-  <NativeReference Include="libs\StoreKitWrapper.xcframework">
-    <Kind>Framework</Kind>
-    <Frameworks>Foundation StoreKit SwiftUI UIKit</Frameworks>
-  </NativeReference>
-</ItemGroup>
+  <ItemGroup>
+    <NativeReference Include="libs\StoreKitWrapper.xcframework">
+      <Kind>Framework</Kind>
+      <Frameworks>Foundation StoreKit SwiftUI UIKit</Frameworks>
+    </NativeReference>
+  </ItemGroup>
 
   <ItemGroup>
     <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\..\..\LICENSE" Pack="true" PackagePath="\" />
+    <None Include="..\..\..\..\assets\icons\nuget_icon_128.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 </Project>

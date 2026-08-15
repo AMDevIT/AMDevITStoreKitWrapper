@@ -1,5 +1,14 @@
 # StoreKit Wrapper Context
 
+## Latest step: NuGet packaging
+
+- Objective: configure the .NET 10 for iOS binding as a publishable NuGet package with complete metadata, documentation, licensing, and a deterministic output location.
+- Status: configuration completed; restore, build, pack, package inspection, and consumer validation remain pending separate approval.
+- Decisions: use package ID `AMDevIT.StoreKitWrapper`, version `0.130.0`, author `Alessandro Morvillo`, and company/copyright `AMDev.IT di Alessandro Morvillo`; embed README, LICENSE, and an optimized 128x128 package icon; write packages to `artifacts/packages`; do not claim public availability before publication.
+- Affected files: the binding `.csproj`, `README.md`, `assets/icons/nuget_icon_128.png`, `.agents/nuget-packaging.md`, and `.agents/context.md`.
+- Checks: package properties, paths, XML structure, documentation, icon dimensions, icon size, visual preservation, and scoped diffs were checked statically. No restore, build, or pack command was run.
+- Open issues and recommended next step: with user approval, restore, build, pack, inspect the `.nupkg`, and consume it from a local feed before publishing.
+
 ## Latest step: README refresh
 
 - Objective: document the project definition, important and truthful shields, requirements, quick-start usage, common operations, native StoreKit views, verification workflow, and project status.

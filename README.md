@@ -44,9 +44,22 @@ All asynchronous native operations complete through `StoreKitManagerDelegate`. T
 
 ## Quick start
 
-### 1. Reference the binding project
+### 1. Install or reference the binding
 
-The project is not currently distributed as a NuGet package. Clone this repository and add a project reference from the consuming .NET for iOS application:
+The binding is configured as the `AMDevIT.StoreKitWrapper` NuGet package. After it is published, install version `0.130.0` from the configured NuGet source:
+
+```bash
+dotnet add package AMDevIT.StoreKitWrapper --version 0.130.0
+```
+
+Until the first public release, clone this repository and either create a local package or add a direct project reference. To produce and consume the local package from the repository root:
+
+```bash
+dotnet pack src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper.slnx --configuration Release
+dotnet add package AMDevIT.StoreKitWrapper --version 0.130.0 --source ./artifacts/packages
+```
+
+Alternatively, add a project reference from the consuming .NET for iOS application:
 
 ```xml
 <ItemGroup>
@@ -237,6 +250,14 @@ dotnet restore
 dotnet build
 ```
 
+Create the NuGet package from the repository root:
+
+```bash
+dotnet pack src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper.slnx --configuration Release
+```
+
+The package is written to `artifacts/packages` and includes the binding assembly, native XCFramework, README, license, package icon, and NuGet metadata. Packing does not publish the package; use an authenticated NuGet source explicitly when it is ready for release.
+
 On macOS with Xcode installed, build the native framework and verify its generated Objective-C interface:
 
 ```bash
@@ -251,6 +272,7 @@ The script builds the Release framework for the iOS Simulator and validates the 
 - Objective-C-compatible contract: implemented; generated-header verification script available.
 - Native deterministic tests: implemented; execution on macOS pending.
 - .NET 10 for iOS binding: restored and built successfully with zero warnings and errors in the recorded project verification.
+- NuGet packaging: configured for package ID `AMDevIT.StoreKitWrapper`; package creation and content inspection pending.
 - Consumer application and real StoreKit runtime validation: pending on macOS/iOS.
 
 See the files in `.agents` for the progressive implementation notes and verification history.
