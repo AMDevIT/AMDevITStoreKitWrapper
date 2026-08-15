@@ -12,12 +12,12 @@
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
 
-  <ItemGroup>
-		<NativeReference Include="libs\StoreKitWrapper.xcframework">
-			<Kind>Framework</Kind>
-			<Frameworks>Foundation UIKit</Frameworks>
-		</NativeReference>
-	</ItemGroup>
+ <ItemGroup>
+  <NativeReference Include="libs\StoreKitWrapper.xcframework">
+    <Kind>Framework</Kind>
+    <Frameworks>Foundation StoreKit SwiftUI UIKit</Frameworks>
+  </NativeReference>
+</ItemGroup>
 
   <ItemGroup>
     <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
