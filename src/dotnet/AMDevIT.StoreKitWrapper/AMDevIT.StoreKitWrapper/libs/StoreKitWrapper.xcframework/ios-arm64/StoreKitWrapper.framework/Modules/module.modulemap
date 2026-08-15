@@ -1,0 +1,3 @@
+framework module StoreKitWrapper {
+  header "StoreKitWrapper.h"
+}

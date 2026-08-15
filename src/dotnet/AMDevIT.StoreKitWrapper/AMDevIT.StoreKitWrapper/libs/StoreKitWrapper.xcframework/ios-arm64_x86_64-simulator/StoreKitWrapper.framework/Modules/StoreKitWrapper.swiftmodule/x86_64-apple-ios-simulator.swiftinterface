@@ -1,0 +1,419 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.3.3 effective-5.10 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)
+// swift-module-flags: -target x86_64-apple-ios15.6-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -O -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature GlobalActorIsolatedTypesUsability -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InferIsolatedConformances -enable-upcoming-feature NonisolatedNonsendingByDefault -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name StoreKitWrapper
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3.3
+import Foundation
+import StoreKit
+import Swift
+import SwiftUI
+import UIKit
+import _Concurrency
+import _StoreKit_SwiftUI
+import _StringProcessing
+import _SwiftConcurrencyShims
+@objc public protocol IStoreKitWrapperLogger {
+  @objc func isEnabled(logLevel: StoreKitWrapper.StoreKitWrapperLogLevel) -> Swift.Bool
+  @objc func log(logLevel: StoreKitWrapper.StoreKitWrapperLogLevel, eventId: Swift.Int, eventName: Swift.String?, message: Swift.String, error: Foundation.NSError?)
+}
+extension StoreKitWrapper.IStoreKitWrapperLogger {
+  public func logTrace(eventId: Swift.Int, eventName: Swift.String? = nil, message: Swift.String, error: Foundation.NSError? = nil)
+  public func logDebug(eventId: Swift.Int, eventName: Swift.String? = nil, message: Swift.String, error: Foundation.NSError? = nil)
+  public func logInformation(eventId: Swift.Int, eventName: Swift.String? = nil, message: Swift.String, error: Foundation.NSError? = nil)
+  public func logWarning(eventId: Swift.Int, eventName: Swift.String? = nil, message: Swift.String, error: Foundation.NSError? = nil)
+  public func logError(eventId: Swift.Int, eventName: Swift.String? = nil, message: Swift.String, error: Foundation.NSError? = nil)
+  public func logCritical(eventId: Swift.Int, eventName: Swift.String? = nil, message: Swift.String, error: Foundation.NSError? = nil)
+}
+@objc public enum StoreKitWrapperLogLevel : Swift.Int {
+  case trace = 0
+  case debug = 1
+  case information = 2
+  case warning = 3
+  case error = 4
+  case critical = 5
+  case none = 6
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @available(iOS 17.0, *)
+@_Concurrency.MainActor @objcMembers final public class StoreKitProductsViewController : UIKit.UIViewController {
+  @objc @_Concurrency.MainActor final public let productIdentifiers: [Swift.String]
+  @objc @_Concurrency.MainActor public init(productIdentifiers: [Swift.String])
+  @available(*, unavailable)
+  @_Concurrency.MainActor @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor @objc override final public func viewDidLoad()
+  @objc deinit
+}
+@objc @available(iOS 17.0, *)
+@_Concurrency.MainActor @objcMembers final public class StoreKitProductViewController : UIKit.UIViewController {
+  @objc @_Concurrency.MainActor final public let productIdentifier: Swift.String
+  @objc @_Concurrency.MainActor public init(productIdentifier: Swift.String)
+  @available(*, unavailable)
+  @_Concurrency.MainActor @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor @objc override final public func viewDidLoad()
+  @objc deinit
+}
+@objc @available(iOS 17.0, *)
+@_Concurrency.MainActor @objcMembers final public class StoreKitSubscriptionsViewController : UIKit.UIViewController {
+  @objc @_Concurrency.MainActor final public let subscriptionGroupIdentifier: Swift.String
+  @objc @_Concurrency.MainActor public init(subscriptionGroupIdentifier: Swift.String)
+  @available(*, unavailable)
+  @_Concurrency.MainActor @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor @objc override final public func viewDidLoad()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers final public class StoreKitManager : ObjectiveC.NSObject {
+  @objc final public var delegate: (any StoreKitWrapper.StoreKitManagerDelegate)?
+  @objc override convenience dynamic public init()
+  @objc public init(logger: (any StoreKitWrapper.IStoreKitWrapperLogger)?, delegate: (any StoreKitWrapper.StoreKitManagerDelegate)?)
+  @objc deinit
+  @objc final public func initialize()
+  @objc final public func shutdown()
+  @objc final public func getProducts(productIdentifiers: [Swift.String])
+  @objc final public func getCurrentEntitlements()
+  @objc final public func sync()
+  @objc final public func getUnfinishedTransactions()
+  @objc final public func purchase(productIdentifier: Swift.String)
+  @objc final public func purchase(productIdentifier: Swift.String, appAccountToken: Swift.String?)
+  @objc final public func purchase(productIdentifier: Swift.String, appAccountToken: Swift.String?, quantity: Swift.Int)
+  @objc final public func finishTransaction(transactionIdentifier: Swift.UInt64)
+}
+@objc public protocol StoreKitManagerDelegate {
+  @objc func initializationCompleted(errorCode: StoreKitWrapper.StoreKitWrapperErrorCode, errorMessage: Swift.String?)
+  @objc func shutdownCompleted(errorCode: StoreKitWrapper.StoreKitWrapperErrorCode, errorMessage: Swift.String?)
+  @objc func availableProductsCompleted(withResult: [StoreKitWrapper.StoreKitProduct], errorCode: StoreKitWrapper.StoreKitWrapperErrorCode, errorMessage: Swift.String?)
+  @objc func currentEntitlementsCompleted(withResult: [StoreKitWrapper.StoreKitTransaction], errorCode: StoreKitWrapper.StoreKitWrapperErrorCode, errorMessage: Swift.String?)
+  @objc func appStoreSyncCompleted(errorCode: StoreKitWrapper.StoreKitWrapperErrorCode, errorMessage: Swift.String?)
+  @objc func unfinishedTransactionsCompleted(withResult: [StoreKitWrapper.StoreKitTransaction], errorCode: StoreKitWrapper.StoreKitWrapperErrorCode, errorMessage: Swift.String?)
+  @objc func purchaseCompleted(withResult: StoreKitWrapper.StoreKitTransaction?, purchaseResult: StoreKitWrapper.StoreKitPurchaseResult, errorCode: StoreKitWrapper.StoreKitWrapperErrorCode, errorMessage: Swift.String?)
+  @objc func finishTransactionCompleted(transactionIdentifier: Swift.UInt64, errorCode: StoreKitWrapper.StoreKitWrapperErrorCode, errorMessage: Swift.String?)
+  @objc func transactionUpdated(withResult: StoreKitWrapper.StoreKitTransaction, errorCode: StoreKitWrapper.StoreKitWrapperErrorCode, errorMessage: Swift.String?)
+}
+@objc @objcMembers final public class StoreKitProduct : ObjectiveC.NSObject {
+  @objc final public let identifier: Swift.String
+  @objc final public let productType: StoreKitWrapper.StoreKitProductType
+  @objc final public let productTypeDisplayName: Swift.String
+  @objc final public let displayName: Swift.String
+  @objc final public let displayDescription: Swift.String
+  @objc final public let displayPrice: Swift.String
+  @objc final public let price: Foundation.NSDecimalNumber
+  @objc final public let currencyCode: Swift.String
+  @objc final public let localeIdentifier: Swift.String
+  @objc final public let isFamilyShareable: Swift.Bool
+  @objc final public let subscriptionInfo: StoreKitWrapper.StoreKitSubscriptionInfo?
+  @objc final public let jsonRepresentation: Swift.String
+  @objc public init(identifier: Swift.String, productType: StoreKitWrapper.StoreKitProductType, productTypeDisplayName: Swift.String, displayName: Swift.String, displayDescription: Swift.String, displayPrice: Swift.String, price: Foundation.NSDecimalNumber, currencyCode: Swift.String, localeIdentifier: Swift.String, isFamilyShareable: Swift.Bool, subscriptionInfo: StoreKitWrapper.StoreKitSubscriptionInfo?, jsonRepresentation: Swift.String)
+  @objc deinit
+}
+@objc public enum StoreKitProductType : Swift.Int {
+  case unknown = -1
+  case consumable = 0
+  case nonConsumable = 1
+  case nonRenewableSubscription = 2
+  case autoRenewableSubscription = 3
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum StoreKitPurchaseResult : Swift.Int {
+  case unknown = -1
+  case succeeded = 0
+  case pending = 1
+  case cancelled = 2
+  case failed = 3
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @objcMembers final public class StoreKitSubscriptionInfo : ObjectiveC.NSObject {
+  @objc final public let subscriptionGroupIdentifier: Swift.String
+  @objc final public let groupDisplayName: Swift.String?
+  final public let groupLevel: Swift.Int?
+  @objc final public let subscriptionPeriod: StoreKitWrapper.StoreKitSubscriptionPeriod
+  @objc final public let isEligibleForIntroductoryOffer: Swift.Bool
+  @objc final public let introductoryOffer: StoreKitWrapper.StoreKitSubscriptionOffer?
+  @objc final public let promotionalOffers: [StoreKitWrapper.StoreKitSubscriptionOffer]
+  @objc final public let winBackOffers: [StoreKitWrapper.StoreKitSubscriptionOffer]
+  public init(subscriptionGroupIdentifier: Swift.String, groupDisplayName: Swift.String?, groupLevel: Swift.Int?, subscriptionPeriod: StoreKitWrapper.StoreKitSubscriptionPeriod, isEligibleForIntroductoryOffer: Swift.Bool, introductoryOffer: StoreKitWrapper.StoreKitSubscriptionOffer?, promotionalOffers: [StoreKitWrapper.StoreKitSubscriptionOffer], winBackOffers: [StoreKitWrapper.StoreKitSubscriptionOffer])
+  @objc deinit
+}
+@objc @objcMembers final public class StoreKitSubscriptionOffer : ObjectiveC.NSObject {
+  @objc final public let identifier: Swift.String?
+  @objc final public let offerType: StoreKitWrapper.StoreKitSubscriptionOfferType
+  @objc final public let offerTypeDisplayName: Swift.String
+  @objc final public let displayPrice: Swift.String
+  @objc final public let price: Foundation.NSDecimalNumber
+  @objc final public let currencyCode: Swift.String
+  @objc final public let localeIdentifier: Swift.String
+  @objc final public let paymentMode: StoreKitWrapper.StoreKitSubscriptionOfferPaymentMode
+  @objc final public let paymentModeDisplayName: Swift.String
+  @objc final public let period: StoreKitWrapper.StoreKitSubscriptionPeriod
+  @objc final public let periodCount: Swift.Int
+  @objc public init(identifier: Swift.String?, offerType: StoreKitWrapper.StoreKitSubscriptionOfferType, offerTypeDisplayName: Swift.String, displayPrice: Swift.String, price: Foundation.NSDecimalNumber, currencyCode: Swift.String, localeIdentifier: Swift.String, paymentMode: StoreKitWrapper.StoreKitSubscriptionOfferPaymentMode, paymentModeDisplayName: Swift.String, period: StoreKitWrapper.StoreKitSubscriptionPeriod, periodCount: Swift.Int)
+  @objc deinit
+}
+@objc public enum StoreKitSubscriptionOfferPaymentMode : Swift.Int {
+  case unknown = -1
+  case freeTrial = 0
+  case payAsYouGo = 1
+  case payUpFront = 2
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum StoreKitSubscriptionOfferType : Swift.Int {
+  case unknown = -1
+  case introductory = 0
+  case promotional = 1
+  case winBack = 2
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @objcMembers final public class StoreKitSubscriptionPeriod : ObjectiveC.NSObject {
+  @objc final public let value: Swift.Int
+  @objc final public let unit: StoreKitWrapper.StoreKitSubscriptionPeriodUnit
+  @objc final public let unitDisplayName: Swift.String
+  @objc public init(value: Swift.Int, unit: StoreKitWrapper.StoreKitSubscriptionPeriodUnit, unitDisplayName: Swift.String)
+  @objc deinit
+}
+@objc public enum StoreKitSubscriptionPeriodUnit : Swift.Int {
+  case unknown = -1
+  case day = 0
+  case week = 1
+  case month = 2
+  case year = 3
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @objcMembers final public class StoreKitTransaction : ObjectiveC.NSObject {
+  @objc final public let identifier: Swift.UInt64
+  @objc final public let originalIdentifier: Swift.UInt64
+  @objc final public let webOrderLineItemIdentifier: Swift.String?
+  @objc final public let appBundleIdentifier: Swift.String
+  @objc final public let productIdentifier: Swift.String
+  @objc final public let productType: StoreKitWrapper.StoreKitProductType
+  @objc final public let subscriptionGroupIdentifier: Swift.String?
+  @objc final public let purchaseDate: Foundation.Date
+  @objc final public let originalPurchaseDate: Foundation.Date
+  @objc final public let expirationDate: Foundation.Date?
+  @objc final public let signedDate: Foundation.Date
+  @objc final public let price: Foundation.NSDecimalNumber?
+  @objc final public let currencyCode: Swift.String?
+  @objc final public let purchasedQuantity: Swift.Int
+  @objc final public let isUpgraded: Swift.Bool
+  @objc final public let ownershipType: StoreKitWrapper.StoreKitTransactionOwnershipType
+  @objc final public let environment: StoreKitWrapper.StoreKitTransactionEnvironment
+  @objc final public let storefrontIdentifier: Swift.String?
+  @objc final public let storefrontCountryCode: Swift.String
+  @objc final public let reason: StoreKitWrapper.StoreKitTransactionReason
+  @objc final public let revocationDate: Foundation.Date?
+  @objc final public let revocationReason: StoreKitWrapper.StoreKitTransactionRevocationReason
+  @objc final public let appAccountToken: Swift.String?
+  @objc final public let offer: StoreKitWrapper.StoreKitTransactionOffer?
+  @objc final public let jsonRepresentation: Swift.String
+  @objc final public let jwsRepresentation: Swift.String
+  @objc final public let deviceVerification: Swift.String
+  @objc final public let deviceVerificationNonce: Swift.String
+  @objc final public let verificationStatus: StoreKitWrapper.StoreKitTransactionVerificationStatus
+  @objc final public let verificationErrorCode: StoreKitWrapper.StoreKitTransactionVerificationErrorCode
+  @objc final public let verificationErrorMessage: Swift.String?
+  @objc public init(identifier: Swift.UInt64, originalIdentifier: Swift.UInt64, webOrderLineItemIdentifier: Swift.String?, appBundleIdentifier: Swift.String, productIdentifier: Swift.String, productType: StoreKitWrapper.StoreKitProductType, subscriptionGroupIdentifier: Swift.String?, purchaseDate: Foundation.Date, originalPurchaseDate: Foundation.Date, expirationDate: Foundation.Date?, signedDate: Foundation.Date, price: Foundation.NSDecimalNumber?, currencyCode: Swift.String?, purchasedQuantity: Swift.Int, isUpgraded: Swift.Bool, ownershipType: StoreKitWrapper.StoreKitTransactionOwnershipType, environment: StoreKitWrapper.StoreKitTransactionEnvironment, storefrontIdentifier: Swift.String?, storefrontCountryCode: Swift.String, reason: StoreKitWrapper.StoreKitTransactionReason, revocationDate: Foundation.Date?, revocationReason: StoreKitWrapper.StoreKitTransactionRevocationReason, appAccountToken: Swift.String?, offer: StoreKitWrapper.StoreKitTransactionOffer?, jsonRepresentation: Swift.String, jwsRepresentation: Swift.String, deviceVerification: Swift.String, deviceVerificationNonce: Swift.String, verificationStatus: StoreKitWrapper.StoreKitTransactionVerificationStatus, verificationErrorCode: StoreKitWrapper.StoreKitTransactionVerificationErrorCode, verificationErrorMessage: Swift.String?)
+  @objc deinit
+}
+@objc @objcMembers final public class StoreKitTransactionOffer : ObjectiveC.NSObject {
+  @objc final public let identifier: Swift.String?
+  @objc final public let offerType: StoreKitWrapper.StoreKitTransactionOfferType
+  @objc final public let paymentMode: StoreKitWrapper.StoreKitTransactionOfferPaymentMode
+  @objc final public let period: StoreKitWrapper.StoreKitSubscriptionPeriod?
+  @objc public init(identifier: Swift.String?, offerType: StoreKitWrapper.StoreKitTransactionOfferType, paymentMode: StoreKitWrapper.StoreKitTransactionOfferPaymentMode, period: StoreKitWrapper.StoreKitSubscriptionPeriod?)
+  @objc deinit
+}
+@objc public enum StoreKitTransactionVerificationStatus : Swift.Int {
+  case unverified = 0
+  case verified = 1
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum StoreKitTransactionVerificationErrorCode : Swift.Int {
+  case none = 0
+  case invalidCertificateChain = 1
+  case invalidDeviceVerification = 2
+  case invalidEncoding = 3
+  case invalidSignature = 4
+  case missingRequiredProperties = 5
+  case revokedCertificate = 6
+  case unknown = 999
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum StoreKitTransactionOwnershipType : Swift.Int {
+  case unknown = -1
+  case purchased = 0
+  case familyShared = 1
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum StoreKitTransactionEnvironment : Swift.Int {
+  case unknown = -1
+  case xcode = 0
+  case sandbox = 1
+  case production = 2
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum StoreKitTransactionReason : Swift.Int {
+  case unknown = -1
+  case purchase = 0
+  case renewal = 1
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum StoreKitTransactionRevocationReason : Swift.Int {
+  case none = -1
+  case developerIssue = 0
+  case other = 1
+  case unknown = 999
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum StoreKitTransactionOfferType : Swift.Int {
+  case unknown = -1
+  case introductory = 0
+  case promotional = 1
+  case code = 2
+  case winBack = 3
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum StoreKitTransactionOfferPaymentMode : Swift.Int {
+  case unknown = -1
+  case freeTrial = 0
+  case payAsYouGo = 1
+  case payUpFront = 2
+  case oneTime = 3
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum StoreKitWrapperErrorCode : Swift.Int {
+  case none = 0
+  case unknown = 1
+  case invalidArgument = 2
+  case operationCancelled = 3
+  case managerNotInitialized = 10
+  case managerShutdown = 11
+  case storeKitNetworkError = 20
+  case storeKitSystemError = 21
+  case storeKitNotAvailableInStorefront = 22
+  case storeKitNotEntitled = 23
+  case storeKitUnknown = 24
+  case storeKitUnsupported = 25
+  case productsRequestInProgress = 100
+  case productsRequestFailed = 101
+  case productNotFound = 200
+  case purchaseInProgress = 201
+  case purchaseFailed = 202
+  case transactionVerificationFailed = 203
+  case purchaseProductUnavailable = 204
+  case purchaseNotAllowed = 205
+  case purchaseInvalidQuantity = 206
+  case purchaseInvalidOfferIdentifier = 207
+  case purchaseInvalidOfferPrice = 208
+  case purchaseInvalidOfferSignature = 209
+  case purchaseMissingOfferParameters = 210
+  case purchaseIneligibleForOffer = 211
+  case purchasePaymentMethodBindingConfigurationRequired = 212
+  case transactionNotFound = 300
+  case transactionFinishInProgress = 301
+  case currentEntitlementsRequestInProgress = 400
+  case appStoreSyncInProgress = 500
+  case appStoreSyncFailed = 501
+  case unfinishedTransactionsRequestInProgress = 600
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension StoreKitWrapper.StoreKitWrapperLogLevel : Swift.Equatable {}
+extension StoreKitWrapper.StoreKitWrapperLogLevel : Swift.Hashable {}
+extension StoreKitWrapper.StoreKitWrapperLogLevel : Swift.RawRepresentable {}
+extension StoreKitWrapper.StoreKitProductType : Swift.Equatable {}
+extension StoreKitWrapper.StoreKitProductType : Swift.Hashable {}
+extension StoreKitWrapper.StoreKitProductType : Swift.RawRepresentable {}
+extension StoreKitWrapper.StoreKitPurchaseResult : Swift.Equatable {}
+extension StoreKitWrapper.StoreKitPurchaseResult : Swift.Hashable {}
+extension StoreKitWrapper.StoreKitPurchaseResult : Swift.RawRepresentable {}
+extension StoreKitWrapper.StoreKitSubscriptionOfferPaymentMode : Swift.Equatable {}
+extension StoreKitWrapper.StoreKitSubscriptionOfferPaymentMode : Swift.Hashable {}
+extension StoreKitWrapper.StoreKitSubscriptionOfferPaymentMode : Swift.RawRepresentable {}
+extension StoreKitWrapper.StoreKitSubscriptionOfferType : Swift.Equatable {}
+extension StoreKitWrapper.StoreKitSubscriptionOfferType : Swift.Hashable {}
+extension StoreKitWrapper.StoreKitSubscriptionOfferType : Swift.RawRepresentable {}
+extension StoreKitWrapper.StoreKitSubscriptionPeriodUnit : Swift.Equatable {}
+extension StoreKitWrapper.StoreKitSubscriptionPeriodUnit : Swift.Hashable {}
+extension StoreKitWrapper.StoreKitSubscriptionPeriodUnit : Swift.RawRepresentable {}
+extension StoreKitWrapper.StoreKitTransactionVerificationStatus : Swift.Equatable {}
+extension StoreKitWrapper.StoreKitTransactionVerificationStatus : Swift.Hashable {}
+extension StoreKitWrapper.StoreKitTransactionVerificationStatus : Swift.RawRepresentable {}
+extension StoreKitWrapper.StoreKitTransactionVerificationErrorCode : Swift.Equatable {}
+extension StoreKitWrapper.StoreKitTransactionVerificationErrorCode : Swift.Hashable {}
+extension StoreKitWrapper.StoreKitTransactionVerificationErrorCode : Swift.RawRepresentable {}
+extension StoreKitWrapper.StoreKitTransactionOwnershipType : Swift.Equatable {}
+extension StoreKitWrapper.StoreKitTransactionOwnershipType : Swift.Hashable {}
+extension StoreKitWrapper.StoreKitTransactionOwnershipType : Swift.RawRepresentable {}
+extension StoreKitWrapper.StoreKitTransactionEnvironment : Swift.Equatable {}
+extension StoreKitWrapper.StoreKitTransactionEnvironment : Swift.Hashable {}
+extension StoreKitWrapper.StoreKitTransactionEnvironment : Swift.RawRepresentable {}
+extension StoreKitWrapper.StoreKitTransactionReason : Swift.Equatable {}
+extension StoreKitWrapper.StoreKitTransactionReason : Swift.Hashable {}
+extension StoreKitWrapper.StoreKitTransactionReason : Swift.RawRepresentable {}
+extension StoreKitWrapper.StoreKitTransactionRevocationReason : Swift.Equatable {}
+extension StoreKitWrapper.StoreKitTransactionRevocationReason : Swift.Hashable {}
+extension StoreKitWrapper.StoreKitTransactionRevocationReason : Swift.RawRepresentable {}
+extension StoreKitWrapper.StoreKitTransactionOfferType : Swift.Equatable {}
+extension StoreKitWrapper.StoreKitTransactionOfferType : Swift.Hashable {}
+extension StoreKitWrapper.StoreKitTransactionOfferType : Swift.RawRepresentable {}
+extension StoreKitWrapper.StoreKitTransactionOfferPaymentMode : Swift.Equatable {}
+extension StoreKitWrapper.StoreKitTransactionOfferPaymentMode : Swift.Hashable {}
+extension StoreKitWrapper.StoreKitTransactionOfferPaymentMode : Swift.RawRepresentable {}
+extension StoreKitWrapper.StoreKitWrapperErrorCode : Swift.Equatable {}
+extension StoreKitWrapper.StoreKitWrapperErrorCode : Swift.Hashable {}
+extension StoreKitWrapper.StoreKitWrapperErrorCode : Swift.RawRepresentable {}
