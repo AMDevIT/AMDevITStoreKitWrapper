@@ -1,5 +1,14 @@
 # StoreKit Wrapper Context
 
+## Latest step: GitHub Wiki documentation
+
+- Objective: replace the placeholder GitHub Wiki with complete installation, usage, API, architecture, development, verification, troubleshooting, and production-readiness documentation.
+- Status: completed in the sibling `AMDevITStoreKitWrapper.wiki` repository with a navigable home page, `_Sidebar.md`, and sixteen focused topic pages.
+- Decisions: keep the wiki in English; make `StoreKitClient` the primary path while retaining the low-level delegate contract; distinguish entitlement, unfinished, listener, and sync recovery flows; emphasize verified durable delivery before finishing; keep the preview and pending macOS/iOS verification status explicit.
+- Affected files: all Markdown pages in `AMDevITStoreKitWrapper.wiki`, `.agents/wiki-documentation.md`, and `.agents/context.md`.
+- Checks: compared managed and low-level names against `IStoreKitClient.cs`, `ApiDefinition.cs`, and `StructsAndEnums.cs`; checked package facts against project metadata and README; found all 18 expected wiki files with valid internal targets and balanced code fences; API-token, trailing-whitespace, wiki-diff, and scoped `.agents` diff checks passed. The repository-wide main diff check could not traverse pre-existing long XCFramework paths on Windows. No restore, build, pack, or native test command was run.
+- Open issues and recommended next step: preview the committed wiki on GitHub, validate hosted sidebar/link rendering, and keep version and verification statements synchronized with future releases.
+
 ## Latest step: NuGet publication documentation
 
 - Objective: make the published NuGet package the primary README installation path and reflect its public availability accurately.
