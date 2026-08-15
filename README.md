@@ -1,7 +1,6 @@
 # AMDevIT StoreKit Wrapper
 
-[![NuGet version](https://img.shields.io/nuget/v/AMDevIT.StoreKitWrapper?logo=nuget)](https://www.nuget.org/packages/AMDevIT.StoreKitWrapper/0.130.0)
-[![NuGet downloads](https://img.shields.io/nuget/dt/AMDevIT.StoreKitWrapper?logo=nuget)](https://www.nuget.org/packages/AMDevIT.StoreKitWrapper/0.130.0)
+[![NuGet version](https://img.shields.io/nuget/v/AMDevIT.StoreKitWrapper?logo=nuget)](https://img.shields.io/nuget/v/AMDevIT.StoreKitWrapper)
 [![iOS](https://img.shields.io/badge/iOS-15.6%2B-000000?logo=apple)](https://developer.apple.com/ios/)
 [![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![Swift](https://img.shields.io/badge/Swift-5-F05138?logo=swift&logoColor=white)](https://www.swift.org/)
@@ -48,19 +47,20 @@ All asynchronous native operations complete through `StoreKitManagerDelegate`. T
 
 ### 1. Install the binding
 
-Install the published [`AMDevIT.StoreKitWrapper` version `0.130.0`](https://www.nuget.org/packages/AMDevIT.StoreKitWrapper/0.130.0) package from NuGet.org:
+Install the published [`AMDevIT.StoreKitWrapper`] (https://www.nuget.org/packages/AMDevIT.StoreKitWrapper) package from NuGet.org:
 
 ```bash
-dotnet add package AMDevIT.StoreKitWrapper --version 0.130.0
+dotnet add package AMDevIT.StoreKitWrapper 
 ```
 
 For repository development, clone the project and either create a local package or add a direct project reference. To produce and consume the local package from the repository root:
 
 ```bash
 dotnet pack src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper.slnx --configuration Release
-dotnet add package AMDevIT.StoreKitWrapper --version 0.130.0 --source ./artifacts/packages
+dotnet add package AMDevIT.StoreKitWrapper --version <version> --source ./artifacts/packages
 ```
 
+where version is the current package version built from sources.
 Alternatively, add a project reference from the consuming .NET for iOS application:
 
 ```xml
