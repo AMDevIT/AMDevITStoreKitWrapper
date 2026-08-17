@@ -37,7 +37,7 @@ extension StoreKitWrapper.IStoreKitWrapperLogger {
     get
   }
 }
-@objc @available(iOS 17.0, *)
+@objc @available(iOS 17.0, macCatalyst 17.0, *)
 @_Concurrency.MainActor @objcMembers final public class StoreKitProductsViewController : UIKit.UIViewController {
   @objc @_Concurrency.MainActor final public let productIdentifiers: [Swift.String]
   @objc @_Concurrency.MainActor public init(productIdentifiers: [Swift.String])
@@ -46,7 +46,7 @@ extension StoreKitWrapper.IStoreKitWrapperLogger {
   @_Concurrency.MainActor @objc override final public func viewDidLoad()
   @objc deinit
 }
-@objc @available(iOS 17.0, *)
+@objc @available(iOS 17.0, macCatalyst 17.0, *)
 @_Concurrency.MainActor @objcMembers final public class StoreKitProductViewController : UIKit.UIViewController {
   @objc @_Concurrency.MainActor final public let productIdentifier: Swift.String
   @objc @_Concurrency.MainActor public init(productIdentifier: Swift.String)
@@ -55,7 +55,7 @@ extension StoreKitWrapper.IStoreKitWrapperLogger {
   @_Concurrency.MainActor @objc override final public func viewDidLoad()
   @objc deinit
 }
-@objc @available(iOS 17.0, *)
+@objc @available(iOS 17.0, macCatalyst 17.0, *)
 @_Concurrency.MainActor @objcMembers final public class StoreKitSubscriptionsViewController : UIKit.UIViewController {
   @objc @_Concurrency.MainActor final public let subscriptionGroupIdentifier: Swift.String
   @objc @_Concurrency.MainActor public init(subscriptionGroupIdentifier: Swift.String)
@@ -79,6 +79,14 @@ extension StoreKitWrapper.IStoreKitWrapperLogger {
   @objc final public func purchase(productIdentifier: Swift.String, appAccountToken: Swift.String?)
   @objc final public func purchase(productIdentifier: Swift.String, appAccountToken: Swift.String?, quantity: Swift.Int)
   @objc final public func finishTransaction(transactionIdentifier: Swift.UInt64)
+  @objc final public func cancelInitialization()
+  @objc final public func cancelShutdown()
+  @objc final public func cancelProductsRequest()
+  @objc final public func cancelCurrentEntitlementsRequest()
+  @objc final public func cancelAppStoreSync()
+  @objc final public func cancelUnfinishedTransactionsRequest()
+  @objc final public func cancelPurchase()
+  @objc final public func cancelTransactionFinish()
 }
 @objc public protocol StoreKitManagerDelegate {
   @objc func initializationCompleted(errorCode: StoreKitWrapper.StoreKitWrapperErrorCode, errorMessage: Swift.String?)

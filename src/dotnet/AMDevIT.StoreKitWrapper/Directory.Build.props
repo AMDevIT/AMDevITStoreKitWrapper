@@ -26,7 +26,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>nuget_icon_128.png</PackageIcon>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageOutputPath>$(MSBuildThisFileDirectory)../../../../artifacts/packages</PackageOutputPath>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)../../../artifacts/packages</PackageOutputPath>
     <IncludeSymbols>true</IncludeSymbols>
     <Deterministic>true</Deterministic>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
