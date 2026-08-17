@@ -9,7 +9,7 @@ import Testing
 import UIKit
 @testable import StoreKitWrapper
 
-@available(iOS 17.0, *)
+@available(iOS 17.0, macCatalyst 17.0, *)
 @MainActor
 struct StoreKitViewControllerTests {
     // MARK: - Tests

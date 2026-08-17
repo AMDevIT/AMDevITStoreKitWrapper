@@ -1,5 +1,14 @@
 # StoreKit Wrapper Context
 
+## Latest step: Mac Catalyst compatibility
+
+- Objective: extend the native StoreKit framework, .NET binding, and NuGet source package to support Mac Catalyst alongside iOS.
+- Status: source configuration is complete. The Xcode target supports Catalyst, native scripts build and verify both platform variants, Swift availability checks include Catalyst, and the binding targets `net10.0-ios;net10.0-maccatalyst`. The checked-in XCFramework still needs to be regenerated on macOS before compilation and packaging.
+- Decisions: retain one shared native and managed API surface; use minimum version 15.6 for iOS and Mac Catalyst; expose StoreKit view controllers from version 17.0 on both platforms; advance the source/native version to `0.131.0` while leaving the published iOS-only `0.130.0` package unchanged.
+- Affected files: Xcode project settings, XCFramework and native-contract scripts, Swift availability declarations and tests, binding project and API definition, shared package metadata, README, `.agents/mac-catalyst-compatibility.md`, and `.agents/context.md`.
+- Checks: project XML parsing passed; MSBuild property evaluation reports both target frameworks and version `0.131.0`; .NET 10 iOS and Mac Catalyst packs are installed; both shell scripts pass `bash -n`; platform-availability and scoped diff checks pass. Restore, build, pack, Xcode compilation, and runtime tests were intentionally not run against the still iOS-only checked-in XCFramework.
+- Open issues and recommended next step: regenerate the XCFramework on macOS, replace the artifact under the binding `libs` directory, run the dual-platform native contract verification, then restore/build/pack Release and test iOS and Mac Catalyst consumers.
+
 ## Latest step: GitHub Wiki documentation
 
 - Objective: replace the placeholder GitHub Wiki with complete installation, usage, API, architecture, development, verification, troubleshooting, and production-readiness documentation.

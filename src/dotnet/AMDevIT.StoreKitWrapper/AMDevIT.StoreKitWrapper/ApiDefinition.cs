@@ -273,6 +273,7 @@ namespace AMDevIT.StoreKitWrapper {
 	// @interface StoreKitProductViewController : UIViewController
 	/// <summary>Hosts StoreKit's single-product merchandising view in a UIKit view controller.</summary>
 	[iOS (17, 0)]
+	[MacCatalyst (17, 0)]
 	[BaseType (typeof (UIViewController), Name = "_TtC15StoreKitWrapper29StoreKitProductViewController")]
 	interface StoreKitProductViewController {
 		/// <summary>Gets the product identifier displayed by the controller.</summary>
@@ -290,6 +291,7 @@ namespace AMDevIT.StoreKitWrapper {
 	// @interface StoreKitProductsViewController : UIViewController
 	/// <summary>Hosts StoreKit's multi-product merchandising view in a UIKit view controller.</summary>
 	[iOS (17, 0)]
+	[MacCatalyst (17, 0)]
 	[BaseType (typeof (UIViewController), Name = "_TtC15StoreKitWrapper30StoreKitProductsViewController")]
 	interface StoreKitProductsViewController {
 		/// <summary>Gets the product identifiers displayed by the controller.</summary>
@@ -442,6 +444,7 @@ namespace AMDevIT.StoreKitWrapper {
 	// @interface StoreKitSubscriptionsViewController : UIViewController
 	/// <summary>Hosts StoreKit's subscription-group merchandising view in a UIKit view controller.</summary>
 	[iOS (17, 0)]
+	[MacCatalyst (17, 0)]
 	[BaseType (typeof (UIViewController), Name = "_TtC15StoreKitWrapper35StoreKitSubscriptionsViewController")]
 	interface StoreKitSubscriptionsViewController {
 		/// <summary>Gets the subscription-group identifier displayed by the controller.</summary>
