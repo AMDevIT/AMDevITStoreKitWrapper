@@ -10,9 +10,6 @@
 
 AMDevIT StoreKit Wrapper is a native StoreKit 2 framework with a .NET 10 binding for iOS and Mac Catalyst. It provides a callback-based API for products, purchases, entitlements, transaction recovery, and StoreKit merchandising views without exposing Swift concurrency or native StoreKit types to .NET applications.
 
-> [!IMPORTANT]
-> This project is currently a preview. The iOS binding has built successfully, while the new Mac Catalyst target and native runtime behavior still need final verification on macOS before production use.
-
 ## Features
 
 - Loads complete product and subscription metadata.
