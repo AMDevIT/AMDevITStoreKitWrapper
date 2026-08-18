@@ -9,15 +9,15 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable>true</IsPackable>
     <PackageId>AMDevIT.StoreKitWrapper</PackageId>
-    <VersionPrefix>0.130.0</VersionPrefix>
+    <VersionPrefix>0.131.0</VersionPrefix>
     <VersionSuffix></VersionSuffix>
     <Version>$(VersionPrefix)$(VersionSuffix)</Version>
     <Title>AMDevIT StoreKit Wrapper</Title>
     <Authors>Alessandro Morvillo</Authors>
     <Company>AMDev.IT di Alessandro Morvillo</Company>
     <Copyright>Alessandro Morvillo, 2026</Copyright>
-    <Description>StoreKit 2 native framework binding for .NET for iOS, with callback-based APIs for products, purchases, subscriptions, entitlements, and transaction management.</Description>
-    <PackageTags>storekit storekit2 ios dotnet binding in-app-purchases subscriptions</PackageTags>
+    <Description>StoreKit 2 native framework binding for .NET for iOS and Mac Catalyst, with callback-based APIs for products, purchases, subscriptions, entitlements, and transaction management.</Description>
+    <PackageTags>storekit storekit2 ios maccatalyst dotnet binding in-app-purchases subscriptions</PackageTags>
     <PackageProjectUrl>https://github.com/AMDevIT/AMDevITStoreKitWrapper</PackageProjectUrl>
     <RepositoryUrl>https://github.com/AMDevIT/AMDevITStoreKitWrapper.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -26,7 +26,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>nuget_icon_128.png</PackageIcon>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageOutputPath>$(MSBuildThisFileDirectory)../../../../artifacts/packages</PackageOutputPath>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)../../../artifacts/packages</PackageOutputPath>
     <IncludeSymbols>true</IncludeSymbols>
     <Deterministic>true</Deterministic>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>

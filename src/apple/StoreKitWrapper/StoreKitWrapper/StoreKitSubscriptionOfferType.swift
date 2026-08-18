@@ -26,7 +26,7 @@ import StoreKit
             self = .introductory
         } else if subscriptionOfferType == .promotional {
             self = .promotional
-        } else if #available(iOS 18.0, *), subscriptionOfferType == .winBack {
+        } else if #available(iOS 18.0, macCatalyst 18.0, *), subscriptionOfferType == .winBack {
             self = .winBack
         } else {
             self = .unknown

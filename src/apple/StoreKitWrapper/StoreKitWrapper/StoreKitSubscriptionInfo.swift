@@ -69,7 +69,7 @@ import StoreKit
         }
         var winBackOffers = [StoreKitSubscriptionOffer]()
 
-        if #available(iOS 18.0, *) {
+        if #available(iOS 18.0, macCatalyst 18.0, *) {
             winBackOffers = subscriptionInfo.winBackOffers.map {
                 StoreKitSubscriptionOffer(subscriptionOffer: $0,
                                           currencyCode: currencyCode,
@@ -80,7 +80,7 @@ import StoreKit
         var groupDisplayName: String?
         var groupLevel: Int?
         
-        if #available(iOS 16.4, *) {
+        if #available(iOS 16.4, macCatalyst 16.4, *) {
             groupDisplayName = subscriptionInfo.groupDisplayName
             groupLevel = subscriptionInfo.groupLevel
         } else {

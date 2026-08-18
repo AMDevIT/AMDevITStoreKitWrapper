@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 /// Owns and installs one SwiftUI hosting controller inside a public UIKit controller.
-@available(iOS 17.0, *)
+@available(iOS 17.0, macCatalyst 17.0, *)
 @MainActor
 final class StoreKitViewHostingContainer {
     // MARK: - Properties

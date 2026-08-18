@@ -10,7 +10,7 @@ import SwiftUI
 import UIKit
 
 /// Hosts StoreKit's SwiftUI `ProductView` in an Objective-C-compatible view controller.
-@available(iOS 17.0, *)
+@available(iOS 17.0, macCatalyst 17.0, *)
 @MainActor
 @objcMembers public final class StoreKitProductViewController: UIViewController {
     // MARK: - Properties

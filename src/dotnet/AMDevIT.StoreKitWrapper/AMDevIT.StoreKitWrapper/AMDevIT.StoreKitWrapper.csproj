@@ -1,11 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0-ios</TargetFramework>
+    <TargetFrameworks>net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.6</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.6</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsBindingProject>true</IsBindingProject>
-    <PackageReleaseNotes>First release. Native low level wrapper and high level async wrapper.</PackageReleaseNotes>
+    <PackageReleaseNotes>Adds Mac Catalyst support alongside iOS.</PackageReleaseNotes>
 
     <!--
       Enable trim analyzers for class libraries.

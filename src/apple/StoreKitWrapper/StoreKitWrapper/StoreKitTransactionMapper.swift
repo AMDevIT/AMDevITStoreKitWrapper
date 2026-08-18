@@ -90,7 +90,7 @@ enum StoreKitTransactionMapper {
     }
 
     private static func mapCurrencyCode(transaction: Transaction) -> String? {
-        if #available(iOS 16.0, *) {
+        if #available(iOS 16.0, macCatalyst 16.0, *) {
             return transaction.currency?.identifier
         }
 
@@ -110,7 +110,7 @@ enum StoreKitTransactionMapper {
     }
 
     private static func mapEnvironment(transaction: Transaction) -> StoreKitTransactionEnvironment {
-        if #available(iOS 16.0, *) {
+        if #available(iOS 16.0, macCatalyst 16.0, *) {
             if transaction.environment == .xcode {
                 return .xcode
             }
@@ -141,7 +141,7 @@ enum StoreKitTransactionMapper {
     }
 
     private static func mapStorefrontIdentifier(transaction: Transaction) -> String? {
-        if #available(iOS 17.0, *) {
+        if #available(iOS 17.0, macCatalyst 17.0, *) {
             return transaction.storefront.id
         }
 
@@ -149,7 +149,7 @@ enum StoreKitTransactionMapper {
     }
 
     private static func mapStorefrontCountryCode(transaction: Transaction) -> String {
-        if #available(iOS 17.0, *) {
+        if #available(iOS 17.0, macCatalyst 17.0, *) {
             return transaction.storefront.countryCode
         }
 
@@ -157,7 +157,7 @@ enum StoreKitTransactionMapper {
     }
 
     private static func mapReason(transaction: Transaction) -> StoreKitTransactionReason {
-        if #available(iOS 17.0, *) {
+        if #available(iOS 17.0, macCatalyst 17.0, *) {
             if transaction.reason == .purchase {
                 return .purchase
             }
@@ -194,13 +194,13 @@ enum StoreKitTransactionMapper {
     }
 
     private static func mapOffer(transaction: Transaction) -> StoreKitTransactionOffer? {
-        if #available(iOS 17.2, *) {
+        if #available(iOS 17.2, macCatalyst 17.2, *) {
             guard let offer = transaction.offer else {
                 return nil
             }
 
             let period: StoreKitSubscriptionPeriod?
-            if #available(iOS 18.4, *) {
+            if #available(iOS 18.4, macCatalyst 18.4, *) {
                 period = offer.period.map { StoreKitSubscriptionPeriod(subscriptionPeriod: $0) }
             } else {
                 period = nil
@@ -241,7 +241,7 @@ enum StoreKitTransactionMapper {
         }
     }
 
-    @available(iOS 17.2, *)
+    @available(iOS 17.2, macCatalyst 17.2, *)
     private static func map(paymentMode: Transaction.Offer.PaymentMode?) -> StoreKitTransactionOfferPaymentMode {
         guard let paymentMode = paymentMode else {
             return .unknown

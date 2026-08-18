@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # build_xcframework.sh
-# Compiles iOS archives and creates the StoreKitWrapper xcframework
+# Compiles iOS and Mac Catalyst archives and creates the StoreKitWrapper xcframework
 
 set -euo pipefail
 
@@ -20,6 +20,7 @@ echo "🧹 Cleaning previous build..."
 rm -rf "$OUTPUT_DIR/$XCFRAMEWORK_NAME.xcframework"
 rm -rf "$OUTPUT_DIR/$XCFRAMEWORK_NAME-iOS.xcarchive"
 rm -rf "$OUTPUT_DIR/$XCFRAMEWORK_NAME-iOSSimulator.xcarchive"
+rm -rf "$OUTPUT_DIR/$XCFRAMEWORK_NAME-MacCatalyst.xcarchive"
 
 echo "📱 Building archive for device (arm64)..."
 xcodebuild archive \
@@ -49,10 +50,23 @@ xcodebuild archive \
     
 # SWIFT_OBJC_INTERFACE_HEADER_NAME="$XCFRAMEWORK_NAME.h" \
 
+echo "💻 Building archive for Mac Catalyst (arm64 + x86_64)..."
+xcodebuild archive \
+    -scheme "$SCHEME" \
+    -project "$PROJECT_PATH" \
+    -destination "generic/platform=macOS,variant=Mac Catalyst" \
+    -archivePath "$OUTPUT_DIR/$XCFRAMEWORK_NAME-MacCatalyst" \
+    SKIP_INSTALL=NO \
+    BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+    SWIFT_INSTALL_OBJC_HEADER=YES \
+    DEFINES_MODULE=YES \
+    | xcpretty
+
 echo "📦 Creating xcframework..."
 xcodebuild -create-xcframework \
     -framework "$OUTPUT_DIR/$XCFRAMEWORK_NAME-iOS.xcarchive/Products/Library/Frameworks/$XCFRAMEWORK_NAME.framework" \
     -framework "$OUTPUT_DIR/$XCFRAMEWORK_NAME-iOSSimulator.xcarchive/Products/Library/Frameworks/$XCFRAMEWORK_NAME.framework" \
+    -framework "$OUTPUT_DIR/$XCFRAMEWORK_NAME-MacCatalyst.xcarchive/Products/Library/Frameworks/$XCFRAMEWORK_NAME.framework" \
     -output "$OUTPUT_DIR/$XCFRAMEWORK_NAME.xcframework"
 
 echo "✅ xcframework created at $OUTPUT_DIR/$XCFRAMEWORK_NAME.xcframework"

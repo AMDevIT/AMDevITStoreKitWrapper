@@ -374,115 +374,248 @@ extern "C" {
 SWIFT_ENUM_FWD_DECL(NSInteger, StoreKitWrapperLogLevel)
 @class NSString;
 @class NSError;
+/// Receives structured diagnostic events emitted by the StoreKit wrapper.
+/// The contract mirrors the core concepts of <code>Microsoft.Extensions.Logging.ILogger</code>
+/// so that applications can implement a small bridge between the two logging systems.
 SWIFT_PROTOCOL("_TtP15StoreKitWrapper22IStoreKitWrapperLogger_")
 @protocol IStoreKitWrapperLogger
+/// Determines whether events at the specified severity should be emitted.
+/// \param logLevel The severity to test.
+///
+///
+/// returns:
+/// <code>true</code> when logging is enabled for the severity; otherwise, <code>false</code>.
 - (BOOL)isEnabledWithLogLevel:(enum StoreKitWrapperLogLevel)logLevel SWIFT_WARN_UNUSED_RESULT;
+/// Records a structured log event.
+/// \param logLevel The event severity.
+///
+/// \param eventId A stable numeric identifier for the event.
+///
+/// \param eventName An optional human-readable event name.
+///
+/// \param message The formatted event message.
+///
+/// \param error An optional native error associated with the event.
+///
 - (void)logWithLogLevel:(enum StoreKitWrapperLogLevel)logLevel eventId:(NSInteger)eventId eventName:(NSString * _Nullable)eventName message:(NSString * _Nonnull)message error:(NSError * _Nullable)error;
 @end
 
 @protocol StoreKitManagerDelegate;
+/// Coordinates StoreKit operations through an Objective-C-compatible callback API.
+/// Swift concurrency remains internal. Set <code>delegate</code>, call <code>initialize()</code>, and process
+/// terminal operation callbacks before issuing dependent requests. Callbacks aren’t
+/// automatically dispatched to the main thread.
 SWIFT_CLASS("_TtC15StoreKitWrapper15StoreKitManager")
 @interface StoreKitManager : NSObject
+/// Receives operation completions and persistent transaction updates.
 @property (nonatomic, strong) id <StoreKitManagerDelegate> _Nullable delegate;
+/// Creates a manager without a logger or delegate.
 - (nonnull instancetype)init;
+/// Creates a manager with optional logging and callback receivers.
+/// \param logger The structured logger, or <code>nil</code> to disable logging.
+///
+/// \param delegate The operation callback receiver, or <code>nil</code>.
+///
 - (nonnull instancetype)initWithLogger:(id <IStoreKitWrapperLogger> _Nullable)logger delegate:(id <StoreKitManagerDelegate> _Nullable)delegate OBJC_DESIGNATED_INITIALIZER;
+/// Initializes the manager and starts listening for transaction updates.
+/// Completion is reported through <code>StoreKitManagerDelegate.initializationCompleted</code>.
 - (void)initialize;
+/// Stops the transaction listener and shuts down the manager.
+/// Completion is reported through <code>StoreKitManagerDelegate.shutdownCompleted</code>.
 - (void)shutdown;
+/// Invalidates the current product catalog and requests fresh product metadata.
+/// \param productIdentifiers The App Store Connect identifiers to request.
+///
 - (void)getProductsWithProductIdentifiers:(NSArray<NSString *> * _Nonnull)productIdentifiers;
+/// Invalidates and reloads the customer’s current entitlement snapshot.
 - (void)getCurrentEntitlements;
+/// Explicitly synchronizes transaction information with the App Store.
+/// Call only in response to a user-initiated restore action because StoreKit may present authentication UI.
 - (void)sync;
+/// Invalidates and reloads the currently unfinished verified transactions.
 - (void)getUnfinishedTransactions;
+/// Purchases one unit of a product without an application account token.
+/// \param productIdentifier The identifier of a product loaded by <code>getProducts(productIdentifiers:)</code>.
+///
 - (void)purchaseWithProductIdentifier:(NSString * _Nonnull)productIdentifier;
+/// Purchases one unit of a product with an optional application account token.
 - (void)purchaseWithProductIdentifier:(NSString * _Nonnull)productIdentifier appAccountToken:(NSString * _Nullable)appAccountToken;
+/// Purchases a product using the supplied account token and quantity.
+/// \param productIdentifier The identifier of a product loaded by <code>getProducts(productIdentifiers:)</code>.
+///
+/// \param appAccountToken A UUID string associated with the application account, or <code>nil</code>.
+///
+/// \param quantity The quantity to purchase. Values greater than one are valid only for consumables.
+///
 - (void)purchaseWithProductIdentifier:(NSString * _Nonnull)productIdentifier appAccountToken:(NSString * _Nullable)appAccountToken quantity:(NSInteger)quantity;
+/// Finishes a verified transaction after the application has durably delivered its content.
+/// \param transactionIdentifier The identifier of a retained unfinished transaction.
+///
 - (void)finishTransactionWithTransactionIdentifier:(uint64_t)transactionIdentifier;
+/// Cooperatively cancels active initialization work.
+- (void)cancelInitialization;
+/// Cooperatively cancels an active shutdown wait.
+- (void)cancelShutdown;
+/// Cooperatively cancels the active product request.
+- (void)cancelProductsRequest;
+/// Cooperatively cancels the active current-entitlements request.
+- (void)cancelCurrentEntitlementsRequest;
+/// Cooperatively cancels active App Store synchronization.
+- (void)cancelAppStoreSync;
+/// Cooperatively cancels the active unfinished-transactions request.
+- (void)cancelUnfinishedTransactionsRequest;
+/// Cooperatively cancels the active purchase task.
+/// Cancellation doesn’t guarantee dismissal or rollback of App Store UI or a transaction already created by StoreKit.
+- (void)cancelPurchase;
+/// Cooperatively cancels transaction finishing before StoreKit accepts the finish operation.
+- (void)cancelTransactionFinish;
 @end
 
 SWIFT_ENUM_FWD_DECL(NSInteger, StoreKitWrapperErrorCode)
 @class StoreKitProduct;
 @class StoreKitTransaction;
 SWIFT_ENUM_FWD_DECL(NSInteger, StoreKitPurchaseResult)
+/// Receives terminal operation callbacks and persistent transaction updates from a <code>StoreKitManager</code>.
+/// Callbacks are delivered on the executor used by the underlying asynchronous operation.
+/// The wrapper doesn’t dispatch callbacks to the main thread.
 SWIFT_PROTOCOL("_TtP15StoreKitWrapper23StoreKitManagerDelegate_")
 @protocol StoreKitManagerDelegate
+/// Reports completion of manager initialization.
 - (void)initializationCompletedWithErrorCode:(enum StoreKitWrapperErrorCode)errorCode errorMessage:(NSString * _Nullable)errorMessage;
+/// Reports completion of manager shutdown.
 - (void)shutdownCompletedWithErrorCode:(enum StoreKitWrapperErrorCode)errorCode errorMessage:(NSString * _Nullable)errorMessage;
+/// Reports the products returned by the most recent product request.
 - (void)availableProductsCompletedWithResult:(NSArray<StoreKitProduct *> * _Nonnull)withResult errorCode:(enum StoreKitWrapperErrorCode)errorCode errorMessage:(NSString * _Nullable)errorMessage;
+/// Reports the current entitlement snapshot.
 - (void)currentEntitlementsCompletedWithResult:(NSArray<StoreKitTransaction *> * _Nonnull)withResult errorCode:(enum StoreKitWrapperErrorCode)errorCode errorMessage:(NSString * _Nullable)errorMessage;
+/// Reports completion of an explicit App Store synchronization request.
 - (void)appStoreSyncCompletedWithErrorCode:(enum StoreKitWrapperErrorCode)errorCode errorMessage:(NSString * _Nullable)errorMessage;
+/// Reports the currently unfinished verified transactions known to StoreKit.
 - (void)unfinishedTransactionsCompletedWithResult:(NSArray<StoreKitTransaction *> * _Nonnull)withResult errorCode:(enum StoreKitWrapperErrorCode)errorCode errorMessage:(NSString * _Nullable)errorMessage;
+/// Reports the outcome of a programmatic purchase request.
 - (void)purchaseCompletedWithResult:(StoreKitTransaction * _Nullable)withResult purchaseResult:(enum StoreKitPurchaseResult)purchaseResult errorCode:(enum StoreKitWrapperErrorCode)errorCode errorMessage:(NSString * _Nullable)errorMessage;
+/// Reports completion of a request to finish a verified transaction.
 - (void)finishTransactionCompletedWithTransactionIdentifier:(uint64_t)transactionIdentifier errorCode:(enum StoreKitWrapperErrorCode)errorCode errorMessage:(NSString * _Nullable)errorMessage;
+/// Reports a transaction emitted by the persistent StoreKit transaction listener.
 - (void)transactionUpdatedWithResult:(StoreKitTransaction * _Nonnull)withResult errorCode:(enum StoreKitWrapperErrorCode)errorCode errorMessage:(NSString * _Nullable)errorMessage;
 @end
 
 SWIFT_ENUM_FWD_DECL(NSInteger, StoreKitProductType)
 @class NSDecimalNumber;
 @class StoreKitSubscriptionInfo;
+/// Provides an Objective-C-compatible snapshot of StoreKit product metadata.
 SWIFT_CLASS("_TtC15StoreKitWrapper15StoreKitProduct")
 @interface StoreKitProduct : NSObject
+/// The App Store Connect product identifier.
 @property (nonatomic, readonly, copy) NSString * _Nonnull identifier;
+/// The normalized StoreKit product category.
 @property (nonatomic, readonly) enum StoreKitProductType productType;
+/// StoreKit’s localized description of the product category.
 @property (nonatomic, readonly, copy) NSString * _Nonnull productTypeDisplayName;
+/// The localized product name configured in App Store Connect.
 @property (nonatomic, readonly, copy) NSString * _Nonnull displayName;
+/// The localized product description configured in App Store Connect.
 @property (nonatomic, readonly, copy) NSString * _Nonnull displayDescription;
+/// The localized, currency-formatted product price.
 @property (nonatomic, readonly, copy) NSString * _Nonnull displayPrice;
+/// The product price as a decimal number.
 @property (nonatomic, readonly, strong) NSDecimalNumber * _Nonnull price;
+/// The ISO 4217 currency code used by the price.
 @property (nonatomic, readonly, copy) NSString * _Nonnull currencyCode;
+/// The locale identifier used to format the product price.
 @property (nonatomic, readonly, copy) NSString * _Nonnull localeIdentifier;
+/// Indicates whether the product supports Family Sharing.
 @property (nonatomic, readonly) BOOL isFamilyShareable;
+/// Subscription metadata, or <code>nil</code> when the product isn’t an auto-renewable subscription.
 @property (nonatomic, readonly, strong) StoreKitSubscriptionInfo * _Nullable subscriptionInfo;
+/// StoreKit’s raw product JSON represented as a UTF-8 string.
 @property (nonatomic, readonly, copy) NSString * _Nonnull jsonRepresentation;
+/// Creates a product metadata snapshot.
 - (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier productType:(enum StoreKitProductType)productType productTypeDisplayName:(NSString * _Nonnull)productTypeDisplayName displayName:(NSString * _Nonnull)displayName displayDescription:(NSString * _Nonnull)displayDescription displayPrice:(NSString * _Nonnull)displayPrice price:(NSDecimalNumber * _Nonnull)price currencyCode:(NSString * _Nonnull)currencyCode localeIdentifier:(NSString * _Nonnull)localeIdentifier isFamilyShareable:(BOOL)isFamilyShareable subscriptionInfo:(StoreKitSubscriptionInfo * _Nullable)subscriptionInfo jsonRepresentation:(NSString * _Nonnull)jsonRepresentation OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+/// Identifies the StoreKit category of a product.
 typedef SWIFT_ENUM(NSInteger, StoreKitProductType, open) {
+/// A product type that isn’t recognized by this version of the wrapper.
   StoreKitProductTypeUnknown = -1,
+/// A product that can be purchased, consumed, and purchased again.
   StoreKitProductTypeConsumable = 0,
+/// A product that is purchased once and doesn’t expire.
   StoreKitProductTypeNonConsumable = 1,
+/// A subscription that doesn’t renew automatically.
   StoreKitProductTypeNonRenewableSubscription = 2,
+/// A subscription that renews automatically until it is cancelled.
   StoreKitProductTypeAutoRenewableSubscription = 3,
 };
 
 @class NSCoder;
 @class NSBundle;
-SWIFT_CLASS("_TtC15StoreKitWrapper29StoreKitProductViewController") SWIFT_AVAILABILITY(ios,introduced=17.0)
+/// Hosts StoreKit’s SwiftUI <code>ProductView</code> in an Objective-C-compatible view controller.
+SWIFT_CLASS("_TtC15StoreKitWrapper29StoreKitProductViewController") SWIFT_AVAILABILITY(maccatalyst,introduced=17.0) SWIFT_AVAILABILITY(ios,introduced=17.0)
 @interface StoreKitProductViewController : UIViewController
+/// The product identifier displayed by the controller.
 @property (nonatomic, readonly, copy) NSString * _Nonnull productIdentifier;
+/// Creates a controller that displays one StoreKit product.
+/// \param productIdentifier The App Store Connect product identifier to display.
+///
 - (nonnull instancetype)initWithProductIdentifier:(NSString * _Nonnull)productIdentifier OBJC_DESIGNATED_INITIALIZER;
+/// Storyboard and archive initialization aren’t supported.
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE;
+/// Installs the hosted StoreKit product view when the controller loads.
 - (void)viewDidLoad;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
-SWIFT_CLASS("_TtC15StoreKitWrapper30StoreKitProductsViewController") SWIFT_AVAILABILITY(ios,introduced=17.0)
+/// Hosts StoreKit’s SwiftUI <code>StoreView</code> in an Objective-C-compatible view controller.
+SWIFT_CLASS("_TtC15StoreKitWrapper30StoreKitProductsViewController") SWIFT_AVAILABILITY(maccatalyst,introduced=17.0) SWIFT_AVAILABILITY(ios,introduced=17.0)
 @interface StoreKitProductsViewController : UIViewController
+/// The product identifiers displayed by the controller.
 @property (nonatomic, readonly, copy) NSArray<NSString *> * _Nonnull productIdentifiers;
+/// Creates a controller that displays a collection of StoreKit products.
+/// \param productIdentifiers The App Store Connect product identifiers to display.
+///
 - (nonnull instancetype)initWithProductIdentifiers:(NSArray<NSString *> * _Nonnull)productIdentifiers OBJC_DESIGNATED_INITIALIZER;
+/// Storyboard and archive initialization aren’t supported.
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE;
+/// Installs the hosted StoreKit products view when the controller loads.
 - (void)viewDidLoad;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
+/// Describes the outcome of a programmatic purchase request.
 typedef SWIFT_ENUM(NSInteger, StoreKitPurchaseResult, open) {
+/// StoreKit returned a result unknown to this version of the wrapper.
   StoreKitPurchaseResultUnknown = -1,
+/// The purchase completed and produced a transaction.
   StoreKitPurchaseResultSucceeded = 0,
+/// The purchase is waiting for an external action, such as approval.
   StoreKitPurchaseResultPending = 1,
+/// The customer cancelled the purchase flow.
   StoreKitPurchaseResultCancelled = 2,
+/// The purchase failed.
   StoreKitPurchaseResultFailed = 3,
 };
 
 @class StoreKitSubscriptionPeriod;
 @class StoreKitSubscriptionOffer;
+/// Provides subscription-specific metadata for an auto-renewable product.
 SWIFT_CLASS("_TtC15StoreKitWrapper24StoreKitSubscriptionInfo")
 @interface StoreKitSubscriptionInfo : NSObject
+/// The App Store Connect subscription-group identifier.
 @property (nonatomic, readonly, copy) NSString * _Nonnull subscriptionGroupIdentifier;
+/// The localized subscription-group display name when supported by the OS.
 @property (nonatomic, readonly, copy) NSString * _Nullable groupDisplayName;
+/// The standard renewal period of the subscription.
 @property (nonatomic, readonly, strong) StoreKitSubscriptionPeriod * _Nonnull subscriptionPeriod;
+/// Indicates whether the current customer is eligible for the introductory offer.
 @property (nonatomic, readonly) BOOL isEligibleForIntroductoryOffer;
+/// The introductory offer configured for the product, if any.
 @property (nonatomic, readonly, strong) StoreKitSubscriptionOffer * _Nullable introductoryOffer;
+/// Promotional offers configured for the product.
 @property (nonatomic, readonly, copy) NSArray<StoreKitSubscriptionOffer *> * _Nonnull promotionalOffers;
+/// Win-back offers configured for the product on supported OS versions.
 @property (nonatomic, readonly, copy) NSArray<StoreKitSubscriptionOffer *> * _Nonnull winBackOffers;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -490,62 +623,103 @@ SWIFT_CLASS("_TtC15StoreKitWrapper24StoreKitSubscriptionInfo")
 
 SWIFT_ENUM_FWD_DECL(NSInteger, StoreKitSubscriptionOfferType)
 SWIFT_ENUM_FWD_DECL(NSInteger, StoreKitSubscriptionOfferPaymentMode)
+/// Provides pricing and duration metadata for a subscription offer.
 SWIFT_CLASS("_TtC15StoreKitWrapper25StoreKitSubscriptionOffer")
 @interface StoreKitSubscriptionOffer : NSObject
+/// The offer identifier, or <code>nil</code> when StoreKit doesn’t assign one.
 @property (nonatomic, readonly, copy) NSString * _Nullable identifier;
+/// The normalized kind of offer.
 @property (nonatomic, readonly) enum StoreKitSubscriptionOfferType offerType;
+/// StoreKit’s localized description of the offer kind.
 @property (nonatomic, readonly, copy) NSString * _Nonnull offerTypeDisplayName;
+/// The localized, currency-formatted offer price.
 @property (nonatomic, readonly, copy) NSString * _Nonnull displayPrice;
+/// The offer price as a decimal number.
 @property (nonatomic, readonly, strong) NSDecimalNumber * _Nonnull price;
+/// The ISO 4217 currency code used by the offer price.
 @property (nonatomic, readonly, copy) NSString * _Nonnull currencyCode;
+/// The locale identifier used to format the offer price.
 @property (nonatomic, readonly, copy) NSString * _Nonnull localeIdentifier;
+/// The normalized offer payment mode.
 @property (nonatomic, readonly) enum StoreKitSubscriptionOfferPaymentMode paymentMode;
+/// StoreKit’s localized description of the payment mode.
 @property (nonatomic, readonly, copy) NSString * _Nonnull paymentModeDisplayName;
+/// The duration of one offer period.
 @property (nonatomic, readonly, strong) StoreKitSubscriptionPeriod * _Nonnull period;
+/// The number of periods included in the offer.
 @property (nonatomic, readonly) NSInteger periodCount;
+/// Creates a subscription-offer metadata snapshot.
 - (nonnull instancetype)initWithIdentifier:(NSString * _Nullable)identifier offerType:(enum StoreKitSubscriptionOfferType)offerType offerTypeDisplayName:(NSString * _Nonnull)offerTypeDisplayName displayPrice:(NSString * _Nonnull)displayPrice price:(NSDecimalNumber * _Nonnull)price currencyCode:(NSString * _Nonnull)currencyCode localeIdentifier:(NSString * _Nonnull)localeIdentifier paymentMode:(enum StoreKitSubscriptionOfferPaymentMode)paymentMode paymentModeDisplayName:(NSString * _Nonnull)paymentModeDisplayName period:(StoreKitSubscriptionPeriod * _Nonnull)period periodCount:(NSInteger)periodCount OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+/// Describes how an introductory, promotional, or win-back offer is charged.
 typedef SWIFT_ENUM(NSInteger, StoreKitSubscriptionOfferPaymentMode, open) {
+/// A payment mode that isn’t recognized by this version of the wrapper.
   StoreKitSubscriptionOfferPaymentModeUnknown = -1,
+/// The customer pays nothing during the offer period.
   StoreKitSubscriptionOfferPaymentModeFreeTrial = 0,
+/// The customer pays in multiple installments during the offer period.
   StoreKitSubscriptionOfferPaymentModePayAsYouGo = 1,
+/// The customer pays once for the complete offer period.
   StoreKitSubscriptionOfferPaymentModePayUpFront = 2,
 };
 
+/// Identifies the kind of subscription offer represented by product metadata.
 typedef SWIFT_ENUM(NSInteger, StoreKitSubscriptionOfferType, open) {
+/// An offer type that isn’t recognized by this version of the wrapper.
   StoreKitSubscriptionOfferTypeUnknown = -1,
+/// An offer available to eligible new subscribers.
   StoreKitSubscriptionOfferTypeIntroductory = 0,
+/// A promotional offer configured for selected customers.
   StoreKitSubscriptionOfferTypePromotional = 1,
+/// An offer intended to recover a previous subscriber.
   StoreKitSubscriptionOfferTypeWinBack = 2,
 };
 
 SWIFT_ENUM_FWD_DECL(NSInteger, StoreKitSubscriptionPeriodUnit)
+/// Represents a subscription duration using a numeric value and calendar unit.
 SWIFT_CLASS("_TtC15StoreKitWrapper26StoreKitSubscriptionPeriod")
 @interface StoreKitSubscriptionPeriod : NSObject
+/// The number of calendar units in the period.
 @property (nonatomic, readonly) NSInteger value;
+/// The normalized calendar unit.
 @property (nonatomic, readonly) enum StoreKitSubscriptionPeriodUnit unit;
+/// StoreKit’s localized description of the calendar unit.
 @property (nonatomic, readonly, copy) NSString * _Nonnull unitDisplayName;
+/// Creates a subscription period.
 - (nonnull instancetype)initWithValue:(NSInteger)value unit:(enum StoreKitSubscriptionPeriodUnit)unit unitDisplayName:(NSString * _Nonnull)unitDisplayName OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+/// Identifies the calendar unit used by a subscription period.
 typedef SWIFT_ENUM(NSInteger, StoreKitSubscriptionPeriodUnit, open) {
+/// A period unit that isn’t recognized by this version of the wrapper.
   StoreKitSubscriptionPeriodUnitUnknown = -1,
+/// A period measured in days.
   StoreKitSubscriptionPeriodUnitDay = 0,
+/// A period measured in weeks.
   StoreKitSubscriptionPeriodUnitWeek = 1,
+/// A period measured in months.
   StoreKitSubscriptionPeriodUnitMonth = 2,
+/// A period measured in years.
   StoreKitSubscriptionPeriodUnitYear = 3,
 };
 
-SWIFT_CLASS("_TtC15StoreKitWrapper35StoreKitSubscriptionsViewController") SWIFT_AVAILABILITY(ios,introduced=17.0)
+/// Hosts StoreKit’s SwiftUI <code>SubscriptionStoreView</code> in an Objective-C-compatible view controller.
+SWIFT_CLASS("_TtC15StoreKitWrapper35StoreKitSubscriptionsViewController") SWIFT_AVAILABILITY(maccatalyst,introduced=17.0) SWIFT_AVAILABILITY(ios,introduced=17.0)
 @interface StoreKitSubscriptionsViewController : UIViewController
+/// The subscription-group identifier displayed by the controller.
 @property (nonatomic, readonly, copy) NSString * _Nonnull subscriptionGroupIdentifier;
+/// Creates a controller that displays an auto-renewable subscription group.
+/// \param subscriptionGroupIdentifier The App Store Connect subscription-group identifier.
+///
 - (nonnull instancetype)initWithSubscriptionGroupIdentifier:(NSString * _Nonnull)subscriptionGroupIdentifier OBJC_DESIGNATED_INITIALIZER;
+/// Storyboard and archive initialization aren’t supported.
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE;
+/// Installs the hosted StoreKit subscriptions view when the controller loads.
 - (void)viewDidLoad;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
@@ -558,158 +732,281 @@ SWIFT_ENUM_FWD_DECL(NSInteger, StoreKitTransactionRevocationReason)
 @class StoreKitTransactionOffer;
 SWIFT_ENUM_FWD_DECL(NSInteger, StoreKitTransactionVerificationStatus)
 SWIFT_ENUM_FWD_DECL(NSInteger, StoreKitTransactionVerificationErrorCode)
+/// Provides an Objective-C-compatible snapshot of a StoreKit transaction and its verification state.
 SWIFT_CLASS("_TtC15StoreKitWrapper19StoreKitTransaction")
 @interface StoreKitTransaction : NSObject
+/// The unique StoreKit transaction identifier.
 @property (nonatomic, readonly) uint64_t identifier;
+/// The identifier of the original transaction in the purchase chain.
 @property (nonatomic, readonly) uint64_t originalIdentifier;
+/// The App Store web-order line-item identifier, when available.
 @property (nonatomic, readonly, copy) NSString * _Nullable webOrderLineItemIdentifier;
+/// The bundle identifier of the application that owns the transaction.
 @property (nonatomic, readonly, copy) NSString * _Nonnull appBundleIdentifier;
+/// The purchased product identifier.
 @property (nonatomic, readonly, copy) NSString * _Nonnull productIdentifier;
+/// The normalized product category.
 @property (nonatomic, readonly) enum StoreKitProductType productType;
+/// The subscription-group identifier for subscription transactions.
 @property (nonatomic, readonly, copy) NSString * _Nullable subscriptionGroupIdentifier;
+/// The date of this purchase or renewal.
 @property (nonatomic, readonly, copy) NSDate * _Nonnull purchaseDate;
+/// The date of the first purchase in the transaction chain.
 @property (nonatomic, readonly, copy) NSDate * _Nonnull originalPurchaseDate;
+/// The subscription expiration date, when applicable.
 @property (nonatomic, readonly, copy) NSDate * _Nullable expirationDate;
+/// The date StoreKit signed the transaction payload.
 @property (nonatomic, readonly, copy) NSDate * _Nonnull signedDate;
+/// The transaction price when supplied by the running OS.
 @property (nonatomic, readonly, strong) NSDecimalNumber * _Nullable price;
+/// The ISO 4217 currency code associated with <code>price</code>.
 @property (nonatomic, readonly, copy) NSString * _Nullable currencyCode;
+/// The number of product units purchased by the transaction.
 @property (nonatomic, readonly) NSInteger purchasedQuantity;
+/// Indicates whether a subscription upgrade superseded this transaction.
 @property (nonatomic, readonly) BOOL isUpgraded;
+/// Describes whether the customer purchased or family-shared the product.
 @property (nonatomic, readonly) enum StoreKitTransactionOwnershipType ownershipType;
+/// The App Store environment that created the transaction.
 @property (nonatomic, readonly) enum StoreKitTransactionEnvironment environment;
+/// The storefront identifier active when the transaction was created.
 @property (nonatomic, readonly, copy) NSString * _Nullable storefrontIdentifier;
+/// The storefront country code active when the transaction was created.
 @property (nonatomic, readonly, copy) NSString * _Nonnull storefrontCountryCode;
+/// The reason StoreKit created the transaction.
 @property (nonatomic, readonly) enum StoreKitTransactionReason reason;
+/// The date the App Store revoked the transaction, if applicable.
 @property (nonatomic, readonly, copy) NSDate * _Nullable revocationDate;
+/// The normalized reason for revocation.
 @property (nonatomic, readonly) enum StoreKitTransactionRevocationReason revocationReason;
+/// The application account token supplied during purchase as a UUID string.
 @property (nonatomic, readonly, copy) NSString * _Nullable appAccountToken;
+/// The subscription offer applied to the transaction, if any.
 @property (nonatomic, readonly, strong) StoreKitTransactionOffer * _Nullable offer;
+/// StoreKit’s raw transaction JSON represented as a UTF-8 string.
 @property (nonatomic, readonly, copy) NSString * _Nonnull jsonRepresentation;
+/// The transaction’s JSON Web Signature representation.
 @property (nonatomic, readonly, copy) NSString * _Nonnull jwsRepresentation;
+/// The device-verification data encoded as Base64.
 @property (nonatomic, readonly, copy) NSString * _Nonnull deviceVerification;
+/// The device-verification nonce represented as a UUID string.
 @property (nonatomic, readonly, copy) NSString * _Nonnull deviceVerificationNonce;
+/// Indicates whether StoreKit verified the transaction.
 @property (nonatomic, readonly) enum StoreKitTransactionVerificationStatus verificationStatus;
+/// The normalized verification failure code.
 @property (nonatomic, readonly) enum StoreKitTransactionVerificationErrorCode verificationErrorCode;
+/// StoreKit’s verification error message, or <code>nil</code> for verified transactions.
 @property (nonatomic, readonly, copy) NSString * _Nullable verificationErrorMessage;
+/// Creates a transaction snapshot.
 - (nonnull instancetype)initWithIdentifier:(uint64_t)identifier originalIdentifier:(uint64_t)originalIdentifier webOrderLineItemIdentifier:(NSString * _Nullable)webOrderLineItemIdentifier appBundleIdentifier:(NSString * _Nonnull)appBundleIdentifier productIdentifier:(NSString * _Nonnull)productIdentifier productType:(enum StoreKitProductType)productType subscriptionGroupIdentifier:(NSString * _Nullable)subscriptionGroupIdentifier purchaseDate:(NSDate * _Nonnull)purchaseDate originalPurchaseDate:(NSDate * _Nonnull)originalPurchaseDate expirationDate:(NSDate * _Nullable)expirationDate signedDate:(NSDate * _Nonnull)signedDate price:(NSDecimalNumber * _Nullable)price currencyCode:(NSString * _Nullable)currencyCode purchasedQuantity:(NSInteger)purchasedQuantity isUpgraded:(BOOL)isUpgraded ownershipType:(enum StoreKitTransactionOwnershipType)ownershipType environment:(enum StoreKitTransactionEnvironment)environment storefrontIdentifier:(NSString * _Nullable)storefrontIdentifier storefrontCountryCode:(NSString * _Nonnull)storefrontCountryCode reason:(enum StoreKitTransactionReason)reason revocationDate:(NSDate * _Nullable)revocationDate revocationReason:(enum StoreKitTransactionRevocationReason)revocationReason appAccountToken:(NSString * _Nullable)appAccountToken offer:(StoreKitTransactionOffer * _Nullable)offer jsonRepresentation:(NSString * _Nonnull)jsonRepresentation jwsRepresentation:(NSString * _Nonnull)jwsRepresentation deviceVerification:(NSString * _Nonnull)deviceVerification deviceVerificationNonce:(NSString * _Nonnull)deviceVerificationNonce verificationStatus:(enum StoreKitTransactionVerificationStatus)verificationStatus verificationErrorCode:(enum StoreKitTransactionVerificationErrorCode)verificationErrorCode verificationErrorMessage:(NSString * _Nullable)verificationErrorMessage OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+/// Identifies the App Store environment that created a transaction.
 typedef SWIFT_ENUM(NSInteger, StoreKitTransactionEnvironment, open) {
+/// An environment that isn’t recognized by this version of the wrapper.
   StoreKitTransactionEnvironmentUnknown = -1,
+/// The transaction was generated by an Xcode StoreKit configuration.
   StoreKitTransactionEnvironmentXcode = 0,
+/// The transaction was generated by the App Store sandbox.
   StoreKitTransactionEnvironmentSandbox = 1,
+/// The transaction was generated by the production App Store.
   StoreKitTransactionEnvironmentProduction = 2,
 };
 
 SWIFT_ENUM_FWD_DECL(NSInteger, StoreKitTransactionOfferType)
 SWIFT_ENUM_FWD_DECL(NSInteger, StoreKitTransactionOfferPaymentMode)
+/// Describes the subscription offer applied to a transaction.
 SWIFT_CLASS("_TtC15StoreKitWrapper24StoreKitTransactionOffer")
 @interface StoreKitTransactionOffer : NSObject
+/// The applied offer identifier, when supplied by StoreKit.
 @property (nonatomic, readonly, copy) NSString * _Nullable identifier;
+/// The normalized kind of applied offer.
 @property (nonatomic, readonly) enum StoreKitTransactionOfferType offerType;
+/// The normalized payment mode of the applied offer.
 @property (nonatomic, readonly) enum StoreKitTransactionOfferPaymentMode paymentMode;
+/// The applied offer period when available on the running OS.
 @property (nonatomic, readonly, strong) StoreKitSubscriptionPeriod * _Nullable period;
+/// Creates an applied transaction-offer snapshot.
 - (nonnull instancetype)initWithIdentifier:(NSString * _Nullable)identifier offerType:(enum StoreKitTransactionOfferType)offerType paymentMode:(enum StoreKitTransactionOfferPaymentMode)paymentMode period:(StoreKitSubscriptionPeriod * _Nullable)period OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+/// Describes how the offer attached to a transaction was charged.
 typedef SWIFT_ENUM(NSInteger, StoreKitTransactionOfferPaymentMode, open) {
+/// A payment mode that isn’t recognized or wasn’t reported.
   StoreKitTransactionOfferPaymentModeUnknown = -1,
+/// The offer provided a free trial.
   StoreKitTransactionOfferPaymentModeFreeTrial = 0,
+/// The offer charged in installments.
   StoreKitTransactionOfferPaymentModePayAsYouGo = 1,
+/// The offer charged once for the full offer period.
   StoreKitTransactionOfferPaymentModePayUpFront = 2,
+/// The offer used a one-time payment.
   StoreKitTransactionOfferPaymentModeOneTime = 3,
 };
 
+/// Identifies the subscription offer applied to a transaction.
 typedef SWIFT_ENUM(NSInteger, StoreKitTransactionOfferType, open) {
+/// An offer type that isn’t recognized or no offer was reported.
   StoreKitTransactionOfferTypeUnknown = -1,
+/// An introductory offer was applied.
   StoreKitTransactionOfferTypeIntroductory = 0,
+/// A promotional offer was applied.
   StoreKitTransactionOfferTypePromotional = 1,
+/// An offer code was applied.
   StoreKitTransactionOfferTypeCode = 2,
+/// A win-back offer was applied.
   StoreKitTransactionOfferTypeWinBack = 3,
 };
 
+/// Describes how the current customer obtained a transaction.
 typedef SWIFT_ENUM(NSInteger, StoreKitTransactionOwnershipType, open) {
+/// An ownership type that isn’t recognized by this version of the wrapper.
   StoreKitTransactionOwnershipTypeUnknown = -1,
+/// The customer purchased the product directly.
   StoreKitTransactionOwnershipTypePurchased = 0,
+/// The customer received access through Family Sharing.
   StoreKitTransactionOwnershipTypeFamilyShared = 1,
 };
 
+/// Describes why the App Store created a transaction.
 typedef SWIFT_ENUM(NSInteger, StoreKitTransactionReason, open) {
+/// A reason that isn’t recognized by this version of the wrapper.
   StoreKitTransactionReasonUnknown = -1,
+/// The customer initiated a purchase.
   StoreKitTransactionReasonPurchase = 0,
+/// StoreKit renewed an auto-renewable subscription.
   StoreKitTransactionReasonRenewal = 1,
 };
 
+/// Identifies why the App Store revoked a transaction.
 typedef SWIFT_ENUM(NSInteger, StoreKitTransactionRevocationReason, open) {
+/// The transaction hasn’t been revoked.
   StoreKitTransactionRevocationReasonNone = -1,
+/// The App Store refunded the transaction because of a developer issue.
   StoreKitTransactionRevocationReasonDeveloperIssue = 0,
+/// The transaction was revoked for another recognized App Store reason.
   StoreKitTransactionRevocationReasonOther = 1,
+/// The revocation reason isn’t recognized by this version of the wrapper.
   StoreKitTransactionRevocationReasonUnknown = 999,
 };
 
+/// Identifies the reason a transaction failed StoreKit verification.
 typedef SWIFT_ENUM(NSInteger, StoreKitTransactionVerificationErrorCode, open) {
+/// No verification error occurred.
   StoreKitTransactionVerificationErrorCodeNone = 0,
+/// The certificate chain used to sign the transaction is invalid.
   StoreKitTransactionVerificationErrorCodeInvalidCertificateChain = 1,
+/// Device verification data is invalid.
   StoreKitTransactionVerificationErrorCodeInvalidDeviceVerification = 2,
+/// The signed transaction data has an invalid encoding.
   StoreKitTransactionVerificationErrorCodeInvalidEncoding = 3,
+/// The transaction signature is invalid.
   StoreKitTransactionVerificationErrorCodeInvalidSignature = 4,
+/// Required signed transaction properties are missing.
   StoreKitTransactionVerificationErrorCodeMissingRequiredProperties = 5,
+/// A certificate in the signing chain has been revoked.
   StoreKitTransactionVerificationErrorCodeRevokedCertificate = 6,
+/// The verification failure isn’t recognized by this version of the wrapper.
   StoreKitTransactionVerificationErrorCodeUnknown = 999,
 };
 
+/// Indicates whether StoreKit cryptographically verified a transaction.
 typedef SWIFT_ENUM(NSInteger, StoreKitTransactionVerificationStatus, open) {
+/// The transaction failed verification and must not grant content.
   StoreKitTransactionVerificationStatusUnverified = 0,
+/// StoreKit successfully verified the transaction.
   StoreKitTransactionVerificationStatusVerified = 1,
 };
 
+/// Stable error codes returned across the Objective-C-compatible wrapper boundary.
 typedef SWIFT_ENUM(NSInteger, StoreKitWrapperErrorCode, open) {
+/// The operation completed successfully.
   StoreKitWrapperErrorCodeNone = 0,
+/// An unknown failure occurred.
   StoreKitWrapperErrorCodeUnknown = 1,
+/// One or more arguments are invalid.
   StoreKitWrapperErrorCodeInvalidArgument = 2,
+/// The operation was cancelled.
   StoreKitWrapperErrorCodeOperationCancelled = 3,
+/// The manager hasn’t been initialized.
   StoreKitWrapperErrorCodeManagerNotInitialized = 10,
+/// The manager has already shut down or is shutting down.
   StoreKitWrapperErrorCodeManagerShutdown = 11,
+/// StoreKit failed because of a network error.
   StoreKitWrapperErrorCodeStoreKitNetworkError = 20,
+/// StoreKit reported an underlying system error.
   StoreKitWrapperErrorCodeStoreKitSystemError = 21,
+/// The requested item isn’t available in the current storefront.
   StoreKitWrapperErrorCodeStoreKitNotAvailableInStorefront = 22,
+/// The customer isn’t entitled to perform the requested operation.
   StoreKitWrapperErrorCodeStoreKitNotEntitled = 23,
+/// StoreKit reported an unknown error.
   StoreKitWrapperErrorCodeStoreKitUnknown = 24,
+/// The requested StoreKit operation isn’t supported.
   StoreKitWrapperErrorCodeStoreKitUnsupported = 25,
+/// Another product request is already active.
   StoreKitWrapperErrorCodeProductsRequestInProgress = 100,
+/// The product request failed.
   StoreKitWrapperErrorCodeProductsRequestFailed = 101,
+/// The requested product wasn’t found in the current product catalog.
   StoreKitWrapperErrorCodeProductNotFound = 200,
+/// Another purchase is already active.
   StoreKitWrapperErrorCodePurchaseInProgress = 201,
+/// The purchase failed for a reason without a more specific code.
   StoreKitWrapperErrorCodePurchaseFailed = 202,
+/// StoreKit couldn’t verify the returned transaction.
   StoreKitWrapperErrorCodeTransactionVerificationFailed = 203,
+/// The product isn’t available for purchase.
   StoreKitWrapperErrorCodePurchaseProductUnavailable = 204,
+/// Purchases aren’t allowed for the current customer or device.
   StoreKitWrapperErrorCodePurchaseNotAllowed = 205,
+/// The requested purchase quantity is invalid.
   StoreKitWrapperErrorCodePurchaseInvalidQuantity = 206,
+/// The promotional offer identifier is invalid.
   StoreKitWrapperErrorCodePurchaseInvalidOfferIdentifier = 207,
+/// The promotional offer price is invalid.
   StoreKitWrapperErrorCodePurchaseInvalidOfferPrice = 208,
+/// The promotional offer signature is invalid.
   StoreKitWrapperErrorCodePurchaseInvalidOfferSignature = 209,
+/// Required promotional offer parameters are missing.
   StoreKitWrapperErrorCodePurchaseMissingOfferParameters = 210,
+/// The customer isn’t eligible for the requested offer.
   StoreKitWrapperErrorCodePurchaseIneligibleForOffer = 211,
+/// The storefront requires payment-method binding configuration.
   StoreKitWrapperErrorCodePurchasePaymentMethodBindingConfigurationRequired = 212,
+/// No finishable verified transaction matches the requested identifier.
   StoreKitWrapperErrorCodeTransactionNotFound = 300,
+/// The transaction is already being finished.
   StoreKitWrapperErrorCodeTransactionFinishInProgress = 301,
+/// Another current-entitlements request is already active.
   StoreKitWrapperErrorCodeCurrentEntitlementsRequestInProgress = 400,
+/// Another App Store synchronization request is already active.
   StoreKitWrapperErrorCodeAppStoreSyncInProgress = 500,
+/// App Store synchronization failed.
   StoreKitWrapperErrorCodeAppStoreSyncFailed = 501,
+/// Another unfinished-transactions request is already active.
   StoreKitWrapperErrorCodeUnfinishedTransactionsRequestInProgress = 600,
 };
 
+/// Defines log severity levels using the ordering of <code>Microsoft.Extensions.Logging.LogLevel</code>.
 typedef SWIFT_ENUM(NSInteger, StoreKitWrapperLogLevel, open) {
+/// Detailed diagnostic information, typically useful only during development.
   StoreKitWrapperLogLevelTrace = 0,
+/// Diagnostic information useful for debugging.
   StoreKitWrapperLogLevelDebug = 1,
+/// Informational messages that describe normal operation.
   StoreKitWrapperLogLevelInformation = 2,
+/// A potentially harmful or unexpected condition that doesn’t stop the operation.
   StoreKitWrapperLogLevelWarning = 3,
+/// A failure in the current operation.
   StoreKitWrapperLogLevelError = 4,
+/// A critical failure that requires immediate attention.
   StoreKitWrapperLogLevelCritical = 5,
+/// Logging is disabled.
   StoreKitWrapperLogLevelNone = 6,
 };
 

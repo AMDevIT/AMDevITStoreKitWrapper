@@ -2,12 +2,13 @@
 
 [![NuGet version](https://img.shields.io/nuget/v/AMDevIT.StoreKitWrapper?logo=nuget)](https://img.shields.io/nuget/v/AMDevIT.StoreKitWrapper)
 [![iOS](https://img.shields.io/badge/iOS-15.6%2B-000000?logo=apple)](https://developer.apple.com/ios/)
+[![Mac Catalyst](https://img.shields.io/badge/Mac%20Catalyst-15.6%2B-000000?logo=apple)](https://developer.apple.com/mac-catalyst/)
 [![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![Swift](https://img.shields.io/badge/Swift-5-F05138?logo=swift&logoColor=white)](https://www.swift.org/)
 [![Project status](https://img.shields.io/badge/status-preview-F59E0B)](#project-status)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](LICENSE)
 
-AMDevIT StoreKit Wrapper is a native StoreKit 2 framework with a .NET 10 for iOS binding. It provides a callback-based API for products, purchases, entitlements, transaction recovery, and StoreKit merchandising views without exposing Swift concurrency or native StoreKit types to .NET applications.
+AMDevIT StoreKit Wrapper is a native StoreKit 2 framework with a .NET 10 binding for iOS and Mac Catalyst. It provides a callback-based API for products, purchases, entitlements, transaction recovery, and StoreKit merchandising views without exposing Swift concurrency or native StoreKit types to .NET applications.
 
 ## Features
 
@@ -20,7 +21,7 @@ AMDevIT StoreKit Wrapper is a native StoreKit 2 framework with a .NET 10 for iOS
 - Maps StoreKit failures to stable, Objective-C-compatible error codes.
 - Bridges optional native structured logging to `Microsoft.Extensions.Logging` in the managed client.
 - Provides a managed `StoreKitClient` facade with task-based .NET APIs.
-- Provides UIKit controllers backed by StoreKit SwiftUI views on iOS 17 and later.
+- Provides UIKit controllers backed by StoreKit SwiftUI views on iOS and Mac Catalyst 17.0 or later.
 - Keeps Swift concurrency, `Product`, `Transaction`, and `VerificationResult` behind the native boundary.
 
 ## Architecture
@@ -28,16 +29,16 @@ AMDevIT StoreKit Wrapper is a native StoreKit 2 framework with a .NET 10 for iOS
 The repository contains two cooperating layers:
 
 1. `src/apple/StoreKitWrapper` implements the StoreKit 2 framework in Swift and exposes an Objective-C-compatible surface.
-2. `src/dotnet/AMDevIT.StoreKitWrapper` binds the packaged `StoreKitWrapper.xcframework` for .NET 10 for iOS.
+2. `src/dotnet/AMDevIT.StoreKitWrapper` binds the packaged `StoreKitWrapper.xcframework` for .NET 10 for iOS and Mac Catalyst.
 
 All asynchronous native operations complete through `StoreKitManagerDelegate`. The managed `StoreKitClient` converts those callbacks into .NET tasks while preserving `StoreKitManager` as the directly bound low-level API. This allows .NET consumers to use StoreKit 2 without crossing the binding boundary with Swift actors, tasks, async sequences, or generic StoreKit values.
 
 ## Requirements
 
-- .NET 10 SDK with the iOS workload.
-- iOS 15.6 or later.
+- .NET 10 SDK with the iOS and Mac Catalyst workloads required by the target application.
+- iOS 15.6 or Mac Catalyst 15.6 or later.
 - macOS and a compatible Xcode installation for native framework builds, signing, simulator execution, or device deployment.
-- iOS 17 or later when using the native StoreKit view controllers.
+- iOS 17 or Mac Catalyst 17.0 or later when using the native StoreKit view controllers.
 - StoreKit products configured in App Store Connect or in an Xcode StoreKit Configuration file.
 
 ## Quick start
@@ -58,7 +59,7 @@ dotnet add package AMDevIT.StoreKitWrapper --version <version> --source ./artifa
 ```
 
 where version is the current package version built from sources.
-Alternatively, add a project reference from the consuming .NET for iOS application:
+Alternatively, add a project reference from the consuming .NET for iOS or Mac Catalyst application:
 
 ```xml
 <ItemGroup>
@@ -287,7 +288,7 @@ Transactions arriving independently of a programmatic purchase are reported thro
 
 ## Native StoreKit views
 
-On iOS 17 and later, the framework exposes ordinary UIKit controllers that internally host StoreKit SwiftUI merchandising views:
+On iOS and Mac Catalyst 17.0 or later, the framework exposes ordinary UIKit controllers that internally host StoreKit SwiftUI merchandising views:
 
 - `StoreKitProductViewController` for a single product.
 - `StoreKitProductsViewController` for multiple products.
@@ -308,7 +309,7 @@ Build the .NET binding from its solution directory:
 ```bash
 cd src/dotnet/AMDevIT.StoreKitWrapper
 dotnet restore
-dotnet build
+dotnet build --configuration Release
 ```
 
 Create the NuGet package from the repository root:
@@ -319,22 +320,32 @@ dotnet pack src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper.slnx --co
 
 The package is written to `artifacts/packages` and includes the binding assembly, its XML documentation for IDE IntelliSense, the native XCFramework, README, license, package icon, and NuGet metadata. Creating a local package does not publish a new version; publishing still requires an explicit push to an authenticated NuGet source.
 
-On macOS with Xcode installed, build the native framework and verify its generated Objective-C interface:
+On macOS with Xcode installed, create the native XCFramework for iOS, iOS Simulator, and Mac Catalyst:
+
+```bash
+cd src/apple/StoreKitWrapper
+bash build_xcframework.sh
+```
+
+Replace `src/dotnet/AMDevIT.StoreKitWrapper/AMDevIT.StoreKitWrapper/libs/StoreKitWrapper.xcframework` with the generated `src/apple/StoreKitWrapper/build/StoreKitWrapper.xcframework` before building or packing the .NET project.
+
+Verify the generated Objective-C interface for both iOS Simulator and Mac Catalyst:
 
 ```bash
 bash scripts/verify-native-contract.sh
 ```
 
-The script builds the Release framework for the iOS Simulator and validates the installed `StoreKitWrapper-Swift.h`, including the expected public API and the absence of internal Swift implementation types.
+The script builds the Release framework for both platforms and validates each installed `StoreKitWrapper-Swift.h`, including the expected public API and the absence of internal Swift implementation types.
 
 ## Project status
 
 - Native StoreKit implementation: implemented; macOS/Xcode verification pending.
-- Objective-C-compatible contract: implemented; generated-header verification script available.
+- Objective-C-compatible contract: implemented; generated-header verification covers iOS Simulator and Mac Catalyst.
 - Native deterministic tests: implemented; execution on macOS pending.
-- .NET 10 for iOS binding: restored and built successfully with zero warnings and errors in the recorded project verification.
+- .NET 10 binding: targets `net10.0-ios` and `net10.0-maccatalyst`; the earlier iOS-only target built successfully, while the new dual-target Release build is pending the regenerated XCFramework.
 - NuGet package: [`AMDevIT.StoreKitWrapper` version `0.130.0`](https://www.nuget.org/packages/AMDevIT.StoreKitWrapper/0.130.0) is published on NuGet.org.
-- Consumer application and real StoreKit runtime validation: pending on macOS/iOS.
+- Source version: `0.131.0`; the regenerated dual-platform package has not been published yet.
+- Consumer application and real StoreKit runtime validation: pending on iOS and Mac Catalyst.
 
 See the files in `.agents` for the progressive implementation notes and verification history.
 

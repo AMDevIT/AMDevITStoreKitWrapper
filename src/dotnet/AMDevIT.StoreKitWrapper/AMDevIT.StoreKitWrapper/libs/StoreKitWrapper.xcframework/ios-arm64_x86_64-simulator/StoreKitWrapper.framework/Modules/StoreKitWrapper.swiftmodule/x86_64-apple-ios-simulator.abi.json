@@ -45,6 +45,7 @@
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.IStoreKitWrapperLogger>",
             "protocolReq": true,
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "reqNewWitnessTableEntry": true,
@@ -115,6 +116,7 @@
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.IStoreKitWrapperLogger>",
             "protocolReq": true,
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "reqNewWitnessTableEntry": true,
@@ -244,6 +246,9 @@
             "moduleName": "StoreKitWrapper",
             "genericSig": "<τ_0_0 where τ_0_0 : StoreKitWrapper.IStoreKitWrapperLogger>",
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.IStoreKitWrapperLogger>",
+            "declAttributes": [
+              "RawDocComment"
+            ],
             "isFromExtension": true,
             "funcSelfKind": "NonMutating"
           },
@@ -306,6 +311,9 @@
             "moduleName": "StoreKitWrapper",
             "genericSig": "<τ_0_0 where τ_0_0 : StoreKitWrapper.IStoreKitWrapperLogger>",
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.IStoreKitWrapperLogger>",
+            "declAttributes": [
+              "RawDocComment"
+            ],
             "isFromExtension": true,
             "funcSelfKind": "NonMutating"
           },
@@ -368,6 +376,9 @@
             "moduleName": "StoreKitWrapper",
             "genericSig": "<τ_0_0 where τ_0_0 : StoreKitWrapper.IStoreKitWrapperLogger>",
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.IStoreKitWrapperLogger>",
+            "declAttributes": [
+              "RawDocComment"
+            ],
             "isFromExtension": true,
             "funcSelfKind": "NonMutating"
           },
@@ -430,6 +441,9 @@
             "moduleName": "StoreKitWrapper",
             "genericSig": "<τ_0_0 where τ_0_0 : StoreKitWrapper.IStoreKitWrapperLogger>",
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.IStoreKitWrapperLogger>",
+            "declAttributes": [
+              "RawDocComment"
+            ],
             "isFromExtension": true,
             "funcSelfKind": "NonMutating"
           },
@@ -492,6 +506,9 @@
             "moduleName": "StoreKitWrapper",
             "genericSig": "<τ_0_0 where τ_0_0 : StoreKitWrapper.IStoreKitWrapperLogger>",
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.IStoreKitWrapperLogger>",
+            "declAttributes": [
+              "RawDocComment"
+            ],
             "isFromExtension": true,
             "funcSelfKind": "NonMutating"
           }
@@ -504,7 +521,8 @@
         "sugared_genericSig": "<Self : AnyObject>",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "conformances": [
           {
@@ -575,6 +593,7 @@
             "mangledName": "$s15StoreKitWrapper0abC8LogLevelO5traceyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 0
@@ -616,6 +635,7 @@
             "mangledName": "$s15StoreKitWrapper0abC8LogLevelO5debugyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 1
@@ -657,6 +677,7 @@
             "mangledName": "$s15StoreKitWrapper0abC8LogLevelO11informationyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 2
@@ -698,6 +719,7 @@
             "mangledName": "$s15StoreKitWrapper0abC8LogLevelO7warningyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 3
@@ -739,6 +761,7 @@
             "mangledName": "$s15StoreKitWrapper0abC8LogLevelO5erroryA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 4
@@ -780,6 +803,7 @@
             "mangledName": "$s15StoreKitWrapper0abC8LogLevelO8criticalyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 5
@@ -821,6 +845,7 @@
             "mangledName": "$s15StoreKitWrapper0abC8LogLevelO4noneyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 6
@@ -904,7 +929,8 @@
         "moduleName": "StoreKitWrapper",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -1018,6 +1044,7 @@
               "Custom",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -1188,6 +1215,8 @@
           "ObjCMembers",
           "Custom",
           "Available",
+          "Available",
+          "RawDocComment",
           "ObjC"
         ],
         "superclassUsr": "c:objc(cs)UIViewController",
@@ -1319,6 +1348,7 @@
               "Custom",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -1473,6 +1503,8 @@
           "ObjCMembers",
           "Custom",
           "Available",
+          "Available",
+          "RawDocComment",
           "ObjC"
         ],
         "superclassUsr": "c:objc(cs)UIViewController",
@@ -1618,6 +1650,7 @@
               "Custom",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -1772,6 +1805,8 @@
           "ObjCMembers",
           "Custom",
           "Available",
+          "Available",
+          "RawDocComment",
           "ObjC"
         ],
         "superclassUsr": "c:objc(cs)UIViewController",
@@ -1935,6 +1970,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "hasStorage": true,
@@ -2103,6 +2139,7 @@
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "init_kind": "Designated"
@@ -2148,6 +2185,7 @@
             "declAttributes": [
               "Final",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "funcSelfKind": "NonMutating"
@@ -2184,6 +2222,7 @@
             "declAttributes": [
               "Final",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "funcSelfKind": "NonMutating"
@@ -2206,6 +2245,7 @@
             "declAttributes": [
               "Final",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "funcSelfKind": "NonMutating"
@@ -2228,6 +2268,7 @@
             "declAttributes": [
               "Final",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "funcSelfKind": "NonMutating"
@@ -2250,6 +2291,7 @@
             "declAttributes": [
               "Final",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "funcSelfKind": "NonMutating"
@@ -2278,6 +2320,7 @@
             "declAttributes": [
               "Final",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "funcSelfKind": "NonMutating"
@@ -2320,6 +2363,7 @@
             "declAttributes": [
               "Final",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "funcSelfKind": "NonMutating"
@@ -2368,6 +2412,7 @@
             "declAttributes": [
               "Final",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "funcSelfKind": "NonMutating"
@@ -2396,6 +2441,191 @@
             "declAttributes": [
               "Final",
               "AccessControl",
+              "RawDocComment",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "cancelInitialization",
+            "printedName": "cancelInitialization()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@StoreKitWrapper@objc(cs)StoreKitManager(im)cancelInitialization",
+            "mangledName": "$s15StoreKitWrapper0aB7ManagerC20cancelInitializationyyF",
+            "moduleName": "StoreKitWrapper",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "cancelShutdown",
+            "printedName": "cancelShutdown()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@StoreKitWrapper@objc(cs)StoreKitManager(im)cancelShutdown",
+            "mangledName": "$s15StoreKitWrapper0aB7ManagerC14cancelShutdownyyF",
+            "moduleName": "StoreKitWrapper",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "cancelProductsRequest",
+            "printedName": "cancelProductsRequest()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@StoreKitWrapper@objc(cs)StoreKitManager(im)cancelProductsRequest",
+            "mangledName": "$s15StoreKitWrapper0aB7ManagerC21cancelProductsRequestyyF",
+            "moduleName": "StoreKitWrapper",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "cancelCurrentEntitlementsRequest",
+            "printedName": "cancelCurrentEntitlementsRequest()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@StoreKitWrapper@objc(cs)StoreKitManager(im)cancelCurrentEntitlementsRequest",
+            "mangledName": "$s15StoreKitWrapper0aB7ManagerC32cancelCurrentEntitlementsRequestyyF",
+            "moduleName": "StoreKitWrapper",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "cancelAppStoreSync",
+            "printedName": "cancelAppStoreSync()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@StoreKitWrapper@objc(cs)StoreKitManager(im)cancelAppStoreSync",
+            "mangledName": "$s15StoreKitWrapper0aB7ManagerC09cancelAppA4SyncyyF",
+            "moduleName": "StoreKitWrapper",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "cancelUnfinishedTransactionsRequest",
+            "printedName": "cancelUnfinishedTransactionsRequest()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@StoreKitWrapper@objc(cs)StoreKitManager(im)cancelUnfinishedTransactionsRequest",
+            "mangledName": "$s15StoreKitWrapper0aB7ManagerC35cancelUnfinishedTransactionsRequestyyF",
+            "moduleName": "StoreKitWrapper",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "cancelPurchase",
+            "printedName": "cancelPurchase()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@StoreKitWrapper@objc(cs)StoreKitManager(im)cancelPurchase",
+            "mangledName": "$s15StoreKitWrapper0aB7ManagerC14cancelPurchaseyyF",
+            "moduleName": "StoreKitWrapper",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "cancelTransactionFinish",
+            "printedName": "cancelTransactionFinish()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@StoreKitWrapper@objc(cs)StoreKitManager(im)cancelTransactionFinish",
+            "mangledName": "$s15StoreKitWrapper0aB7ManagerC23cancelTransactionFinishyyF",
+            "moduleName": "StoreKitWrapper",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "funcSelfKind": "NonMutating"
@@ -2409,6 +2639,7 @@
           "Final",
           "AccessControl",
           "ObjCMembers",
+          "RawDocComment",
           "ObjC"
         ],
         "superclassUsr": "c:objc(cs)NSObject",
@@ -2536,6 +2767,7 @@
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.StoreKitManagerDelegate>",
             "protocolReq": true,
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "reqNewWitnessTableEntry": true,
@@ -2580,6 +2812,7 @@
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.StoreKitManagerDelegate>",
             "protocolReq": true,
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "reqNewWitnessTableEntry": true,
@@ -2638,6 +2871,7 @@
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.StoreKitManagerDelegate>",
             "protocolReq": true,
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "reqNewWitnessTableEntry": true,
@@ -2696,6 +2930,7 @@
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.StoreKitManagerDelegate>",
             "protocolReq": true,
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "reqNewWitnessTableEntry": true,
@@ -2740,6 +2975,7 @@
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.StoreKitManagerDelegate>",
             "protocolReq": true,
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "reqNewWitnessTableEntry": true,
@@ -2798,6 +3034,7 @@
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.StoreKitManagerDelegate>",
             "protocolReq": true,
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "reqNewWitnessTableEntry": true,
@@ -2862,6 +3099,7 @@
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.StoreKitManagerDelegate>",
             "protocolReq": true,
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "reqNewWitnessTableEntry": true,
@@ -2912,6 +3150,7 @@
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.StoreKitManagerDelegate>",
             "protocolReq": true,
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "reqNewWitnessTableEntry": true,
@@ -2962,6 +3201,7 @@
             "sugared_genericSig": "<Self where Self : StoreKitWrapper.StoreKitManagerDelegate>",
             "protocolReq": true,
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "reqNewWitnessTableEntry": true,
@@ -2976,7 +3216,8 @@
         "sugared_genericSig": "<Self : AnyObject>",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "conformances": [
           {
@@ -2993,6 +3234,16 @@
             "usr": "s:s8CopyableP",
             "mangledName": "$ss8CopyableP"
           }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "StoreKitWrapper",
+        "declAttributes": [
+          "RawDocComment"
         ]
       },
       {
@@ -3088,6 +3339,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -3138,6 +3390,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -3188,6 +3441,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -3238,6 +3492,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -3288,6 +3543,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -3338,6 +3594,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -3388,6 +3645,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -3438,6 +3696,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -3488,6 +3747,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -3546,6 +3806,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -3604,6 +3865,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -3772,6 +4034,7 @@
           "Final",
           "AccessControl",
           "ObjCMembers",
+          "RawDocComment",
           "ObjC"
         ],
         "superclassUsr": "c:objc(cs)NSObject",
@@ -3903,6 +4166,7 @@
             "mangledName": "$s15StoreKitWrapper0aB11ProductTypeO7unknownyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 0
@@ -3944,6 +4208,7 @@
             "mangledName": "$s15StoreKitWrapper0aB11ProductTypeO10consumableyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 1
@@ -3985,6 +4250,7 @@
             "mangledName": "$s15StoreKitWrapper0aB11ProductTypeO13nonConsumableyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 2
@@ -4026,6 +4292,7 @@
             "mangledName": "$s15StoreKitWrapper0aB11ProductTypeO24nonRenewableSubscriptionyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 3
@@ -4067,6 +4334,7 @@
             "mangledName": "$s15StoreKitWrapper0aB11ProductTypeO25autoRenewableSubscriptionyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 4
@@ -4150,7 +4418,8 @@
         "moduleName": "StoreKitWrapper",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -4258,6 +4527,7 @@
             "mangledName": "$s15StoreKitWrapper0aB14PurchaseResultO7unknownyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 0
@@ -4299,6 +4569,7 @@
             "mangledName": "$s15StoreKitWrapper0aB14PurchaseResultO9succeededyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 1
@@ -4340,6 +4611,7 @@
             "mangledName": "$s15StoreKitWrapper0aB14PurchaseResultO7pendingyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 2
@@ -4381,6 +4653,7 @@
             "mangledName": "$s15StoreKitWrapper0aB14PurchaseResultO9cancelledyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 3
@@ -4422,6 +4695,7 @@
             "mangledName": "$s15StoreKitWrapper0aB14PurchaseResultO6failedyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 4
@@ -4505,7 +4779,8 @@
         "moduleName": "StoreKitWrapper",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -4662,6 +4937,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -4727,7 +5003,8 @@
             "declAttributes": [
               "Final",
               "HasStorage",
-              "AccessControl"
+              "AccessControl",
+              "RawDocComment"
             ],
             "isLet": true,
             "hasStorage": true,
@@ -4784,6 +5061,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -4834,6 +5112,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -4892,6 +5171,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -4958,6 +5238,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -5024,6 +5305,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -5207,6 +5489,7 @@
           "Final",
           "AccessControl",
           "ObjCMembers",
+          "RawDocComment",
           "ObjC"
         ],
         "superclassUsr": "c:objc(cs)NSObject",
@@ -5388,6 +5671,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -5438,6 +5722,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -5488,6 +5773,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -5538,6 +5824,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -5588,6 +5875,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -5638,6 +5926,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -5688,6 +5977,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -5738,6 +6028,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -5788,6 +6079,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -5838,6 +6130,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -6000,6 +6293,7 @@
           "Final",
           "AccessControl",
           "ObjCMembers",
+          "RawDocComment",
           "ObjC"
         ],
         "superclassUsr": "c:objc(cs)NSObject",
@@ -6131,6 +6425,7 @@
             "mangledName": "$s15StoreKitWrapper0aB28SubscriptionOfferPaymentModeO7unknownyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 0
@@ -6172,6 +6467,7 @@
             "mangledName": "$s15StoreKitWrapper0aB28SubscriptionOfferPaymentModeO9freeTrialyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 1
@@ -6213,6 +6509,7 @@
             "mangledName": "$s15StoreKitWrapper0aB28SubscriptionOfferPaymentModeO10payAsYouGoyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 2
@@ -6254,6 +6551,7 @@
             "mangledName": "$s15StoreKitWrapper0aB28SubscriptionOfferPaymentModeO10payUpFrontyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 3
@@ -6337,7 +6635,8 @@
         "moduleName": "StoreKitWrapper",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -6452,6 +6751,7 @@
             "mangledName": "$s15StoreKitWrapper0aB21SubscriptionOfferTypeO7unknownyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 0
@@ -6493,6 +6793,7 @@
             "mangledName": "$s15StoreKitWrapper0aB21SubscriptionOfferTypeO12introductoryyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 1
@@ -6534,6 +6835,7 @@
             "mangledName": "$s15StoreKitWrapper0aB21SubscriptionOfferTypeO11promotionalyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 2
@@ -6575,6 +6877,7 @@
             "mangledName": "$s15StoreKitWrapper0aB21SubscriptionOfferTypeO7winBackyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 3
@@ -6658,7 +6961,8 @@
         "moduleName": "StoreKitWrapper",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -6807,6 +7111,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -6857,6 +7162,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -6963,6 +7269,7 @@
           "Final",
           "AccessControl",
           "ObjCMembers",
+          "RawDocComment",
           "ObjC"
         ],
         "superclassUsr": "c:objc(cs)NSObject",
@@ -7094,6 +7401,7 @@
             "mangledName": "$s15StoreKitWrapper0aB22SubscriptionPeriodUnitO7unknownyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 0
@@ -7135,6 +7443,7 @@
             "mangledName": "$s15StoreKitWrapper0aB22SubscriptionPeriodUnitO3dayyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 1
@@ -7176,6 +7485,7 @@
             "mangledName": "$s15StoreKitWrapper0aB22SubscriptionPeriodUnitO4weekyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 2
@@ -7217,6 +7527,7 @@
             "mangledName": "$s15StoreKitWrapper0aB22SubscriptionPeriodUnitO5monthyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 3
@@ -7258,6 +7569,7 @@
             "mangledName": "$s15StoreKitWrapper0aB22SubscriptionPeriodUnitO4yearyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 4
@@ -7341,7 +7653,8 @@
         "moduleName": "StoreKitWrapper",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -7483,6 +7796,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -7541,6 +7855,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -7599,6 +7914,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -7649,6 +7965,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -7699,6 +8016,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -7757,6 +8075,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -7815,6 +8134,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -7865,6 +8185,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -7923,6 +8244,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -7981,6 +8303,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8039,6 +8362,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8105,6 +8429,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8163,6 +8488,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8213,6 +8539,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8263,6 +8590,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8313,6 +8641,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8371,6 +8700,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8429,6 +8759,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8479,6 +8810,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8537,6 +8869,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8595,6 +8928,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8653,6 +8987,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8719,6 +9054,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8777,6 +9113,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8827,6 +9164,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8877,6 +9215,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8927,6 +9266,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -8977,6 +9317,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -9027,6 +9368,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -9085,6 +9427,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -9447,6 +9790,7 @@
           "Final",
           "AccessControl",
           "ObjCMembers",
+          "RawDocComment",
           "ObjC"
         ],
         "superclassUsr": "c:objc(cs)NSObject",
@@ -9638,6 +9982,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -9688,6 +10033,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -9746,6 +10092,7 @@
               "Final",
               "HasStorage",
               "AccessControl",
+              "RawDocComment",
               "ObjC"
             ],
             "isLet": true,
@@ -9882,6 +10229,7 @@
           "Final",
           "AccessControl",
           "ObjCMembers",
+          "RawDocComment",
           "ObjC"
         ],
         "superclassUsr": "c:objc(cs)NSObject",
@@ -10006,6 +10354,7 @@
             "mangledName": "$s15StoreKitWrapper0aB29TransactionVerificationStatusO10unverifiedyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 0
@@ -10047,6 +10396,7 @@
             "mangledName": "$s15StoreKitWrapper0aB29TransactionVerificationStatusO8verifiedyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 1
@@ -10130,7 +10480,8 @@
         "moduleName": "StoreKitWrapper",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -10228,6 +10579,7 @@
             "mangledName": "$s15StoreKitWrapper0aB32TransactionVerificationErrorCodeO4noneyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 0
@@ -10269,6 +10621,7 @@
             "mangledName": "$s15StoreKitWrapper0aB32TransactionVerificationErrorCodeO23invalidCertificateChainyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 1
@@ -10310,6 +10663,7 @@
             "mangledName": "$s15StoreKitWrapper0aB32TransactionVerificationErrorCodeO013invalidDeviceE0yA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 2
@@ -10351,6 +10705,7 @@
             "mangledName": "$s15StoreKitWrapper0aB32TransactionVerificationErrorCodeO15invalidEncodingyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 3
@@ -10392,6 +10747,7 @@
             "mangledName": "$s15StoreKitWrapper0aB32TransactionVerificationErrorCodeO16invalidSignatureyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 4
@@ -10433,6 +10789,7 @@
             "mangledName": "$s15StoreKitWrapper0aB32TransactionVerificationErrorCodeO25missingRequiredPropertiesyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 5
@@ -10474,6 +10831,7 @@
             "mangledName": "$s15StoreKitWrapper0aB32TransactionVerificationErrorCodeO18revokedCertificateyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 6
@@ -10515,6 +10873,7 @@
             "mangledName": "$s15StoreKitWrapper0aB32TransactionVerificationErrorCodeO7unknownyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 7
@@ -10598,7 +10957,8 @@
         "moduleName": "StoreKitWrapper",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -10696,6 +11056,7 @@
             "mangledName": "$s15StoreKitWrapper0aB24TransactionOwnershipTypeO7unknownyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 0
@@ -10737,6 +11098,7 @@
             "mangledName": "$s15StoreKitWrapper0aB24TransactionOwnershipTypeO9purchasedyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 1
@@ -10778,6 +11140,7 @@
             "mangledName": "$s15StoreKitWrapper0aB24TransactionOwnershipTypeO12familySharedyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 2
@@ -10861,7 +11224,8 @@
         "moduleName": "StoreKitWrapper",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -10959,6 +11323,7 @@
             "mangledName": "$s15StoreKitWrapper0aB22TransactionEnvironmentO7unknownyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 0
@@ -11000,6 +11365,7 @@
             "mangledName": "$s15StoreKitWrapper0aB22TransactionEnvironmentO5xcodeyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 1
@@ -11041,6 +11407,7 @@
             "mangledName": "$s15StoreKitWrapper0aB22TransactionEnvironmentO7sandboxyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 2
@@ -11082,6 +11449,7 @@
             "mangledName": "$s15StoreKitWrapper0aB22TransactionEnvironmentO10productionyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 3
@@ -11165,7 +11533,8 @@
         "moduleName": "StoreKitWrapper",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -11263,6 +11632,7 @@
             "mangledName": "$s15StoreKitWrapper0aB17TransactionReasonO7unknownyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 0
@@ -11304,6 +11674,7 @@
             "mangledName": "$s15StoreKitWrapper0aB17TransactionReasonO8purchaseyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 1
@@ -11345,6 +11716,7 @@
             "mangledName": "$s15StoreKitWrapper0aB17TransactionReasonO7renewalyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 2
@@ -11428,7 +11800,8 @@
         "moduleName": "StoreKitWrapper",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -11526,6 +11899,7 @@
             "mangledName": "$s15StoreKitWrapper0aB27TransactionRevocationReasonO4noneyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 0
@@ -11567,6 +11941,7 @@
             "mangledName": "$s15StoreKitWrapper0aB27TransactionRevocationReasonO14developerIssueyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 1
@@ -11608,6 +11983,7 @@
             "mangledName": "$s15StoreKitWrapper0aB27TransactionRevocationReasonO5otheryA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 2
@@ -11649,6 +12025,7 @@
             "mangledName": "$s15StoreKitWrapper0aB27TransactionRevocationReasonO7unknownyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 3
@@ -11732,7 +12109,8 @@
         "moduleName": "StoreKitWrapper",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -11830,6 +12208,7 @@
             "mangledName": "$s15StoreKitWrapper0aB20TransactionOfferTypeO7unknownyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 0
@@ -11871,6 +12250,7 @@
             "mangledName": "$s15StoreKitWrapper0aB20TransactionOfferTypeO12introductoryyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 1
@@ -11912,6 +12292,7 @@
             "mangledName": "$s15StoreKitWrapper0aB20TransactionOfferTypeO11promotionalyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 2
@@ -11953,6 +12334,7 @@
             "mangledName": "$s15StoreKitWrapper0aB20TransactionOfferTypeO4codeyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 3
@@ -11994,6 +12376,7 @@
             "mangledName": "$s15StoreKitWrapper0aB20TransactionOfferTypeO7winBackyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 4
@@ -12077,7 +12460,8 @@
         "moduleName": "StoreKitWrapper",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -12175,6 +12559,7 @@
             "mangledName": "$s15StoreKitWrapper0aB27TransactionOfferPaymentModeO7unknownyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 0
@@ -12216,6 +12601,7 @@
             "mangledName": "$s15StoreKitWrapper0aB27TransactionOfferPaymentModeO9freeTrialyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 1
@@ -12257,6 +12643,7 @@
             "mangledName": "$s15StoreKitWrapper0aB27TransactionOfferPaymentModeO10payAsYouGoyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 2
@@ -12298,6 +12685,7 @@
             "mangledName": "$s15StoreKitWrapper0aB27TransactionOfferPaymentModeO10payUpFrontyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 3
@@ -12339,6 +12727,7 @@
             "mangledName": "$s15StoreKitWrapper0aB27TransactionOfferPaymentModeO7oneTimeyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 4
@@ -12422,7 +12811,8 @@
         "moduleName": "StoreKitWrapper",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -12530,6 +12920,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO4noneyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 0
@@ -12571,6 +12962,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO7unknownyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 1
@@ -12612,6 +13004,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO15invalidArgumentyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 2
@@ -12653,6 +13046,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO18operationCancelledyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 3
@@ -12694,6 +13088,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO21managerNotInitializedyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 4
@@ -12735,6 +13130,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO15managerShutdownyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 5
@@ -12776,6 +13172,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO05storeb7NetworkD0yA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 6
@@ -12817,6 +13214,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO05storeb6SystemD0yA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 7
@@ -12858,6 +13256,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO05storeB24NotAvailableInStorefrontyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 8
@@ -12899,6 +13298,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO05storeB11NotEntitledyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 9
@@ -12940,6 +13340,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO05storeB7UnknownyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 10
@@ -12981,6 +13382,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO05storeB11UnsupportedyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 11
@@ -13022,6 +13424,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO25productsRequestInProgressyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 12
@@ -13063,6 +13466,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO21productsRequestFailedyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 13
@@ -13104,6 +13508,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO15productNotFoundyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 14
@@ -13145,6 +13550,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO18purchaseInProgressyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 15
@@ -13186,6 +13592,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO14purchaseFailedyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 16
@@ -13227,6 +13634,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO29transactionVerificationFailedyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 17
@@ -13268,6 +13676,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO26purchaseProductUnavailableyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 18
@@ -13309,6 +13718,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO18purchaseNotAllowedyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 19
@@ -13350,6 +13760,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO23purchaseInvalidQuantityyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 20
@@ -13391,6 +13802,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO30purchaseInvalidOfferIdentifieryA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 21
@@ -13432,6 +13844,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO25purchaseInvalidOfferPriceyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 22
@@ -13473,6 +13886,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO29purchaseInvalidOfferSignatureyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 23
@@ -13514,6 +13928,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO30purchaseMissingOfferParametersyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 24
@@ -13555,6 +13970,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO26purchaseIneligibleForOfferyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 25
@@ -13596,6 +14012,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO49purchasePaymentMethodBindingConfigurationRequiredyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 26
@@ -13637,6 +14054,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO19transactionNotFoundyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 27
@@ -13678,6 +14096,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO27transactionFinishInProgressyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 28
@@ -13719,6 +14138,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO36currentEntitlementsRequestInProgressyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 29
@@ -13760,6 +14180,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO03appA14SyncInProgressyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 30
@@ -13801,6 +14222,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO03appA10SyncFailedyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 31
@@ -13842,6 +14264,7 @@
             "mangledName": "$s15StoreKitWrapper0abC9ErrorCodeO39unfinishedTransactionsRequestInProgressyA2CmF",
             "moduleName": "StoreKitWrapper",
             "declAttributes": [
+              "RawDocComment",
               "ObjC"
             ],
             "fixedbinaryorder": 32
@@ -13925,7 +14348,8 @@
         "moduleName": "StoreKitWrapper",
         "declAttributes": [
           "AccessControl",
-          "ObjC"
+          "ObjC",
+          "RawDocComment"
         ],
         "enumRawTypeName": "Int",
         "conformances": [
@@ -14022,1092 +14446,1113 @@
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/Diagnostics\/StoreKitWrapperLogLevel.swift",
       "kind": "IntegerLiteral",
-      "offset": 199,
+      "offset": 377,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/Diagnostics\/StoreKitWrapperLogLevel.swift",
       "kind": "IntegerLiteral",
-      "offset": 218,
+      "offset": 449,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/Diagnostics\/StoreKitWrapperLogLevel.swift",
       "kind": "IntegerLiteral",
-      "offset": 243,
+      "offset": 537,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/Diagnostics\/StoreKitWrapperLogLevel.swift",
       "kind": "IntegerLiteral",
-      "offset": 264,
+      "offset": 645,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/Diagnostics\/StoreKitWrapperLogLevel.swift",
       "kind": "IntegerLiteral",
-      "offset": 283,
+      "offset": 708,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/Diagnostics\/StoreKitWrapperLogLevel.swift",
       "kind": "IntegerLiteral",
-      "offset": 305,
+      "offset": 792,
       "length": 1,
       "value": "5"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/Diagnostics\/StoreKitWrapperLogLevel.swift",
       "kind": "IntegerLiteral",
-      "offset": 323,
+      "offset": 839,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 286,
+      "offset": 597,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 349,
+      "offset": 660,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 407,
+      "offset": 718,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 469,
+      "offset": 780,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 524,
+      "offset": 835,
       "length": 1,
       "value": "5"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 581,
+      "offset": 892,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 636,
+      "offset": 947,
       "length": 1,
       "value": "7"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 702,
+      "offset": 1010,
+      "length": 1,
+      "value": "8"
+    },
+    {
+      "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1067,
+      "length": 1,
+      "value": "9"
+    },
+    {
+      "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1133,
       "length": 2,
       "value": "10"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 769,
+      "offset": 1200,
       "length": 2,
       "value": "11"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 838,
+      "offset": 1269,
       "length": 2,
       "value": "12"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 905,
+      "offset": 1336,
       "length": 2,
       "value": "13"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 967,
+      "offset": 1398,
       "length": 2,
       "value": "20"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1032,
+      "offset": 1463,
       "length": 2,
       "value": "21"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1098,
+      "offset": 1529,
       "length": 4,
       "value": "1000"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1163,
+      "offset": 1594,
       "length": 4,
       "value": "1001"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1218,
+      "offset": 1649,
       "length": 4,
       "value": "1002"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1285,
+      "offset": 1716,
       "length": 4,
       "value": "1003"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1349,
+      "offset": 1780,
       "length": 4,
       "value": "1004"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1416,
+      "offset": 1847,
       "length": 4,
       "value": "1005"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1478,
+      "offset": 1909,
       "length": 4,
       "value": "1006"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1546,
+      "offset": 1977,
       "length": 4,
       "value": "1007"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1613,
+      "offset": 2044,
       "length": 4,
       "value": "2000"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1671,
+      "offset": 2102,
       "length": 4,
       "value": "2001"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1732,
+      "offset": 2163,
       "length": 4,
       "value": "2002"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1790,
+      "offset": 2221,
       "length": 4,
       "value": "2003"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1850,
+      "offset": 2281,
       "length": 4,
       "value": "2004"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1908,
+      "offset": 2339,
       "length": 4,
       "value": "2005"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 1968,
+      "offset": 2399,
       "length": 4,
       "value": "2006"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2037,
+      "offset": 2468,
       "length": 4,
       "value": "2007"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2094,
+      "offset": 2525,
       "length": 4,
       "value": "2008"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2158,
+      "offset": 2589,
       "length": 4,
       "value": "2009"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2220,
+      "offset": 2651,
       "length": 4,
       "value": "3000"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2290,
+      "offset": 2721,
       "length": 4,
       "value": "3001"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2357,
+      "offset": 2788,
       "length": 4,
       "value": "3002"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2426,
+      "offset": 2857,
       "length": 4,
       "value": "3003"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2505,
+      "offset": 2926,
+      "length": 4,
+      "value": "3004"
+    },
+    {
+      "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3005,
       "length": 4,
       "value": "4000"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2581,
+      "offset": 3081,
       "length": 4,
       "value": "4001"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2647,
+      "offset": 3147,
       "length": 4,
       "value": "4002"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2726,
+      "offset": 3226,
       "length": 4,
       "value": "4003"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2804,
+      "offset": 3304,
       "length": 4,
       "value": "4004"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2882,
+      "offset": 3382,
       "length": 4,
       "value": "4005"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 2947,
+      "offset": 3447,
       "length": 4,
       "value": "5000"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 3009,
+      "offset": 3509,
       "length": 4,
       "value": "5001"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 3073,
+      "offset": 3573,
       "length": 4,
       "value": "5002"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 3137,
+      "offset": 3637,
       "length": 4,
       "value": "5003"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 3198,
+      "offset": 3698,
       "length": 4,
       "value": "5004"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 3280,
+      "offset": 3780,
       "length": 4,
       "value": "6000"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 3359,
+      "offset": 3859,
       "length": 4,
       "value": "6001"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 3428,
+      "offset": 3928,
       "length": 4,
       "value": "6002"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 3510,
+      "offset": 4010,
       "length": 4,
       "value": "6003"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 3591,
+      "offset": 4091,
       "length": 4,
       "value": "6004"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 3672,
+      "offset": 4172,
       "length": 4,
       "value": "6005"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 3751,
+      "offset": 4251,
       "length": 4,
       "value": "6006"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitProductType.swift",
       "kind": "IntegerLiteral",
-      "offset": 209,
+      "offset": 337,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitProductType.swift",
       "kind": "IntegerLiteral",
-      "offset": 234,
+      "offset": 434,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitProductType.swift",
       "kind": "IntegerLiteral",
-      "offset": 261,
+      "offset": 522,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitProductType.swift",
       "kind": "IntegerLiteral",
-      "offset": 299,
+      "offset": 617,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitProductType.swift",
       "kind": "IntegerLiteral",
-      "offset": 338,
+      "offset": 728,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitPurchaseResult.swift",
       "kind": "IntegerLiteral",
-      "offset": 199,
+      "offset": 336,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitPurchaseResult.swift",
       "kind": "IntegerLiteral",
-      "offset": 223,
+      "offset": 419,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitPurchaseResult.swift",
       "kind": "IntegerLiteral",
-      "offset": 244,
+      "offset": 514,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitPurchaseResult.swift",
       "kind": "IntegerLiteral",
-      "offset": 267,
+      "offset": 587,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitPurchaseResult.swift",
       "kind": "IntegerLiteral",
-      "offset": 287,
+      "offset": 636,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitSubscriptionOfferPaymentMode.swift",
       "kind": "IntegerLiteral",
-      "offset": 243,
+      "offset": 398,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitSubscriptionOfferPaymentMode.swift",
       "kind": "IntegerLiteral",
-      "offset": 267,
+      "offset": 481,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitSubscriptionOfferPaymentMode.swift",
       "kind": "IntegerLiteral",
-      "offset": 291,
+      "offset": 581,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitSubscriptionOfferPaymentMode.swift",
       "kind": "IntegerLiteral",
-      "offset": 315,
+      "offset": 667,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitSubscriptionOfferType.swift",
       "kind": "IntegerLiteral",
-      "offset": 229,
+      "offset": 384,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitSubscriptionOfferType.swift",
       "kind": "IntegerLiteral",
-      "offset": 256,
+      "offset": 467,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitSubscriptionOfferType.swift",
       "kind": "IntegerLiteral",
-      "offset": 281,
+      "offset": 555,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitSubscriptionOfferType.swift",
       "kind": "IntegerLiteral",
-      "offset": 302,
+      "offset": 636,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitSubscriptionPeriodUnit.swift",
       "kind": "IntegerLiteral",
-      "offset": 231,
+      "offset": 371,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitSubscriptionPeriodUnit.swift",
       "kind": "IntegerLiteral",
-      "offset": 249,
+      "offset": 424,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitSubscriptionPeriodUnit.swift",
       "kind": "IntegerLiteral",
-      "offset": 267,
+      "offset": 478,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitSubscriptionPeriodUnit.swift",
       "kind": "IntegerLiteral",
-      "offset": 286,
+      "offset": 534,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitSubscriptionPeriodUnit.swift",
       "kind": "IntegerLiteral",
-      "offset": 304,
+      "offset": 588,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 219,
+      "offset": 364,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 241,
+      "offset": 442,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 328,
+      "offset": 639,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 365,
+      "offset": 747,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 404,
+      "offset": 831,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 433,
+      "offset": 921,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 463,
+      "offset": 997,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 502,
+      "offset": 1096,
       "length": 1,
       "value": "5"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 534,
+      "offset": 1189,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 555,
+      "offset": 1292,
       "length": 3,
       "value": "999"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 639,
+      "offset": 1519,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 663,
+      "offset": 1596,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 689,
+      "offset": 1683,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 769,
+      "offset": 1909,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 789,
+      "offset": 2003,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 810,
+      "offset": 2088,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 834,
+      "offset": 2179,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 909,
+      "offset": 2380,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 932,
+      "offset": 2446,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 953,
+      "offset": 2524,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 1035,
+      "offset": 2707,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 1064,
+      "offset": 2813,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 1083,
+      "offset": 2909,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 1104,
+      "offset": 3009,
       "length": 3,
       "value": "999"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 1184,
+      "offset": 3223,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 1211,
+      "offset": 3293,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 1236,
+      "offset": 3359,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 1254,
+      "offset": 3412,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 1275,
+      "offset": 3471,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 1360,
+      "offset": 3688,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 1384,
+      "offset": 3753,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 1408,
+      "offset": 3820,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 1432,
+      "offset": 3902,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitTransactionTypes.swift",
       "kind": "IntegerLiteral",
-      "offset": 1453,
+      "offset": 3966,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 200,
+      "offset": 330,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 221,
+      "offset": 388,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 250,
+      "offset": 460,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 282,
+      "offset": 529,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 318,
+      "offset": 610,
       "length": 2,
       "value": "10"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 348,
+      "offset": 703,
       "length": 2,
       "value": "11"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 384,
+      "offset": 791,
       "length": 2,
       "value": "20"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 418,
+      "offset": 879,
       "length": 2,
       "value": "21"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 465,
+      "offset": 996,
       "length": 2,
       "value": "22"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 499,
+      "offset": 1102,
       "length": 2,
       "value": "23"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 529,
+      "offset": 1176,
       "length": 2,
       "value": "24"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 563,
+      "offset": 1268,
       "length": 2,
       "value": "25"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 604,
+      "offset": 1360,
       "length": 3,
       "value": "100"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 641,
+      "offset": 1433,
       "length": 3,
       "value": "101"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 673,
+      "offset": 1540,
       "length": 3,
       "value": "200"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 707,
+      "offset": 1618,
       "length": 3,
       "value": "201"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 737,
+      "offset": 1719,
       "length": 3,
       "value": "202"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 782,
+      "offset": 1823,
       "length": 3,
       "value": "203"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 824,
+      "offset": 1915,
       "length": 3,
       "value": "204"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 858,
+      "offset": 2018,
       "length": 3,
       "value": "205"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 897,
+      "offset": 2109,
       "length": 3,
       "value": "206"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 943,
+      "offset": 2208,
       "length": 3,
       "value": "207"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 984,
+      "offset": 2297,
       "length": 3,
       "value": "208"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 1029,
+      "offset": 2394,
       "length": 3,
       "value": "209"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 1075,
+      "offset": 2499,
       "length": 3,
       "value": "210"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 1117,
+      "offset": 2602,
       "length": 3,
       "value": "211"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 1182,
+      "offset": 2737,
       "length": 3,
       "value": "212"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 1218,
+      "offset": 2850,
       "length": 3,
       "value": "300"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 1261,
+      "offset": 2944,
       "length": 3,
       "value": "301"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 1314,
+      "offset": 3061,
       "length": 3,
       "value": "400"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 1353,
+      "offset": 3169,
       "length": 3,
       "value": "500"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 1387,
+      "offset": 3245,
       "length": 3,
       "value": "501"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorCode.swift",
       "kind": "IntegerLiteral",
-      "offset": 1443,
+      "offset": 3368,
       "length": 3,
       "value": "600"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreKitWrapperErrorMapper.swift",
       "kind": "StringLiteral",
-      "offset": 422,
+      "offset": 583,
       "length": 30,
       "value": "\"The operation was cancelled.\""
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreState.swift",
       "kind": "BooleanLiteral",
-      "offset": 2209,
+      "offset": 2298,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreState.swift",
       "kind": "BooleanLiteral",
-      "offset": 2278,
+      "offset": 2367,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreState.swift",
       "kind": "BooleanLiteral",
-      "offset": 2333,
+      "offset": 2422,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreState.swift",
       "kind": "BooleanLiteral",
-      "offset": 2405,
+      "offset": 2494,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Volumes\/Dati\/Git\/Personali\/AMDevITStoreKitWrapper\/src\/apple\/StoreKitWrapper\/StoreKitWrapper\/StoreState.swift",
       "kind": "BooleanLiteral",
-      "offset": 2456,
+      "offset": 2545,
       "length": 5,
       "value": "false"
     }
